@@ -65,4 +65,9 @@ dependencies {
     // implementation ('com.google.code.gson:gson:2.8.6') {
     //     transitive = false
     // }
+
+    runtimeOnly rfg.deobf('curse.maven:had-enough-items-557549:4543375')
+    runtimeOnly rfg.deobf('curse.maven:just-enough-pattern-banners-263590:2455920')
+    //runtimeOnly rfg.deobf('curse.maven:quark-rotn-edition-417392:5594720')
+    //runtimeOnly rfg.deobf('curse.maven:autoreglib-250363:2746011')
 }
