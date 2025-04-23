@@ -11,7 +11,6 @@ import roidrole.patternbanners.Utils;
 import java.util.Map.Entry;
 
 import static roidrole.patternbanners.PatternBanners.*;
-import static roidrole.patternbanners.PatternBanners.config;
 
 public class ItemPattern extends Item {
     public ItemPattern() {
