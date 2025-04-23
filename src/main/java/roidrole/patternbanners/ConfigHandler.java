@@ -8,7 +8,7 @@ import static roidrole.patternbanners.PatternBanners.configMappings;
 
 public class ConfigHandler {
     public static void postInit(){
-        if(!config.hasCategory(configMappings)) {
+        if(config.getCategory(configMappings).isEmpty()) {
             generateMappings();
         }
     }
