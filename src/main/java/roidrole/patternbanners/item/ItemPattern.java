@@ -27,7 +27,7 @@ public class ItemPattern extends Item {
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if(this.isInCreativeTab(tab)){
-            for (Entry<String, Property> configEntry : config.getCategory(configMappings).entrySet()){
+            for (Entry<String, Property> configEntry : Config.config.getCategory(Config.mappings).entrySet()){
                 items.add(new ItemStack(this, 1,Integer.parseInt(configEntry.getKey())));
             }
         }

@@ -19,9 +19,12 @@ public class PatternBanners {
     public static final String MODID = "patternbanners";
     public static final String NAME = "Pattern Banners Backport";
     public static final String VERSION = "0.0.1";
-    public static Configuration config = new Configuration(new File("config/"+MODID+".cfg"));
-    public static String configMappings = "Banner Pattern Mapping";
     public static Item pattern = new ItemPattern();
+    public static class Config {
+        public static Configuration config = new Configuration(new File("config/"+MODID+".cfg"));
+        public static String mappings = "Banner Pattern Mapping";
+        public static boolean generated = config.getCategory(mappings).isEmpty();
+    }
 
     //Proxy
     @SidedProxy(clientSide = "roidrole."+MODID+".proxy.ClientProxy", serverSide = "roidrole."+MODID+".proxy.CommonProxy")

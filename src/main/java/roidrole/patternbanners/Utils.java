@@ -8,8 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
-import static roidrole.patternbanners.PatternBanners.config;
-import static roidrole.patternbanners.PatternBanners.configMappings;
+import static roidrole.patternbanners.PatternBanners.Config;
 
 public class Utils {
     public static String snakeToItem(String in){
@@ -21,7 +20,7 @@ public class Utils {
         return out.substring(1);
     }
     public static String getPatternFromInt(int in){
-        try{return config.getCategory(configMappings).get(String.valueOf(in)).getString();}
+        try{return Config.config.getCategory(Config.mappings).get(String.valueOf(in)).getString();}
         catch (Exception e) {return "UNKNOWN";}
     }
 

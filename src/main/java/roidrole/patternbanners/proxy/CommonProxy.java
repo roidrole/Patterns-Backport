@@ -9,9 +9,7 @@ public class CommonProxy {
 
     public void preInit(){ForgeRegistries.ITEMS.register(pattern);}
 
-    public void init(){
-
-    }
+    public void init(){}
 
     public void postInit(){
         ConfigHandler.postInit();
