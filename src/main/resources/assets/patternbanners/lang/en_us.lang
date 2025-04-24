@@ -1,1 +1,6 @@
-item.patternbanners.pattern=Banner Pattern: %s
+item.patternbanners.pattern.name=Banner Pattern: %s
+
+patternbanners.pattern.quark_dragon.name=Dragon
+patternbanners.pattern.quark_eye.name=Eye
+patternbanners.pattern.quark_shield.name=Shield
+patternbanners.pattern.quark_sword.name=Sword

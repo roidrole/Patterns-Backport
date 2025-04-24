@@ -7,7 +7,7 @@ import static roidrole.patternbanners.PatternBanners.Config.*;
 
 public class ConfigHandler {
     public static void postInit(){
-        if(generated) {
+        if(!generated) {
             generateMappings();
         }
     }

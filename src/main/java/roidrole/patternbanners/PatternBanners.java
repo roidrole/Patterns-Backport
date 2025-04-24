@@ -23,7 +23,7 @@ public class PatternBanners {
     public static class Config {
         public static Configuration config = new Configuration(new File("config/"+MODID+".cfg"));
         public static String mappings = "Banner Pattern Mapping";
-        public static boolean generated = config.getCategory(mappings).isEmpty();
+        public static boolean generated = !config.getCategory(mappings).isEmpty();
     }
 
     //Proxy
