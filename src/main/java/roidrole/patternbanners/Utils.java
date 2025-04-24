@@ -8,8 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
-import static roidrole.patternbanners.PatternBanners.Config;
-
 public class Utils {
     public static String snakeToItem(String in){
         StringBuilder out = new StringBuilder();

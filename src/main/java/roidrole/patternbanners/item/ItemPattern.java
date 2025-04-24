@@ -8,6 +8,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import roidrole.patternbanners.Config;
 import roidrole.patternbanners.Utils;
 
 import java.util.Map.Entry;
@@ -37,8 +38,8 @@ public class ItemPattern extends Item {
     }
 
     public String getPatternLang(ItemStack stack){
-        String key = Utils.getPatternFromInt(stack.getItemDamage());
-        if (I18n.hasKey(key)){return I18n.format(MODID + ".pattern."+key+".name");}
+        String key = Utils.getPatternFromInt(stack.getItemDamage()).toLowerCase();
+        if (I18n.hasKey(MODID + ".pattern."+key+".name")){return I18n.format(MODID + ".pattern."+key+".name");}
         else{return Utils.snakeToItem(key);}
     }
 }

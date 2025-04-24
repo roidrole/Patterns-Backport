@@ -1,11 +1,18 @@
 package roidrole.patternbanners;
 
 import net.minecraft.tileentity.BannerPattern;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-import static roidrole.patternbanners.PatternBanners.Config.*;
+import java.io.File;
 
-public class ConfigHandler {
+import static roidrole.patternbanners.PatternBanners.MODID;
+
+public class Config {
+    public static Configuration config = new Configuration(new File("config/"+MODID+".cfg"));
+    public static String mappings = "Banner Pattern Mapping";
+    public static boolean generated = !config.getCategory(mappings).isEmpty();
+
     public static void postInit(){
         if(!generated) {
             generateMappings();
@@ -15,7 +22,7 @@ public class ConfigHandler {
     public static void generateMappings(){
         config.addCustomCategoryComment(mappings,
     "Controls the mapping of metadata -> pattern.\n"+
-            "Impacts both the item's damage value and texture, via the patternOrdinal predicate\n"+
+            "Impacts both the item's damage value and texture\n"+
             "To regenerate, remove this text and the category.\n" +
             "You shouldn't touch this unless you know what you're doing."
         );
