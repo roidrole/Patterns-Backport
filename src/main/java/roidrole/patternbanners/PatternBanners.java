@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import roidrole.patternbanners.item.ItemPattern;
 import roidrole.patternbanners.proxy.CommonProxy;
 
@@ -30,4 +31,9 @@ public class PatternBanners {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {PROXY.postInit();}
+
+    @Mod.EventHandler
+    public void onServerStart(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandRegenConfig());
+    }
 }

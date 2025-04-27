@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.GameData;
 import roidrole.patternbanners.Config;
-import roidrole.patternbanners.recipe.PatternApply;
+import roidrole.patternbanners.RecipePatternApply;
 
 import static roidrole.patternbanners.PatternBanners.*;
 
@@ -18,9 +18,7 @@ public class CommonProxy {
     public void preInit(){ForgeRegistries.ITEMS.register(pattern);}
 
     public void init(){
-        //Pattern crafting
         for (ConfigCategory mapping : Config.mappings){
-            GameData.register_impl(new PatternApply(mapping).setRegistryName(MODID, "recipes/pattern_apply/"+mapping.get("hash").getString()));
             GameRegistry.addShapelessRecipe(
                     new ResourceLocation(MODID, "recipes/pattern_create_" + mapping.get("name").getString()),
                     new ResourceLocation(""),
@@ -28,6 +26,9 @@ public class CommonProxy {
                     Ingredient.fromItem(Items.PAPER),
                     Ingredient.fromStacks(Config.getItemStack(mapping))
             );
+        }
+        for (ConfigCategory mapping : Config.mappings) {
+            GameData.register_impl(new RecipePatternApply(mapping).setRegistryName(MODID, "recipes/pattern_apply/" + mapping.get("hash").getString()));
         }
     }
 

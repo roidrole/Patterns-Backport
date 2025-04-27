@@ -21,6 +21,7 @@ public class Config {
     public static void postInit(){
         if(!generated) {
             generateMappings();
+            config.save();
         }
     }
 
@@ -43,11 +44,10 @@ public class Config {
                 temp.put("item", new Property("item", item, Property.Type.STRING));
             }
         }
-        config.save();
     }
 
     public static ConfigCategory getMappingFor(int meta){return config.getCategory("mappings."+meta);}
-    //public static ConfigCategory getMappingFor(String meta){return config.getCategory("mappings."+meta);}
+
     public static ItemStack getItemStack(ConfigCategory mapping){
         if(!generated){return ItemStack.EMPTY;}
         String[] params = mapping.get("item").getString().split(":");

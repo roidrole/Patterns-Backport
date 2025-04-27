@@ -1,4 +1,4 @@
-package roidrole.patternbanners.recipe;
+package roidrole.patternbanners;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -13,18 +13,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import roidrole.patternbanners.PatternBanners;
 
 import java.util.Arrays;
 
 
-public class PatternApply
+public class RecipePatternApply
         extends IForgeRegistryEntry.Impl<IRecipe>
         implements IRecipe, IRecipeWrapper {
 
     ConfigCategory mapping;
 
-    public PatternApply(ConfigCategory mapping){
+    public RecipePatternApply(ConfigCategory mapping){
         this.mapping = mapping;
     }
 
