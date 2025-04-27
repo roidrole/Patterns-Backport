@@ -1,5 +1,14 @@
 item.patternbanners.pattern.name=Banner Pattern: %s
 
+//Vanilla
+patternbanners.pattern.curly_border.name=Curly Border
+patternbanners.pattern.creeper.name=Creeper
+patternbanners.pattern.bricks.name=Bricks
+patternbanners.pattern.skull.name=Skull
+patternbanners.pattern.flower.name=Flower
+patternbanners.pattern.mojang.name=Mojang
+
+//Quark
 patternbanners.pattern.quark_dragon.name=Dragon
 patternbanners.pattern.quark_eye.name=Eye
 patternbanners.pattern.quark_shield.name=Shield
