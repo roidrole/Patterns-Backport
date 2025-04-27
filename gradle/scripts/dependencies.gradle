@@ -66,6 +66,6 @@ dependencies {
     //     transitive = false
     // }
 
-    runtimeOnly rfg.deobf('curse.maven:had-enough-items-557549:4543375')
+    implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
     runtimeOnly rfg.deobf('curse.maven:just-enough-pattern-banners-263590:2455920')
 }

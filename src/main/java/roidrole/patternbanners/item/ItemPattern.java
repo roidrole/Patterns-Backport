@@ -46,6 +46,11 @@ public class ItemPattern extends Item {
         return container;
     }
 
+    @Override
+    public ItemStack getDefaultInstance() {
+        return new ItemStack(pattern, 1, 32);
+    }
+
     //Utils
     @SideOnly(Side.CLIENT)
     public String getPatternLang(ItemStack stack){

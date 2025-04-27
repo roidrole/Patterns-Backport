@@ -1,9 +1,12 @@
 package roidrole.patternbanners;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.io.File;
 import java.util.Set;
@@ -24,7 +27,6 @@ public class Config {
     public static void generateMappings(){
         mappingCategory.setComment(
             "Controls the mapping of metadata -> pattern.\n"+
-            "Uses the enum's ordinal and hashValue\n"+
             "Impacts the item's damage value, texture and name\n"+
             "To regenerate, remove this text and the category.\n" +
             "You shouldn't touch this unless you know what you're doing."
@@ -36,6 +38,9 @@ public class Config {
                 temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
                 temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
                 temp.put("meta", new Property("meta", String.valueOf(pattern.ordinal()), Property.Type.INTEGER));
+                ItemStack stack = pattern.getPatternItem();
+                String item = String.join(":", stack.getItem().getRegistryName().toString(), String.valueOf(stack.getItemDamage()));
+                temp.put("item", new Property("item", item, Property.Type.STRING));
             }
         }
         config.save();
@@ -43,4 +48,10 @@ public class Config {
 
     public static ConfigCategory getMappingFor(int meta){return config.getCategory("mappings."+meta);}
     //public static ConfigCategory getMappingFor(String meta){return config.getCategory("mappings."+meta);}
+    public static ItemStack getItemStack(ConfigCategory mapping){
+        if(!generated){return ItemStack.EMPTY;}
+        String[] params = mapping.get("item").getString().split(":");
+        if(params.length != 3){return ItemStack.EMPTY;}
+        return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, Integer.parseInt(params[2]));
+    }
 }
