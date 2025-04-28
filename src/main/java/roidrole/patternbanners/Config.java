@@ -24,6 +24,10 @@ public class Config {
         Property max_banner_layer = new Property("max_banner_layer", "16", Property.Type.INTEGER);
         max_banner_layer.setComment("Maximal number of patterns on a single banner");
         generalCategory.put("max_banner_layer", max_banner_layer);
+
+        Property shapes_pattern = new Property("shapes_pattern", "false", Property.Type.BOOLEAN);
+        shapes_pattern.setComment("Should we generate pattern for non-item patterns (such as square corner)?");
+        generalCategory.put("shapes_pattern", shapes_pattern);
     }
     public static void postInit(){
         if(!generated) {
@@ -33,10 +37,11 @@ public class Config {
     }
 
     public static void generateMappings(){
+        config.load();
         mappingCategory.setComment(
             "Controls the mapping of metadata -> pattern.\n"+
             "Impacts the item's damage value, texture and name\n"+
-            "To regenerate, remove this text and the category.\n" +
+            "To regenerate, use /configregen.\n" +
             "You shouldn't touch this unless you know what you're doing."
         );
         ConfigCategory temp;
@@ -49,6 +54,13 @@ public class Config {
                 ItemStack stack = pattern.getPatternItem();
                 String item = String.join(":", stack.getItem().getRegistryName().toString(), String.valueOf(stack.getItemDamage()));
                 temp.put("item", new Property("item", item, Property.Type.STRING));
+            } else if (generalCategory.get("shapes_pattern").getBoolean() && pattern.ordinal() != 0) {
+                temp = new ConfigCategory(String.valueOf(pattern.ordinal()), mappingCategory);
+                temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
+                temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
+                temp.put("meta", new Property("meta", String.valueOf(pattern.ordinal()), Property.Type.INTEGER));
+                String shap = ("."+String.join("", pattern.getPatterns())+".");
+                temp.put("shap", new Property("shap", shap, Property.Type.STRING));
             }
         }
     }
