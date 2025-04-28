@@ -5,17 +5,22 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityBanner;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class RecipePatternApply
@@ -57,17 +62,19 @@ public class RecipePatternApply
 
     @Override
     public void getIngredients(IIngredients iIngredients) {
-        ItemStack banner = new ItemStack(Items.BANNER, 1, 15);
-        iIngredients.setInputs(
-            VanillaTypes.ITEM,
-            Arrays.asList(
-                banner.copy(),
-                new ItemStack(PatternBanners.pattern,1,mapping.get("meta").getInt()),
-                Items.DYE.getDefaultInstance()
-            )
-        );
-        addPattern(banner, 0);
-        iIngredients.setOutput(VanillaTypes.ITEM, banner);
+        ItemStack bannerIn = new ItemStack(Items.BANNER, 1, OreDictionary.WILDCARD_VALUE);
+        iIngredients.setInputLists(VanillaTypes.ITEM, Arrays.asList(
+            Collections.singletonList(bannerIn),
+            Collections.singletonList(new ItemStack(PatternBanners.pattern, 1, mapping.get("meta").getInt())),
+            OreDictionary.getOres("dye")
+        ));
+        List<ItemStack> outputList = new ArrayList<>(16);
+        for (int i = 0; i < 16; i++) {
+            ItemStack bannerOut = new ItemStack(Items.BANNER, 1, i);
+            addPattern(bannerOut, 15 - i);
+            outputList.add(i, bannerOut);
+        }
+        iIngredients.setOutputLists(VanillaTypes.ITEM, Collections.singletonList(outputList));
     }
     //Helper
     public void addPattern(ItemStack banner, int color){
