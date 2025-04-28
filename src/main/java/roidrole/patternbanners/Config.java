@@ -16,8 +16,15 @@ import static roidrole.patternbanners.PatternBanners.MODID;
 public class Config {
     public static Configuration config = new Configuration(new File("config/"+MODID+".cfg"));
     public static ConfigCategory mappingCategory = config.getCategory("mappings");
+    public static ConfigCategory generalCategory = config.getCategory("general");
     public static Set<ConfigCategory> mappings = mappingCategory.getChildren();
     public static boolean generated = !mappings.isEmpty();
+
+    public static void preInit(){
+        Property max_banner_layer = new Property("max_banner_layer", "16", Property.Type.INTEGER);
+        max_banner_layer.setComment("Maximal number of patterns on a single banner");
+        generalCategory.put("max_banner_layer", max_banner_layer);
+    }
     public static void postInit(){
         if(!generated) {
             generateMappings();

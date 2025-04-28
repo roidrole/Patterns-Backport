@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;
@@ -31,6 +32,7 @@ public class RecipePatternApply
     public boolean matches(InventoryCrafting inv, World worldIn) {
         if(inv.getStackInSlot(0).getItem() != Items.BANNER){return false;}
         if(inv.getStackInSlot(1).getItem() != PatternBanners.pattern){return false;}
+        if(TileEntityBanner.getPatterns(inv.getStackInSlot(1)) >= Config.generalCategory.get("max_banner_layer").getInt()){return false;}
         if(inv.getStackInSlot(2).isEmpty()){return false;}
         for(int oreID : OreDictionary.getOreIDs(inv.getStackInSlot(2))){
             if(OreDictionary.getOreName(oreID).startsWith("dye")){return true;}
@@ -67,7 +69,6 @@ public class RecipePatternApply
         addPattern(banner, 0);
         iIngredients.setOutput(VanillaTypes.ITEM, banner);
     }
-
     //Helper
     public void addPattern(ItemStack banner, int color){
         NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");

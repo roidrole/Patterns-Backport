@@ -15,7 +15,10 @@ import static roidrole.patternbanners.PatternBanners.*;
 
 public class CommonProxy {
 
-    public void preInit(){ForgeRegistries.ITEMS.register(pattern);}
+    public void preInit(){
+        ForgeRegistries.ITEMS.register(pattern);
+        Config.preInit();
+    }
 
     public void init(){
         for (ConfigCategory mapping : Config.mappings){

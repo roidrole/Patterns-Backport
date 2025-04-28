@@ -15,7 +15,7 @@ import roidrole.patternbanners.proxy.CommonProxy;
 public class PatternBanners {
     //Constants
     public static final String MODID = "patternbanners";
-    public static final String NAME = "Pattern Banners Backport";
+    public static final String NAME = "Banner Patterns";
     public static final String VERSION = "0.0.1";
     public static Item pattern = new ItemPattern();
 
