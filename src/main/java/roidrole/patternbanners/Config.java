@@ -41,7 +41,7 @@ public class Config {
         mappingCategory.setComment(
             "Controls the mapping of metadata -> pattern.\n"+
             "Impacts the item's damage value, texture and name\n"+
-            "To regenerate, use /patternbanners:configregen.\n" +
+            "To update (such as pattern addition/deletion), use /"+ CommandUpdateMappings.name+".\n" +
             "You shouldn't touch this unless you know what you're doing."
         );
         for (BannerPattern pattern : BannerPattern.values()) {genMappingFor(pattern);}

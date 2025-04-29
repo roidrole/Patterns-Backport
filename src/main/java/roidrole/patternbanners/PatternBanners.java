@@ -34,6 +34,6 @@ public class PatternBanners {
 
     @Mod.EventHandler
     public void onServerStart(FMLServerStartingEvent event) {
-        event.registerServerCommand(new CommandRegenConfig());
+        event.registerServerCommand(new CommandUpdateMappings());
     }
 }

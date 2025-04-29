@@ -7,14 +7,17 @@ import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.config.ConfigCategory;
 
 import static roidrole.patternbanners.Config.*;
+import static roidrole.patternbanners.PatternBanners.MODID;
 
-public class CommandRegenConfig extends CommandBase {
+public class CommandUpdateMappings extends CommandBase {
+    public static String name = MODID+":configupdate";
+
     @Override
-    public String getName() {return "patternbanners:configregen";}
+    public String getName() {return name;}
 
     @Override
     public String getUsage(ICommandSender sender) {
-        return "/patternbanners:configregen - Regenerates pattern mappings";
+        return "/"+name+" - Regenerates pattern mappings";
     }
 
     @Override
@@ -47,18 +50,6 @@ public class CommandRegenConfig extends CommandBase {
         }
         config.save();
         config.load();
-        /*
-        config.load();
-        for(ConfigCategory child : mappingCategory.getChildren()){
-            config.removeCategory(child);
-        }
-        Config.generateMappings();
-        //TODO:Figure out where that 0 comes from and if it can not be added
-        //TODO:Figure out why duplicates some categories
-        config.removeCategory(Config.getMappingFor(0));
-        config.save();
-        config.load();
-        */
     }
 
     @Override
