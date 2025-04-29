@@ -41,6 +41,9 @@ public class CommandUpdateMappings extends CommandBase {
         for (ConfigCategory mapping : mappingCategory.getChildren()){
             boolean removeThisPattern = true;
             for (BannerPattern pattern : BannerPattern.values()) {
+                if(!generalCategory.get("shapes_pattern").getBoolean() && mapping.containsKey("shap")){
+                    break;
+                }
                 if(mapping.get("hash").getString().equals(pattern.getHashname())){
                     removeThisPattern = false;
                     break;
