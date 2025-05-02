@@ -20,6 +20,7 @@ public class Config {
     public static ConfigCategory generalCategory = config.getCategory("general");
     public static Set<ConfigCategory> mappings = mappingCategory.getChildren();
     public static boolean generated = !mappings.isEmpty();
+    public static int patternAmount = mappings.size();
 
     public static void preInit(){
         addGeneralProperty("max_banner_layer", 16, Property.Type.INTEGER, "Maximal number of patterns on a single banner");
@@ -52,21 +53,22 @@ public class Config {
         for (BannerPattern pattern : BannerPattern.values()) {genMappingFor(pattern);}
     }
     public static void genMappingFor(BannerPattern pattern){
-        int ordinal = mappingCategory.size() + 1;
+        patternAmount += 1;
         ConfigCategory temp;
         if(pattern.hasPatternItem()){
-            temp = new ConfigCategory(String.valueOf(ordinal), mappingCategory);
+            temp = new ConfigCategory(String.valueOf(patternAmount), mappingCategory);
             temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
             temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
-            temp.put("meta", new Property("meta", String.valueOf(ordinal), Property.Type.INTEGER));
+            temp.put("meta", new Property("meta", String.valueOf(patternAmount), Property.Type.INTEGER));
             ItemStack stack = pattern.getPatternItem();
             String item = String.join(":", stack.getItem().getRegistryName().toString(), String.valueOf(stack.getItemDamage()));
             temp.put("item", new Property("item", item, Property.Type.STRING));
         } else if (generalCategory.get("shapes_pattern").getBoolean()) {
-            temp = new ConfigCategory(String.valueOf(ordinal), mappingCategory);
+            temp = new ConfigCategory(String.valueOf(patternAmount), mappingCategory);
             temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
             temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
-            temp.put("meta", new Property("meta", String.valueOf(ordinal), Property.Type.INTEGER));
+            temp.put("meta", new Property("meta", String.valueOf(patternAmount), Property.Type.INTEGER));
+            if(!pattern.hasPattern()){return;}
             String shap = ("."+String.join("", pattern.getPatterns())+".");
             temp.put("shap", new Property("shap", shap, Property.Type.STRING));
         }
