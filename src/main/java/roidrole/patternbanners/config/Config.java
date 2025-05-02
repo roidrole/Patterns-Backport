@@ -49,9 +49,10 @@ public class Config {
             "To update (such as pattern addition/deletion), use /"+ CommandUpdateMappings.name+".\n" +
             "You shouldn't touch this unless you know what you're doing."
         );
-        for (BannerPattern pattern : BannerPattern.values()) {genMappingFor(pattern, pattern.ordinal());}
+        for (BannerPattern pattern : BannerPattern.values()) {genMappingFor(pattern);}
     }
-    public static void genMappingFor(BannerPattern pattern, int ordinal){
+    public static void genMappingFor(BannerPattern pattern){
+        int ordinal = mappingCategory.size() + 1;
         ConfigCategory temp;
         if(pattern.hasPatternItem()){
             temp = new ConfigCategory(String.valueOf(ordinal), mappingCategory);

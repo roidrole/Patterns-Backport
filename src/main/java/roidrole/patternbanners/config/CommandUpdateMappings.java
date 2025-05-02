@@ -26,9 +26,8 @@ public class CommandUpdateMappings extends CommandBase {
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
         config.load();
         for (BannerPattern pattern : BannerPattern.values()) {
-            int meta = mappingCategory.getChildren().size() + 1;
             if(checkAdd(pattern)){
-                genMappingFor(pattern, meta);
+                genMappingFor(pattern);
             }
         }
         config.removeCategory(Config.getMappingFor(0));
