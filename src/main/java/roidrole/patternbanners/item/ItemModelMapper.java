@@ -6,7 +6,7 @@ import net.minecraftforge.common.config.ConfigCategory;
 
 import static roidrole.patternbanners.PatternBanners.MODID;
 import static roidrole.patternbanners.PatternBanners.pattern;
-import roidrole.patternbanners.Config;
+import roidrole.patternbanners.config.Config;
 import static roidrole.patternbanners.Utils.itemModelExists;
 
 public class ItemModelMapper {

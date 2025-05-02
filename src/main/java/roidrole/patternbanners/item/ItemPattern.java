@@ -8,7 +8,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import roidrole.patternbanners.Config;
+import org.apache.commons.lang3.StringUtils;
+import roidrole.patternbanners.config.Config;
 
 import static roidrole.patternbanners.PatternBanners.*;
 
@@ -62,6 +63,13 @@ public class ItemPattern extends Item {
         }
         String key = MODID + ".pattern."+name+".name";
         if (I18n.hasKey(key)){return I18n.format(key);}
-        else{return name;}
+        else{
+            StringBuilder out = new StringBuilder();
+            for(String word : name.toLowerCase().split("_")){
+                out.append(" ");
+                out.append(StringUtils.capitalize(word));
+            }
+            return out.substring(1);
+        }
     }
 }

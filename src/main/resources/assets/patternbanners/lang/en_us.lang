@@ -1,45 +1,22 @@
 item.patternbanners.pattern.name=Banner Pattern: %s
 
 //Vanilla
-patternbanners.pattern.square_bottom_left.name=Square Bottom Left
-patternbanners.pattern.square_bottom_right.name=Square Bottom Right
-patternbanners.pattern.square_top_left.name=Square Top Left
-patternbanners.pattern.square_top_right.name=Square Top Right
-patternbanners.pattern.stripe_bottom.name=Stripe Bottom
-patternbanners.pattern.stripe_top.name=Stripe Top
-patternbanners.pattern.stripe_left.name=Stripe Left
-patternbanners.pattern.stripe_right.name=Stripe Right
-patternbanners.pattern.stripe_center.name=Stripe Center
-patternbanners.pattern.stripe_middle.name=Stripe Middle
-patternbanners.pattern.stripe_downright.name=Stripe Downright
-patternbanners.pattern.stripe_downleft.name=Stripe Downleft
-patternbanners.pattern.small_stripes.name=Small Stripes
-patternbanners.pattern.cross.name=Cross
-patternbanners.pattern.straight_cross.name=Straight Cross
-patternbanners.pattern.triangle_bottom.name=Triangle Bottom
-patternbanners.pattern.triangle_top.name=Triangle Top
-patternbanners.pattern.triangles_bottom.name=Triangles Bottom
-patternbanners.pattern.triangles_top.name=Triangles Top
+patternbanners.pattern.cross.name=Diagonal Cross
+patternbanners.pattern.straight_cross.name=Orthogonal Cross
+patternbanners.pattern.triangle_bottom.name=Big Triangle Bottom
+patternbanners.pattern.triangle_top.name=Big Triangle Top
+patternbanners.pattern.triangles_bottom.name=Many Triangles Bottom
+patternbanners.pattern.triangles_top.name=Many Triangles Top
 patternbanners.pattern.diagonal_left.name=Diagonal Left
 patternbanners.pattern.diagonal_up_right.name=Diagonal Up Right
 patternbanners.pattern.diagonal_up_left.name=Diagonal Up Left
 patternbanners.pattern.diagonal_right.name=Diagonal Right
-patternbanners.pattern.circle.name=Circle
-patternbanners.pattern.rhombus.name=Rhombus
-patternbanners.pattern.half_vertical.name=Half Vertical
-patternbanners.pattern.half_horizontal.name=Half Horizontal
-patternbanners.pattern.half_vertical_right.name=Half Vertical Right
-patternbanners.pattern.half_horizontal_bottom.name=Half Horizontal Bottom
-patternbanners.pattern.border.name=Border
-patternbanners.pattern.gradient.name=Gradient
+patternbanners.pattern.half_vertical.name=Left Half
+patternbanners.pattern.half_horizontal.name=Top Half
+patternbanners.pattern.half_vertical_right.name=Right Half
+patternbanners.pattern.half_horizontal_bottom.name=Bottom Half
+patternbanners.pattern.gradient.name=Gradient Down
 patternbanners.pattern.gradient_up.name=Gradient Up
-
-patternbanners.pattern.curly_border.name=Curly Border
-patternbanners.pattern.creeper.name=Creeper
-patternbanners.pattern.bricks.name=Bricks
-patternbanners.pattern.skull.name=Skull
-patternbanners.pattern.flower.name=Flower
-patternbanners.pattern.mojang.name=Mojang
 
 //Quark
 patternbanners.pattern.quark_dragon.name=Dragon
