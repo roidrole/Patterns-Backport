@@ -53,7 +53,9 @@ public class Config {
         for (BannerPattern pattern : BannerPattern.values()) {genMappingFor(pattern);}
     }
     public static void genMappingFor(BannerPattern pattern){
-        patternAmount += 1;
+        while(mappingCategory.containsKey(String.valueOf(patternAmount))){
+            patternAmount += 1;
+        }
         ConfigCategory temp;
         if(pattern.hasPatternItem()){
             temp = new ConfigCategory(String.valueOf(patternAmount), mappingCategory);
