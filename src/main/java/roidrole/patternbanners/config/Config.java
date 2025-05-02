@@ -85,6 +85,14 @@ public class Config {
         if(params.length != 3){return ItemStack.EMPTY;}
         return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, Integer.parseInt(params[2]));
     }
+    public static int getDamageFromHash(String hash){
+        for(ConfigCategory mapping : mappings){
+            if(mapping.get("hash").getString().equals(hash)){
+                return mapping.get("meta").getInt();
+            }
+        }
+        return 0;
+    }
 
     //Helpers
     public static void addGeneralProperty(String name, Object defaultValue, Property.Type type, String comment){

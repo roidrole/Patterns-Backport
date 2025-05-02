@@ -11,7 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
 import roidrole.patternbanners.config.Config;
 
-import static roidrole.patternbanners.PatternBanners.*;
+import static roidrole.patternbanners.PatternBanners.MODID;
+import static roidrole.patternbanners.PatternBanners.pattern;
 
 public class ItemPattern extends Item {
     public ItemPattern() {

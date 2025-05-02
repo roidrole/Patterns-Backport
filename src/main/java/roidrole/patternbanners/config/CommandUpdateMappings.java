@@ -8,8 +8,8 @@ import net.minecraftforge.common.config.ConfigCategory;
 
 import java.util.Arrays;
 
-import static roidrole.patternbanners.config.Config.*;
 import static roidrole.patternbanners.PatternBanners.MODID;
+import static roidrole.patternbanners.config.Config.*;
 
 public class CommandUpdateMappings extends CommandBase {
     public static String name = MODID+":configupdate";

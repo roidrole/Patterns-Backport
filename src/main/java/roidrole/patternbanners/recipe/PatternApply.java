@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import roidrole.patternbanners.config.Config;
 import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Utils;
+import roidrole.patternbanners.config.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
