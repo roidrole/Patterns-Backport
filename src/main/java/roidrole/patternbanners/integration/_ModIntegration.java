@@ -1,17 +1,18 @@
 package roidrole.patternbanners.integration;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
 
 import static roidrole.patternbanners.config.Config.config;
 
-public class ModIntegration {
+public class _ModIntegration {
     public static void init(){
         if(Loader.isModLoaded("deeperdepths") && checkIntegration("deeperdepths")){
             DeeperDepths.init();
+        }
+        if(Loader.isModLoaded("nb") && checkIntegration("unseen's_nether_backport")){
+            NetherBackport.init();
         }
         if(checkIntegration("cartographer")){
             Cartographer.init();
@@ -20,7 +21,7 @@ public class ModIntegration {
 
     //Helpers
     public static void addPattern(String hash, String name){
-        EnumHelper.addEnum(BannerPattern.class, name.toUpperCase(), new Class[]{String.class, String.class, ItemStack.class}, name, hash, new ItemStack(Blocks.BARRIER));
+        EnumHelper.addEnum(BannerPattern.class, name.toUpperCase(), new Class[]{String.class, String.class}, name, hash);
     }
 
     public static boolean checkIntegration(String integration){

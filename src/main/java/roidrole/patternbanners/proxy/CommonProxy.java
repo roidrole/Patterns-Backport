@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.GameData;
 import roidrole.patternbanners.config.Config;
-import roidrole.patternbanners.integration.ModIntegration;
+import roidrole.patternbanners.integration._ModIntegration;
 import roidrole.patternbanners.recipe.PatternApply;
 import roidrole.patternbanners.recipe.PatternFromShape;
 
@@ -26,7 +26,7 @@ public class CommonProxy {
 
     public void init(){
         Config.init();
-        ModIntegration.init();
+        _ModIntegration.init();
         for (ConfigCategory mapping : Config.mappings){
             ResourceLocation name = new ResourceLocation(MODID, "recipes/pattern_create_" + mapping.get("hash").getString());
             ResourceLocation group = new ResourceLocation("");

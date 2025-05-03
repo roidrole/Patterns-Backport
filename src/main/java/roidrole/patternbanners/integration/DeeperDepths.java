@@ -13,7 +13,7 @@ import roidrole.patternbanners.config.Config;
 
 import static roidrole.patternbanners.PatternBanners.MODID;
 import static roidrole.patternbanners.PatternBanners.pattern;
-import static roidrole.patternbanners.integration.ModIntegration.addPattern;
+import static roidrole.patternbanners.integration._ModIntegration.addPattern;
 
 public class DeeperDepths {
     public static void init(){

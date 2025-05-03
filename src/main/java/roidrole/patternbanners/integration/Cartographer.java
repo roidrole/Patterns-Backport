@@ -13,7 +13,7 @@ import roidrole.patternbanners.config.Config;
 import java.util.Random;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
-import static roidrole.patternbanners.integration.ModIntegration.addPattern;
+import static roidrole.patternbanners.integration._ModIntegration.addPattern;
 
 public class Cartographer {
 
