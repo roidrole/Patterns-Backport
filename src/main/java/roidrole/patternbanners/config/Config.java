@@ -6,8 +6,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import roidrole.patternbanners.integration.ModIntegration;
 
 import java.io.File;
 import java.util.Set;
@@ -33,7 +33,7 @@ public class Config {
     public static void init(){
         config.load();
         for(String hash : generalCategory.get("custom_pattern_hashes").getStringList()){
-            EnumHelper.addEnum(BannerPattern.class, hash.toUpperCase(), new Class[]{String.class, String.class}, hash, hash);
+            ModIntegration.addPattern(hash, hash);
         }
     }
     public static void postInit(){
