@@ -11,7 +11,7 @@ public class _ModIntegration {
         if(Loader.isModLoaded("deeperdepths") && checkIntegration("deeperdepths")){
             DeeperDepths.init();
         }
-        if(Loader.isModLoaded("nb") && checkIntegration("unseen's_nether_backport")){
+        if(Loader.isModLoaded("nb") && checkIntegration("unseen_nether_backport")){
             NetherBackport.init();
         }
         if(checkIntegration("cartographer")){

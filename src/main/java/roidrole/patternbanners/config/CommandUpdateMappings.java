@@ -30,7 +30,6 @@ public class CommandUpdateMappings extends CommandBase {
                 genMappingFor(pattern);
             }
         }
-        config.removeCategory(Config.getMappingFor(0));
 
         for (ConfigCategory mapping : mappingCategory.getChildren()){
             if(checkRemove(mapping)){config.removeCategory(mapping);}
@@ -55,7 +54,12 @@ public class CommandUpdateMappings extends CommandBase {
     }
 
     public boolean checkRemove(ConfigCategory mapping){
+        if(!mapping.containsKey("hash")){return true;}
+
         String hash = mapping.get("hash").getString();
+
+        if(hash.equals("b")){return true;}
+
         if(Arrays.asList(generalCategory.get("custom_pattern_hashes").getStringList()).contains(hash)){
             return false;
         }
