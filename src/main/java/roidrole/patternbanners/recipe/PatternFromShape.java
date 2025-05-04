@@ -19,9 +19,7 @@ import java.util.List;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 
-public class PatternFromShape
-        extends IForgeRegistryEntry.Impl<IRecipe>
-        implements IRecipe, IRecipeWrapper {
+public class PatternFromShape extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe, IRecipeWrapper {
 
     String shape;
     ItemStack output;
