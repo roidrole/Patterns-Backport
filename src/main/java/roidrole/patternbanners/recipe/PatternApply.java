@@ -18,9 +18,9 @@ import roidrole.patternbanners.config.Config;
 
 public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-    ItemStack patternI;
+    public ItemStack patternI;
     String patternS;
-    String patternN;
+    public String patternN;
 
     public PatternApply(ConfigCategory mapping){
         this.patternI = new ItemStack(PatternBanners.pattern, 1, mapping.get("meta").getInt());

@@ -50,7 +50,7 @@ public class ItemPattern extends Item {
 
     @Override
     public ItemStack getDefaultInstance() {
-        return new ItemStack(pattern, 1, 1);
+        return new ItemStack(pattern, 1, 0);
     }
 
     //Utils
