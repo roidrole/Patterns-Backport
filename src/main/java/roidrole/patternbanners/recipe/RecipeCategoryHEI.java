@@ -8,6 +8,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import roidrole.patternbanners.PatternBanners;
@@ -33,6 +34,16 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
 
     @Override
     public IDrawable getBackground() {return guiHelper.createBlankDrawable(140, 100);}
+
+    @Override
+    public void drawExtras(Minecraft mc) {
+        for(int y = 0; y < 3; y++) {
+            for(int x = 0; x < 3; ++x) {
+                guiHelper.getSlotDrawable().draw(mc, 4 + x * 18, 4 + y * 18);
+            }
+        }
+
+    }
 
     @Nullable
     @Override
