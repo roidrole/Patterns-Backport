@@ -5,8 +5,10 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RecipeAddPatternWrapper extends PatternRecipeWrapper {
@@ -20,17 +22,17 @@ public class RecipeAddPatternWrapper extends PatternRecipeWrapper {
     @Override
     public void getIngredients(IIngredients iIngredients) {
         boolean flagBanner = true;
-        List<ItemStack> ingredientsTemp = new ArrayList<>(9);
+        List<List<ItemStack>> ingredientsTemp = new ArrayList<>(9);
         for (char c : patternS.toCharArray()){
             if(c == '#'){
-                ingredientsTemp.add(new ItemStack(Items.DYE, 1, 15));
+                ingredientsTemp.add(OreDictionary.getOres("dyeWhite"));
             }else if(flagBanner){
-                ingredientsTemp.add(new ItemStack(Items.BANNER, 1, 0));
+                ingredientsTemp.add(Collections.singletonList(new ItemStack(Items.BANNER, 1, 0)));
                 flagBanner = false;
             }else{
-                ingredientsTemp.add(ItemStack.EMPTY);
+                ingredientsTemp.add(Collections.singletonList(ItemStack.EMPTY));
             }
         }
-        iIngredients.setInputs(VanillaTypes.ITEM, ingredientsTemp);
+        iIngredients.setInputLists(VanillaTypes.ITEM, ingredientsTemp);
     }
 }
