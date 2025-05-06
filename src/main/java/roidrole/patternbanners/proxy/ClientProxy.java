@@ -6,6 +6,8 @@ import roidrole.patternbanners.item.ItemModelMapper;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+
+    @Override
     public void preInit(){
         super.preInit();
         ItemModelMapper.preInit();

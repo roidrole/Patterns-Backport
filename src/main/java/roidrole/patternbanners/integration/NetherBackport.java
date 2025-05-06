@@ -13,10 +13,11 @@ import roidrole.patternbanners.config.Config;
 
 import static roidrole.patternbanners.PatternBanners.MODID;
 import static roidrole.patternbanners.PatternBanners.pattern;
-import static roidrole.patternbanners.integration._ModIntegration.addPattern;
+import static roidrole.patternbanners.integration._Integration.addPattern;
 
-public class NetherBackport {
-    public static void init(){
+public class NetherBackport implements _Integration.Integration {
+
+    public void init(){
         if(Loader.isModLoaded("deeperdepths")){
             addPattern("nb_pig", "piglin");
         }

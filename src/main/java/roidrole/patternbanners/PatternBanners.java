@@ -25,7 +25,7 @@ public class PatternBanners {
     public static CommonProxy PROXY;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {PROXY.preInit();}
+    public void perInit(FMLPreInitializationEvent event) {PROXY.preInit();}
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {PROXY.init();}

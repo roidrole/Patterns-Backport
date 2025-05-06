@@ -1,5 +1,7 @@
 item.patternbanners.pattern.name=Banner Pattern: %s
 
+patternbanners.category.patternapply=Banner Pattern
+
 //Vanilla
 patternbanners.pattern.cross.name=Diagonal Cross
 patternbanners.pattern.straight_cross.name=Orthogonal Cross

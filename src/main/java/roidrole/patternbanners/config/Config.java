@@ -7,7 +7,7 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import roidrole.patternbanners.integration._ModIntegration;
+import roidrole.patternbanners.integration._Integration;
 
 import java.io.File;
 import java.util.Set;
@@ -33,7 +33,7 @@ public class Config {
     public static void init(){
         config.load();
         for(String hash : generalCategory.get("custom_pattern_hashes").getStringList()){
-            _ModIntegration.addPattern(hash, hash);
+            _Integration.addPattern(hash, hash);
         }
     }
     public static void postInit(){
