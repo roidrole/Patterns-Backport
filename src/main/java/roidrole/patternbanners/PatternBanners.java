@@ -25,13 +25,13 @@ public class PatternBanners {
     public static CommonProxy PROXY;
 
     @Mod.EventHandler
-    public void listen(FMLPreInitializationEvent event) {PROXY.preInit();}
+    public void perInit(FMLPreInitializationEvent event) {PROXY.preInit();}
 
     @Mod.EventHandler
-    public void listen(FMLInitializationEvent event) {PROXY.init();}
+    public void init(FMLInitializationEvent event) {PROXY.init();}
 
     @Mod.EventHandler
-    public void listen(FMLPostInitializationEvent event) {PROXY.postInit();}
+    public void postInit(FMLPostInitializationEvent event) {PROXY.postInit();}
 
     @Mod.EventHandler
     public void onServerStart(FMLServerStartingEvent event) {
