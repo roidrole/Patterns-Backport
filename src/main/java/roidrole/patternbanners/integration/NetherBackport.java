@@ -7,7 +7,6 @@ import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import roidrole.patternbanners.config.Config;
 
@@ -18,9 +17,7 @@ import static roidrole.patternbanners.integration._Integration.addPattern;
 public class NetherBackport implements _Integration.Integration {
 
     public void init(){
-        if(Loader.isModLoaded("deeperdepths")){
-            addPattern("nb_pig", "piglin");
-        }
+        addPattern("nb_pig", "piglin");
         MinecraftForge.EVENT_BUS.register(new roidrole.patternbanners.integration.NetherBackport());
     }
 

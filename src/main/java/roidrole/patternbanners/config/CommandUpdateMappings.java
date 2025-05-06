@@ -30,6 +30,8 @@ public class CommandUpdateMappings extends CommandBase {
                 genMappingFor(pattern);
             }
         }
+        config.save();
+        config.load();
 
         for (ConfigCategory mapping : mappingCategory.getChildren()){
             if(checkRemove(mapping)){config.removeCategory(mapping);}
@@ -42,7 +44,7 @@ public class CommandUpdateMappings extends CommandBase {
     public int getRequiredPermissionLevel() {return 3;}
 
     //Helpers
-    public boolean checkAdd(BannerPattern pattern){
+    public static boolean checkAdd(BannerPattern pattern){
         if(pattern.ordinal() == 0){return false;}
         for (ConfigCategory mapping : mappingCategory.getChildren()){
             if(!mapping.containsKey("hash")){continue;}
@@ -53,7 +55,7 @@ public class CommandUpdateMappings extends CommandBase {
         return true;
     }
 
-    public boolean checkRemove(ConfigCategory mapping){
+    public static boolean checkRemove(ConfigCategory mapping){
         if(!mapping.containsKey("hash")){return true;}
 
         String hash = mapping.get("hash").getString();

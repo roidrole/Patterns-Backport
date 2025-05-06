@@ -7,7 +7,6 @@ import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import roidrole.patternbanners.config.Config;
 
@@ -18,10 +17,9 @@ import static roidrole.patternbanners.integration._Integration.addPattern;
 public class DeeperDepths implements _Integration.Integration {
 
     public void init(){
-        if(Loader.isModLoaded("deeperdepths")){
-            addPattern("dd_flo", "flow");
-            addPattern("dd_gust", "guster");
-        }
+        addPattern("dd_flo", "flow");
+        addPattern("dd_gust", "guster");
+
         MinecraftForge.EVENT_BUS.register(new DeeperDepths());
     }
 

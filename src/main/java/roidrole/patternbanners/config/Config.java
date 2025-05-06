@@ -50,27 +50,28 @@ public class Config {
             "To update (such as pattern addition/deletion), use /"+ CommandUpdateMappings.name+".\n" +
             "You shouldn't touch this unless you know what you're doing."
         );
-        for (BannerPattern pattern : BannerPattern.values()) {genMappingFor(pattern);}
+        for (BannerPattern pattern : BannerPattern.values()) {
+            if(CommandUpdateMappings.checkAdd(pattern)){
+                genMappingFor(pattern);
+            }
+        }
     }
     public static void genMappingFor(BannerPattern pattern){
+        ConfigCategory temp;
         do {
             patternAmount += 1;
         } while (config.hasCategory(mappingCategory.getName()+Configuration.CATEGORY_SPLITTER+patternAmount));
-        ConfigCategory temp;
+
+        temp = new ConfigCategory(String.valueOf(patternAmount), mappingCategory);
+        temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
+        temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
+        temp.put("meta", new Property("meta", String.valueOf(patternAmount), Property.Type.INTEGER));
+
         if(pattern.hasPatternItem()){
-            temp = new ConfigCategory(String.valueOf(patternAmount), mappingCategory);
-            temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
-            temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
-            temp.put("meta", new Property("meta", String.valueOf(patternAmount), Property.Type.INTEGER));
             ItemStack stack = pattern.getPatternItem();
             String item = String.join(":", stack.getItem().getRegistryName().toString(), String.valueOf(stack.getItemDamage()));
             temp.put("item", new Property("item", item, Property.Type.STRING));
-        } else if (generalCategory.get("shapes_pattern").getBoolean()) {
-            temp = new ConfigCategory(String.valueOf(patternAmount), mappingCategory);
-            temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
-            temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
-            temp.put("meta", new Property("meta", String.valueOf(patternAmount), Property.Type.INTEGER));
-            if(!pattern.hasPattern()){return;}
+        } else if (pattern.hasPattern()) {
             String shap = ("."+String.join("", pattern.getPatterns())+".");
             temp.put("shap", new Property("shap", shap, Property.Type.STRING));
         }
