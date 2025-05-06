@@ -24,10 +24,6 @@ public class HEIPlugin implements IModPlugin {
     public void register(IModRegistry registry){
 
         registry.handleRecipes(PatternApply.class, PatternApplyWrapper::new, categoryUid);
-        registry.handleRecipes(RecipesBanners.RecipeAddPattern.class,
-                recipeAddPattern -> new RecipeAddPatternWrapper(BannerPattern.BORDER), categoryUid
-        );
-
 
         for(ConfigCategory mapping : Config.mappings){
             registry.addRecipes(Collections.singleton(new PatternApply(mapping)), categoryUid);
