@@ -6,7 +6,6 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.RecipesBanners;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;

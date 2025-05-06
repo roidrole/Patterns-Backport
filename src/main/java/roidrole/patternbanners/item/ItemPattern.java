@@ -41,6 +41,7 @@ public class ItemPattern extends Item {
         return true;
     }
 
+
     @Override
     public ItemStack getContainerItem(ItemStack stack) {
         ItemStack container = stack.copy();
