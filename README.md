@@ -1,5 +1,5 @@
 Aims to backport banner patterns from 1.14+
-Supports all mods adding custom banner patterns with a blank pattern texture and procedurally-generated name.
+Supports all mods adding custom banner patterns with a blank pattern texture and procedurally-generated name (overwritable by packs).
 Out-of-the-box support for : 
 - Quark (and RoTN edition) (banner pattern textures)
 - Botania (and CEu) (banner pattern textures)
