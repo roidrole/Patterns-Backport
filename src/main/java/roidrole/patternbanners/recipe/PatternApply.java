@@ -2,6 +2,7 @@ package roidrole.patternbanners.recipe;
 
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.ConfigCategory;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Utils;
@@ -38,7 +40,14 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inv) {
-        int color = inv.getStackInSlot(2).getItemDamage();
+        int color = -1;
+        for(int oreID : OreDictionary.getOreIDs(inv.getStackInSlot(2))){
+            String oreName = OreDictionary.getOreName(oreID);
+            if(oreName.startsWith("dye") && !oreName.equals("dye")){
+                color = EnumDyeColor.valueOf(oreName.substring(3).toUpperCase()).getDyeDamage();
+                break;
+            }
+        }
         ItemStack output = inv.getStackInSlot(0).copy();
             output.setCount(1);
             addPattern(output, color);
