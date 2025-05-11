@@ -26,6 +26,17 @@ patternbanners.pattern.quark_eye.name=Eye
 patternbanners.pattern.quark_shield.name=Shield
 patternbanners.pattern.quark_sword.name=Sword
 
+//Immersive Engineering
+patternbanners.pattern.immersiveengineering_bevels.name=Bevels
+patternbanners.pattern.immersiveengineering_bullet.name=Bullet
+patternbanners.pattern.immersiveengineering_hammer.name=Hammer
+patternbanners.pattern.immersiveengineering_ornate.name=Ornate
+patternbanners.pattern.immersiveengineering_treated_wood.name=Treated Wood
+patternbanners.pattern.immersiveengineering_windmill.name=Windmill
+patternbanners.pattern.immersiveengineering_wolf.name=Wolf
+patternbanners.pattern.immersiveengineering_wolf_l.name=Wolf (left)
+patternbanners.pattern.immersiveengineering_wolf_r.name=Wolf (right)
+
 //Colors galore
 item.banner.globe.white=White Globe
 item.banner.globe.orange=Orange Globe
