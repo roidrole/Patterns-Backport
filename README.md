@@ -5,6 +5,7 @@ Out-of-the-box support for :
 - Botania (and CEu) (banner pattern textures)
 - Unseen's Nether Backport (adds piglin banner pattern to loot table)
 - Deeper Depths (adds trial chamber patterns to loot table)
+- Vanilla Cartographer (globe trade)
 
 Supports adding custom pattern banners, explained [here](https://github.com/roidrole/Patterns-Backport/wiki/Custom-Patterns)
 
