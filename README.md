@@ -7,3 +7,5 @@ Out-of-the-box support for :
 - Deeper Depths (adds trial chamber patterns to loot table)
 
 Supports adding custom pattern banners, explained [here](https://github.com/roidrole/Patterns-Backport/wiki/Custom-Patterns)
+
+If a modpack author adds more pattern textures and localization, please make a PR adding it!
