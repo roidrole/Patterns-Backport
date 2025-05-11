@@ -10,18 +10,16 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import roidrole.patternbanners.config.CommandUpdateMappings;
 import roidrole.patternbanners.item.ItemPattern;
 import roidrole.patternbanners.proxy.CommonProxy;
+import roidrole.patternbanners.patternbanners.Tags;
 
 
-@Mod(modid = PatternBanners.MODID, name = PatternBanners.NAME, version = PatternBanners.VERSION)
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
 public class PatternBanners {
     //Constants
-    public static final String MODID = "patternbanners";
-    public static final String NAME = "Banner Patterns";
-    public static final String VERSION = "0.0.1";
     public static Item pattern = new ItemPattern();
 
     //Proxy
-    @SidedProxy(clientSide = "roidrole."+MODID+".proxy.ClientProxy", serverSide = "roidrole."+MODID+".proxy.CommonProxy")
+    @SidedProxy(clientSide = "roidrole."+Tags.MOD_ID+".proxy.ClientProxy", serverSide = "roidrole."+Tags.MOD_ID+".proxy.CommonProxy")
     public static CommonProxy PROXY;
 
     @Mod.EventHandler

@@ -8,14 +8,13 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import roidrole.patternbanners.integration._Integration;
+import roidrole.patternbanners.patternbanners.Tags;
 
 import java.io.File;
 import java.util.Set;
 
-import static roidrole.patternbanners.PatternBanners.MODID;
-
 public class Config {
-    public static Configuration config = new Configuration(new File("config/"+MODID+".cfg"));
+    public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+".cfg"));
     public static ConfigCategory mappingCategory = config.getCategory("mappings");
     public static ConfigCategory generalCategory = config.getCategory("general");
     public static Set<ConfigCategory> mappings = mappingCategory.getChildren();

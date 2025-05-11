@@ -5,14 +5,14 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.config.ConfigCategory;
+import roidrole.patternbanners.patternbanners.Tags;
 
 import java.util.Arrays;
 
-import static roidrole.patternbanners.PatternBanners.MODID;
 import static roidrole.patternbanners.config.Config.*;
 
 public class CommandUpdateMappings extends CommandBase {
-    public static String name = MODID+":configupdate";
+    public static String name = Tags.MOD_ID+":configupdate";
 
     @Override
     public String getName() {return name;}

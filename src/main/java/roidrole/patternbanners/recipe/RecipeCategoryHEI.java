@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import roidrole.patternbanners.PatternBanners;
+import roidrole.patternbanners.patternbanners.Tags;
 import roidrole.patternbanners.recipe.wrapper.PatternRecipeWrapper;
 
 import javax.annotation.Nullable;
@@ -30,7 +30,7 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
     public String getTitle() {return I18n.format("patternbanners.category.patternapply");}
 
     @Override
-    public String getModName() {return PatternBanners.NAME;}
+    public String getModName() {return Tags.MOD_NAME;}
 
     @Override
     public IDrawable getBackground() {return guiHelper.createBlankDrawable(140, 100);}

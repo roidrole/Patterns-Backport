@@ -17,7 +17,6 @@ import roidrole.patternbanners.Utils;
 import roidrole.patternbanners.config.Config;
 
 
-
 public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
     public ItemStack patternI;

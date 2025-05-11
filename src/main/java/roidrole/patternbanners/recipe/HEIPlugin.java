@@ -4,6 +4,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
@@ -11,6 +12,7 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;
 import roidrole.patternbanners.config.Config;
 import roidrole.patternbanners.recipe.wrapper.PatternApplyWrapper;
+import roidrole.patternbanners.recipe.wrapper.PatternFromShapeWrapper;
 import roidrole.patternbanners.recipe.wrapper.RecipeAddPatternWrapper;
 
 import java.util.Collections;
@@ -23,6 +25,7 @@ public class HEIPlugin implements IModPlugin {
     public void register(IModRegistry registry){
 
         registry.handleRecipes(PatternApply.class, PatternApplyWrapper::new, categoryUid);
+        registry.handleRecipes(PatternFromShape.class, PatternFromShapeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
 
         for(ConfigCategory mapping : Config.mappings){
             registry.addRecipes(Collections.singleton(new PatternApply(mapping)), categoryUid);

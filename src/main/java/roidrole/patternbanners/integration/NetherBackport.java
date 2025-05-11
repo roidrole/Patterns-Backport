@@ -9,8 +9,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import roidrole.patternbanners.config.Config;
+import roidrole.patternbanners.patternbanners.Tags;
 
-import static roidrole.patternbanners.PatternBanners.MODID;
 import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.integration._Integration.addPattern;
 
@@ -30,7 +30,7 @@ public class NetherBackport implements _Integration.Integration {
                         0,
                         new LootFunction[]{new SetMetadata(new LootCondition[]{}, new RandomValueRange(Config.getDamageFromHash("nb_pig")))},
                         new LootCondition[]{},
-                        MODID+":dd_flo"
+                        Tags.MOD_ID+":dd_flo"
                 ));
             }
         }
