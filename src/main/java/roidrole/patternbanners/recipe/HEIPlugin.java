@@ -5,6 +5,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
@@ -40,6 +41,7 @@ public class HEIPlugin implements IModPlugin {
             }
         }
 
+        registry.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE, 1, 0), categoryUid);
         registry.addRecipeCatalyst(new ItemStack(Items.BANNER, 1, OreDictionary.WILDCARD_VALUE), categoryUid);
     }
 
