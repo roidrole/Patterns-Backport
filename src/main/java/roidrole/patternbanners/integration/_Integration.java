@@ -3,7 +3,7 @@ package roidrole.patternbanners.integration;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
-import roidrole.patternbanners.patternbanners.Tags;
+import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.config.Config.config;
 

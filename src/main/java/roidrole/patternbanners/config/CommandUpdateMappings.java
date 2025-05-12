@@ -5,7 +5,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.config.ConfigCategory;
-import roidrole.patternbanners.patternbanners.Tags;
+import roidrole.patternbanners.Tags;
 
 import java.util.Arrays;
 

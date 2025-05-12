@@ -8,7 +8,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import roidrole.patternbanners.integration._Integration;
-import roidrole.patternbanners.patternbanners.Tags;
+import roidrole.patternbanners.Tags;
 
 import java.io.File;
 import java.util.Set;

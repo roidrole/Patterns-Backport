@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import roidrole.patternbanners.patternbanners.Tags;
+import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.recipe.wrapper.PatternRecipeWrapper;
 
 import javax.annotation.Nullable;

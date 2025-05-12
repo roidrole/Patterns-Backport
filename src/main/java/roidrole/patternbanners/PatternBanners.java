@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import roidrole.patternbanners.config.CommandUpdateMappings;
 import roidrole.patternbanners.item.ItemPattern;
 import roidrole.patternbanners.proxy.CommonProxy;
-import roidrole.patternbanners.patternbanners.Tags;
 
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)

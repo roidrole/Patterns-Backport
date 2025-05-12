@@ -9,7 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import roidrole.patternbanners.config.Config;
-import roidrole.patternbanners.patternbanners.Tags;
+import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.integration._Integration.addPattern;
