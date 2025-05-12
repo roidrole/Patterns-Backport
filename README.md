@@ -11,4 +11,4 @@ Out-of-the-box support for :
 
 Supports adding custom pattern banners, explained [here](https://github.com/roidrole/Patterns-Backport/wiki/Custom-Patterns)
 
-If a modpack author adds more pattern textures and localization, please make a PR adding it!
+If a modpack author adds more mod support (in the form of pattern textures and localisation), feel free to PR!
