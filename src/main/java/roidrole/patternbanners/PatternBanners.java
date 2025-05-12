@@ -18,11 +18,11 @@ public class PatternBanners {
     public static Item pattern = new ItemPattern();
 
     //Proxy
-    @SidedProxy(clientSide = "roidrole."+Tags.MOD_ID+".proxy.ClientProxy", serverSide = "roidrole."+Tags.MOD_ID+".proxy.CommonProxy")
+    @SidedProxy(clientSide = Tags.ROOT_PACKAGE+".proxy.ClientProxy", serverSide = Tags.ROOT_PACKAGE+".proxy.CommonProxy")
     public static CommonProxy PROXY;
 
     @Mod.EventHandler
-    public void perInit(FMLPreInitializationEvent event) {PROXY.preInit();}
+    public void preInit(FMLPreInitializationEvent event) {PROXY.preInit();}
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {PROXY.init();}

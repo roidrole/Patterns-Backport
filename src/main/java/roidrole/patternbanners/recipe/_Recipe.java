@@ -7,8 +7,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.GameData;
-import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.config.Config;
+import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 

@@ -3,8 +3,8 @@ package roidrole.patternbanners.item;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.ConfigCategory;
-import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.config.Config;
+import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.Utils.itemModelExists;

@@ -9,8 +9,8 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
-import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.config.Config;
+import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 
