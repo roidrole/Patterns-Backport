@@ -8,8 +8,8 @@ import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import roidrole.patternbanners.config.Config;
 import roidrole.patternbanners.Tags;
+import roidrole.patternbanners.config.Config;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.integration._Integration.addPattern;
