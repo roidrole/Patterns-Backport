@@ -25,12 +25,15 @@ public class HEIPlugin implements IModPlugin {
     public void register(IModRegistry registry){
 
         registry.handleRecipes(PatternApply.class, PatternApplyWrapper::new, categoryUid);
-        registry.handleRecipes(PatternFromShape.class, PatternFromShapeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
 
         for(ConfigCategory mapping : Config.mappings){
             registry.addRecipes(Collections.singleton(new PatternApply(mapping)), categoryUid);
         }
-        if(!Config.generalCategory.get("shapes_pattern").getBoolean()){
+
+        if(Config.generalCategory.get("shapes_pattern").getBoolean()){
+            registry.handleRecipes(PatternFromShape.class, PatternFromShapeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
+        }
+        else{
             for(BannerPattern pattern : BannerPattern.values()){
                 if(pattern.hasPatternItem() || !pattern.hasPattern()){continue;}
                 registry.addRecipes(Collections.singletonList(new RecipeAddPatternWrapper(pattern)), categoryUid);
