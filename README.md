@@ -1,6 +1,6 @@
-Backports banner patterns from 1.14+
+Backports banner patterns from 1.21.2
 
-Supports all mods adding custom banner patterns with a blank pattern texture and procedurally-generated name (overwritable by resource packs).
+Supports all mods adding custom banner patterns with a blank pattern texture and procedurally-generated name ([overwritable by resource packs](https://github.com/roidrole/Patterns-Backport/wiki/Overwrite-default-pattern-texture-and-name)).
 
 Out-of-the-box support for :
 - Pattern textures for : 
@@ -10,6 +10,8 @@ Out-of-the-box support for :
 - Unseen's Nether Backport (adds piglin banner pattern to loot table)
 - Deeper Depths (adds trial chamber patterns to loot table)
 - Vanilla Cartographer (cartographer globe trade)
+
+Includes [Just Enough Pattern Banners](https://www.curseforge.com/minecraft/mc-mods/just-enough-pattern-banners)' functionality
 
 Supports adding custom pattern banners, explained [here](https://github.com/roidrole/Patterns-Backport/wiki/Custom-Patterns)
 
