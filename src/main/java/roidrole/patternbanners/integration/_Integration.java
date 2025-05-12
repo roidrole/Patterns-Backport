@@ -3,13 +3,12 @@ package roidrole.patternbanners.integration;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
-import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.config.Config.config;
 
 public class _Integration {
     public static void init(){
-        doIntegration(Tags.MOD_ID, "cartographer", new Cartographer());
+        doIntegration("cartographer", new Cartographer());
         doIntegration("deeperdepths", "deeperdepths", new DeeperDepths());
         doIntegration("nb" , "unseen_nether_backport", new NetherBackport());
     }
@@ -24,5 +23,8 @@ public class _Integration {
 
     public static void doIntegration(String modid, String name, Integration integrationClass){
         if(Loader.isModLoaded(modid) && config.get("integration", name, true).getBoolean()){integrationClass.init();}
+    }
+    public static void doIntegration(String name, Integration integrationClass){
+        if(config.get("integration", name, true).getBoolean()){integrationClass.init();}
     }
 }
