@@ -58,6 +58,9 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
     @Override
     public ItemStack getRecipeOutput() {return ItemStack.EMPTY;}
+
+    @Override
+    public boolean isDynamic() {return true;}
     
     //Helper
     public void addPattern(ItemStack banner, int color){
