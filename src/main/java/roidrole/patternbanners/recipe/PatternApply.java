@@ -1,15 +1,21 @@
 package roidrole.patternbanners.recipe;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityBanner;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.config.ConfigCategory;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.PatternBanners;
@@ -24,7 +30,11 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public String patternN;
 
     public PatternApply(ConfigCategory mapping){
-        this.patternI = new ItemStack(PatternBanners.pattern, 1, mapping.get("meta").getInt());
+        Item patternItem;
+        if(mapping.containsKey("from")){
+            patternItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(mapping.get("from").getString()));
+        }else{patternItem = PatternBanners.pattern;}
+        this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());
         this.patternS = mapping.get("hash").getString();
         this.patternN = mapping.get("name").getString();
     }
@@ -58,7 +68,19 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
     @Override
     public ItemStack getRecipeOutput() {return ItemStack.EMPTY;}
-    
+
+    @Override
+    //TODO : fix this
+    //Seems it can't return the same item that was inputted. Worth investigating
+    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+        ItemStack stackLeft = inv.getStackInSlot(1).copy();
+        stackLeft.setCount(1);
+        NonNullList<ItemStack> remaining = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
+        remaining.set(1, new ItemStack(Blocks.VINE, 1));
+        remaining.set(2, ForgeHooks.getContainerItem(inv.getStackInSlot(2)));
+        return remaining;
+    }
+
     //Helper
     public void addPattern(ItemStack banner, int color){
         NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");

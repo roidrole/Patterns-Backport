@@ -31,6 +31,7 @@ public class ItemPattern extends Item {
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if(this.isInCreativeTab(tab)){
             for (ConfigCategory mapping : Config.mappings){
+                if(mapping.containsKey("from")){continue;}
                 items.add(new ItemStack(this, 1,mapping.get("meta").getInt()));
             }
         }
