@@ -1,0 +1,11 @@
+{
+	"package": "roidrole.patternbanners.mixin",
+	"required": true,
+	"refmap": "mixins.patternbanners.refmap.json",
+	"target": "@env(DEFAULT)",
+	"minVersion": "0.8.5",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": ["CraftingManagerMixin"],
+	"server": [],
+	"client": []
+}
