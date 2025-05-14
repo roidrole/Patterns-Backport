@@ -13,6 +13,8 @@ import roidrole.patternbanners.Tags;
 import java.io.File;
 import java.util.Set;
 
+//TODO : move mappings to their own file and make them generate and be used...
+
 public class Config {
     public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+"/general.cfg"));
 
