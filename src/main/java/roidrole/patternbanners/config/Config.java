@@ -14,9 +14,10 @@ import java.io.File;
 import java.util.Set;
 
 public class Config {
-    public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+".cfg"));
-    public static ConfigCategory mappingCategory = config.getCategory("mappings");
+    public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+"/general.cfg"));
     public static ConfigCategory generalCategory = config.getCategory("general");
+
+    public static ConfigCategory mappingCategory = config.getCategory("mappings");
     public static Set<ConfigCategory> mappings = mappingCategory.getChildren();
     public static boolean generated = !mappings.isEmpty();
     public static int patternAmount = mappings.size();
