@@ -36,7 +36,6 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
             patternItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(mapping.get("uses").getString()));
         }else{patternItem = PatternBanners.pattern;}
 
-        assert patternItem != null;
         this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());
         this.patternS = mapping.get("hash").getString();
         this.patternN = mapping.get("name").getString();
