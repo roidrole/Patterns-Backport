@@ -72,9 +72,12 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public @Nonnull ItemStack getRecipeOutput() {return ItemStack.EMPTY;}
 
     @Override
-    //TODO : fix this
     public @Nonnull NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-        return NonNullList.from(ItemStack.EMPTY, ItemStack.EMPTY, patternI.copy(), ForgeHooks.getContainerItem(inv.getStackInSlot(2)));
+        return NonNullList.from(ItemStack.EMPTY,
+            ItemStack.EMPTY,
+            patternI.copy(),
+            ForgeHooks.getContainerItem(inv.getStackInSlot(2))
+        );
     }
 
     @Override
