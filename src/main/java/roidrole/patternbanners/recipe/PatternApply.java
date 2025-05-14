@@ -19,7 +19,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Utils;
-import roidrole.patternbanners.config.Config;
+import roidrole.patternbanners.config.ConfigGeneral;
 
 import javax.annotation.Nonnull;
 
@@ -45,7 +45,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public boolean matches(InventoryCrafting inv, @Nonnull World worldIn) {
         if(inv.getStackInSlot(0).getItem() != Items.BANNER){return false;}
         if(!inv.getStackInSlot(1).isItemEqual(patternI)){return false;}
-        if(TileEntityBanner.getPatterns(inv.getStackInSlot(0)) >= Config.generalCategory.get("max_banner_layer").getInt()){return false;}
+        if(TileEntityBanner.getPatterns(inv.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer){return false;}
         return Utils.isDye(inv.getStackInSlot(2));
     }
 

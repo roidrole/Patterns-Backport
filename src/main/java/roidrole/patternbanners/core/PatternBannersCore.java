@@ -47,7 +47,7 @@ public class PatternBannersCore implements IFMLLoadingPlugin, IEarlyMixinLoader 
 
     @Override
     public boolean shouldMixinConfigQueue(String mixinConfig){
-        return MixinConfig.disableVanillaPatternApply;
+        return ConfigCore.disableVanillaPatternApply;
     }
 }
 

@@ -62,10 +62,10 @@ public class CommandUpdateMappings extends CommandBase {
 
         if(hash.equals("b")){return true;}
 
-        if(Arrays.asList(generalCategory.get("custom_pattern_hashes").getStringList()).contains(hash)){
+        if(Arrays.asList(ConfigGeneral.custom_pattern_hashes).contains(hash)){
             return false;
         }
-        if(!generalCategory.get("shapes_pattern").getBoolean() && mapping.containsKey("shap")){
+        if(!ConfigGeneral.shapes_pattern && mapping.containsKey("shap")){
             return true;
         }
         for (BannerPattern pattern : BannerPattern.values()) {

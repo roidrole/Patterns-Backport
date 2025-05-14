@@ -15,24 +15,16 @@ import java.util.Set;
 
 public class Config {
     public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+"/general.cfg"));
-    public static ConfigCategory generalCategory = config.getCategory("general");
 
-    public static ConfigCategory mappingCategory = config.getCategory("mappings");
+    public static Configuration mappingConfig = new Configuration(new File("config/"+Tags.MOD_ID+"/mappings.cfg"));
+    public static ConfigCategory mappingCategory = mappingConfig.getCategory("mappings");
     public static Set<ConfigCategory> mappings = mappingCategory.getChildren();
     public static boolean generated = !mappings.isEmpty();
     public static int patternAmount = mappings.size();
 
-    public static void preInit(){
-        addGeneralProperty("max_banner_layer", 16, Property.Type.INTEGER, "Maximal number of patterns on a single banner");
-        addGeneralProperty("shapes_pattern", false, Property.Type.BOOLEAN, "Should we generate pattern for non-item patterns (such as square corner)?");
-        addGeneralProperty("custom_pattern_hashes", new String[]{}, Property.Type.STRING,
-                "List of custom patterns hashes\n"+
-                        "To generate recipes, add them in the mappings category following the other patterns"
-        );
-    }
     public static void init(){
         config.load();
-        for(String hash : generalCategory.get("custom_pattern_hashes").getStringList()){
+        for(String hash : ConfigGeneral.custom_pattern_hashes){
             _Integration.addPattern(hash, hash);
         }
     }
@@ -60,7 +52,7 @@ public class Config {
         ConfigCategory temp;
         do {
             patternAmount += 1;
-        } while (config.hasCategory(mappingCategory.getName()+Configuration.CATEGORY_SPLITTER+patternAmount));
+        } while (mappingConfig.hasCategory(mappingCategory.getName()+Configuration.CATEGORY_SPLITTER+patternAmount));
 
         temp = new ConfigCategory(String.valueOf(patternAmount), mappingCategory);
         temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
@@ -92,17 +84,5 @@ public class Config {
             }
         }
         return 0;
-    }
-
-    //Helpers
-    public static void addGeneralProperty(String name, Object defaultValue, Property.Type type, String comment){
-        Property target;
-        if(defaultValue instanceof Object[]){
-            target = new Property(name, (String[]) defaultValue, type);
-        }else{
-            target = new Property(name, String.valueOf(defaultValue), type);
-        }
-        target.setComment(comment);
-        generalCategory.put(name, target);
     }
 }

@@ -12,6 +12,7 @@ import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;
 import roidrole.patternbanners.config.Config;
+import roidrole.patternbanners.config.ConfigGeneral;
 import roidrole.patternbanners.recipe.wrapper.PatternApplyWrapper;
 import roidrole.patternbanners.recipe.wrapper.PatternFromShapeWrapper;
 import roidrole.patternbanners.recipe.wrapper.RecipeAddPatternWrapper;
@@ -31,7 +32,7 @@ public class HEIPlugin implements IModPlugin {
             registry.addRecipes(Collections.singleton(new PatternApply(mapping)), categoryUid);
         }
 
-        if(Config.generalCategory.get("shapes_pattern").getBoolean()){
+        if(ConfigGeneral.shapes_pattern){
             registry.handleRecipes(PatternFromShape.class, PatternFromShapeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
         }
         else{

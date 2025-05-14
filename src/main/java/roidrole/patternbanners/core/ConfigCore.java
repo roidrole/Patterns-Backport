@@ -7,7 +7,7 @@ import roidrole.patternbanners.Tags;
         modid = Tags.MOD_ID,
         name = "patternbanners/mixin"
 )
-public class MixinConfig {
+public class ConfigCore {
     @Config.Comment("Should we remove the vanilla pattern-applying recipe?")
     @Config.RequiresMcRestart
     public static boolean disableVanillaPatternApply = true;

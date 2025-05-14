@@ -12,7 +12,6 @@ public class CommonProxy {
 
     public void preInit(){
         ForgeRegistries.ITEMS.register(pattern);
-        Config.preInit();
     }
 
     public void init(){
