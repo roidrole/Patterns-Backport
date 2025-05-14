@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import roidrole.patternbanners.config.Config;
 import roidrole.patternbanners.Tags;
 
+import javax.annotation.Nonnull;
+
 import static roidrole.patternbanners.PatternBanners.pattern;
 
 public class ItemPattern extends Item {
@@ -23,35 +25,35 @@ public class ItemPattern extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack stack) {
+    public @Nonnull String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return I18n.format("item." + Tags.MOD_ID + ".pattern.name", getPatternLang(stack));
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
         if(this.isInCreativeTab(tab)){
             for (ConfigCategory mapping : Config.mappings){
-                if(mapping.containsKey("from")){continue;}
+                if(mapping.containsKey("uses")){continue;}
                 items.add(new ItemStack(this, 1,mapping.get("meta").getInt()));
             }
         }
     }
 
     @Override
-    public boolean hasContainerItem(ItemStack stack) {
+    public boolean hasContainerItem(@Nonnull ItemStack stack) {
         return true;
     }
 
 
     @Override
-    public ItemStack getContainerItem(ItemStack stack) {
+    public @Nonnull ItemStack getContainerItem(ItemStack stack) {
         ItemStack container = stack.copy();
         container.setCount(1);
         return container;
     }
 
     @Override
-    public ItemStack getDefaultInstance() {
+    public @Nonnull ItemStack getDefaultInstance() {
         return new ItemStack(pattern, 1, 0);
     }
 

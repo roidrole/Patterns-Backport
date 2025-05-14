@@ -1,6 +1,5 @@
 package roidrole.patternbanners.recipe;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
@@ -22,6 +21,8 @@ import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Utils;
 import roidrole.patternbanners.config.Config;
 
+import javax.annotation.Nonnull;
+
 
 public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
@@ -31,16 +32,18 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
     public PatternApply(ConfigCategory mapping){
         Item patternItem;
-        if(mapping.containsKey("from")){
-            patternItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(mapping.get("from").getString()));
+        if(mapping.containsKey("uses")){
+            patternItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(mapping.get("uses").getString()));
         }else{patternItem = PatternBanners.pattern;}
+
+        assert patternItem != null;
         this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());
         this.patternS = mapping.get("hash").getString();
         this.patternN = mapping.get("name").getString();
     }
 
     @Override
-    public boolean matches(InventoryCrafting inv, World worldIn) {
+    public boolean matches(InventoryCrafting inv, @Nonnull World worldIn) {
         if(inv.getStackInSlot(0).getItem() != Items.BANNER){return false;}
         if(!inv.getStackInSlot(1).isItemEqual(patternI)){return false;}
         if(TileEntityBanner.getPatterns(inv.getStackInSlot(1)) >= Config.generalCategory.get("max_banner_layer").getInt()){return false;}
@@ -48,7 +51,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
+    public @Nonnull ItemStack getCraftingResult(InventoryCrafting inv) {
         int color = -1;
         for(int oreID : OreDictionary.getOreIDs(inv.getStackInSlot(2))){
             String oreName = OreDictionary.getOreName(oreID);
@@ -67,20 +70,18 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public boolean canFit(int width, int height) {return width >=2 && height >=2;}
 
     @Override
-    public ItemStack getRecipeOutput() {return ItemStack.EMPTY;}
+    public @Nonnull ItemStack getRecipeOutput() {return ItemStack.EMPTY;}
 
     @Override
     //TODO : fix this
-    //Seems it can't return the same item that was inputted. Worth investigating
-    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
+    public @Nonnull NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
         ItemStack stackLeft = inv.getStackInSlot(1).copy();
         stackLeft.setCount(1);
         NonNullList<ItemStack> remaining = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
-        remaining.set(1, new ItemStack(Blocks.VINE, 1));
+        remaining.set(1, stackLeft);
         remaining.set(2, ForgeHooks.getContainerItem(inv.getStackInSlot(2)));
         return remaining;
     }
-
     //Helper
     public void addPattern(ItemStack banner, int color){
         NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");
