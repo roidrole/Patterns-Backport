@@ -22,7 +22,7 @@ public class _Integration {
     }
 
     public static void doIntegration(String modid, String name, Integration integrationClass){
-        if(Loader.isModLoaded(modid) && config.get("integration", name, true).getBoolean()){integrationClass.init();}
+        if(config.get("integration", name, true).getBoolean() && Loader.isModLoaded(modid)){integrationClass.init();}
     }
     public static void doIntegration(String name, Integration integrationClass){
         if(config.get("integration", name, true).getBoolean()){integrationClass.init();}
