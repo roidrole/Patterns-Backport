@@ -77,6 +77,9 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
         return NonNullList.from(ItemStack.EMPTY, ItemStack.EMPTY, patternI.copy(), ForgeHooks.getContainerItem(inv.getStackInSlot(2)));
     }
 
+    @Override
+    public boolean isDynamic() {return true;}
+
     //Helper
     public void addPattern(ItemStack banner, int color){
         NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");
