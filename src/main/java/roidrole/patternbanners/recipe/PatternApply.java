@@ -45,7 +45,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public boolean matches(InventoryCrafting inv, @Nonnull World worldIn) {
         if(inv.getStackInSlot(0).getItem() != Items.BANNER){return false;}
         if(!inv.getStackInSlot(1).isItemEqual(patternI)){return false;}
-        if(TileEntityBanner.getPatterns(inv.getStackInSlot(1)) >= Config.generalCategory.get("max_banner_layer").getInt()){return false;}
+        if(TileEntityBanner.getPatterns(inv.getStackInSlot(0)) >= Config.generalCategory.get("max_banner_layer").getInt()){return false;}
         return Utils.isDye(inv.getStackInSlot(2));
     }
 
@@ -74,13 +74,9 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     @Override
     //TODO : fix this
     public @Nonnull NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-        ItemStack stackLeft = inv.getStackInSlot(1).copy();
-        stackLeft.setCount(1);
-        NonNullList<ItemStack> remaining = NonNullList.withSize(inv.getSizeInventory(), ItemStack.EMPTY);
-        remaining.set(1, stackLeft);
-        remaining.set(2, ForgeHooks.getContainerItem(inv.getStackInSlot(2)));
-        return remaining;
+        return NonNullList.from(ItemStack.EMPTY, ItemStack.EMPTY, patternI.copy(), ForgeHooks.getContainerItem(inv.getStackInSlot(2)));
     }
+
     //Helper
     public void addPattern(ItemStack banner, int color){
         NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");
