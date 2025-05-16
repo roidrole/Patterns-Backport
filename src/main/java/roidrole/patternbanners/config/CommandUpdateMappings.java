@@ -9,7 +9,7 @@ import roidrole.patternbanners.Tags;
 
 import java.util.Arrays;
 
-import static roidrole.patternbanners.config.Config.*;
+import static roidrole.patternbanners.config.ConfigMapping.*;
 
 public class CommandUpdateMappings extends CommandBase {
     public static String name = Tags.MOD_ID+":configupdate";
@@ -24,20 +24,19 @@ public class CommandUpdateMappings extends CommandBase {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+        ConfigGeneral.config.load();
         config.load();
         for (BannerPattern pattern : BannerPattern.values()) {
             if(checkAdd(pattern)){
                 genMappingFor(pattern);
             }
         }
-        config.save();
-        config.load();
 
-        for (ConfigCategory mapping : mappingCategory.getChildren()){
-            if(checkRemove(mapping)){config.removeCategory(mapping);}
+        for (ConfigCategory mapping : mappings){
+            if(checkRemove(mapping)){
+                config.removeCategory(mapping);}
         }
         config.save();
-        config.load();
     }
 
     @Override
@@ -46,7 +45,8 @@ public class CommandUpdateMappings extends CommandBase {
     //Helpers
     public static boolean checkAdd(BannerPattern pattern){
         if(pattern.ordinal() == 0){return false;}
-        for (ConfigCategory mapping : mappingCategory.getChildren()){
+        if(!ConfigGeneral.shapes_pattern && !pattern.hasPatternItem() && pattern.hasPattern()){return false;}
+        for (ConfigCategory mapping : mappings){
             if(!mapping.containsKey("hash")){continue;}
             if(pattern.getHashname().equals(mapping.get("hash").getString())){
                 return false;

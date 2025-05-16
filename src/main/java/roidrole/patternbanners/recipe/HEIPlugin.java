@@ -11,8 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.oredict.OreDictionary;
-import roidrole.patternbanners.config.Config;
 import roidrole.patternbanners.config.ConfigGeneral;
+import roidrole.patternbanners.config.ConfigMapping;
 import roidrole.patternbanners.recipe.wrapper.PatternApplyWrapper;
 import roidrole.patternbanners.recipe.wrapper.PatternFromShapeWrapper;
 import roidrole.patternbanners.recipe.wrapper.RecipeAddPatternWrapper;
@@ -28,7 +28,7 @@ public class HEIPlugin implements IModPlugin {
 
         registry.handleRecipes(PatternApply.class, PatternApplyWrapper::new, categoryUid);
 
-        for(ConfigCategory mapping : Config.mappings){
+        for(ConfigCategory mapping : ConfigMapping.mappings){
             registry.addRecipes(Collections.singleton(new PatternApply(mapping)), categoryUid);
         }
 

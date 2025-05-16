@@ -1,16 +1,22 @@
 package roidrole.patternbanners.config;
 
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.Configuration;
 import roidrole.patternbanners.Tags;
+
+import java.io.File;
 
 @Config(
         modid = Tags.MOD_ID,
-        name = "patternbanners/general"
+        name = Tags.MOD_ID+"/general"
 )
 public class ConfigGeneral {
+    @Config.Ignore
+    public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+"/general.cfg"));
+
     @Config.Comment("Put hashes of custom patterns here. You can find the documentation on the github wiki.")
-    @Config.RequiresMcRestart
     @Config.Name("Custom Pattern Hashes")
+    @Config.RequiresMcRestart
     public static String[] custom_pattern_hashes = {};
 
     @Config.Comment("Max number of patterns on a banner.\nVanilla default is 16")
@@ -19,6 +25,5 @@ public class ConfigGeneral {
     public static int max_banner_layer = 16;
 
     @Config.Comment("Should we generate pattern items for shapes?")
-    @Config.RequiresMcRestart
     public static boolean shapes_pattern = true;
 }

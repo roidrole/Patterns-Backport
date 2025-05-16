@@ -3,6 +3,8 @@ package roidrole.patternbanners;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.config.ConfigCategory;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -26,5 +28,13 @@ public class Utils {
             if(OreDictionary.getOreName(oreID).startsWith("dye")){return true;}
         }
         return false;
+    }
+
+    public static ItemStack getItemStack(ConfigCategory mapping){
+        if(!mapping.containsKey("item")){return ItemStack.EMPTY;}
+        String[] params = mapping.get("item").getString().split(":");
+        if(params.length == 2){return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, 0);}
+        if(params.length == 3){return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, Integer.parseInt(params[2]));}
+        return ItemStack.EMPTY;
     }
 }

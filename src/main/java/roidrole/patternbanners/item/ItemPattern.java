@@ -9,8 +9,8 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
-import roidrole.patternbanners.config.Config;
 import roidrole.patternbanners.Tags;
+import roidrole.patternbanners.config.ConfigMapping;
 
 import javax.annotation.Nonnull;
 
@@ -30,9 +30,9 @@ public class ItemPattern extends Item {
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, NonNullList<ItemStack> items) {
         if(this.isInCreativeTab(tab)){
-            for (ConfigCategory mapping : Config.mappings){
+            for (ConfigCategory mapping : ConfigMapping.mappings){
                 if(mapping.containsKey("uses")){continue;}
                 items.add(new ItemStack(this, 1,mapping.get("meta").getInt()));
             }
@@ -60,12 +60,9 @@ public class ItemPattern extends Item {
     //Utils
     @SideOnly(Side.CLIENT)
     public String getPatternLang(ItemStack stack){
-        String name;
-        try {
-            name = Config.getMappingFor(stack.getItemDamage()).get("name").getString();
-        }catch (Exception e){
-            return String.valueOf(stack.getItemDamage());
-        }
+        String meta = String.valueOf(stack.getItemDamage());
+        if(!ConfigMapping.config.getCategoryNames().contains(meta)){return meta;}
+        String name = ConfigMapping.config.get(meta, "name", meta).getString();
         String key = Tags.MOD_ID + ".pattern."+name+".name";
         if (I18n.hasKey(key)){return I18n.format(key);}
         else{

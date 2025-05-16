@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import roidrole.patternbanners.config.Config;
+import roidrole.patternbanners.config.ConfigMapping;
 
 import java.util.Random;
 
@@ -30,7 +30,7 @@ public class Cartographer implements _Integration.Integration {
         public void addMerchantRecipe(IMerchant merchant, MerchantRecipeList recipeList, Random random) {
             recipeList.add(new MerchantRecipe(
                     new ItemStack(Items.EMERALD, 8),
-                    new ItemStack(pattern, 1, Config.getDamageFromHash("glo"))
+                    new ItemStack(pattern, 1, ConfigMapping.getDamageFromHash("glo"))
             ));
         }
     }

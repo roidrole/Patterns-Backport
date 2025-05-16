@@ -4,7 +4,7 @@ import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
 
-import static roidrole.patternbanners.config.Config.config;
+import static roidrole.patternbanners.config.ConfigGeneral.config;
 
 public class _Integration {
     public static void init(){
