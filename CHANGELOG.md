@@ -1,3 +1,9 @@
+Unreleased : 
+
+**Fixed** : 
+- entryName of injected entry in Bastion
+
+
 1.1.0 :
 
 **Added** :
@@ -15,6 +21,7 @@
 - Make PatternApply not show in recipe book
 - Make all banners have a black background (#2)
 - Fix max_banner_layers
+
 
 1.0.0 : 
 First release

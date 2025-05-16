@@ -30,7 +30,7 @@ public class NetherBackport implements _Integration.Integration {
                         0,
                         new LootFunction[]{new SetMetadata(new LootCondition[]{}, new RandomValueRange(ConfigMapping.getDamageFromHash("nb_pig")))},
                         new LootCondition[]{},
-                        Tags.MOD_ID+":dd_flo"
+                        Tags.MOD_ID+":nb_pig"
                 ));
             }
         }
