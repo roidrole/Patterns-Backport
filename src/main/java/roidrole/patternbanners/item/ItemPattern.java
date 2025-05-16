@@ -30,7 +30,7 @@ public class ItemPattern extends Item {
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
         if(this.isInCreativeTab(tab)){
             for (ConfigCategory mapping : ConfigMapping.mappings){
                 if(mapping.containsKey("uses")){continue;}

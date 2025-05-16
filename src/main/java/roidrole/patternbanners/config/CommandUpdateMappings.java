@@ -7,6 +7,7 @@ import net.minecraft.tileentity.BannerPattern;
 import net.minecraftforge.common.config.ConfigCategory;
 import roidrole.patternbanners.Tags;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 import static roidrole.patternbanners.config.ConfigMapping.*;
@@ -15,15 +16,13 @@ public class CommandUpdateMappings extends CommandBase {
     public static String name = Tags.MOD_ID+":configupdate";
 
     @Override
-    public String getName() {return name;}
+    public @Nonnull String getName() {return name;}
 
     @Override
-    public String getUsage(ICommandSender sender) {
-        return "/"+name+" - Regenerates pattern mappings";
-    }
+    public @Nonnull String getUsage(@Nonnull ICommandSender sender) {return "/"+name+" - Regenerates pattern mappings";}
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+    public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) {
         ConfigGeneral.config.load();
         config.load();
         for (BannerPattern pattern : BannerPattern.values()) {
