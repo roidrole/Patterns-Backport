@@ -8,7 +8,7 @@
 - Set crafting table as catalyst of the HEI category
 - Rewrote config handling :
     - Move mixins, mappings and general to separate files
-    - **There is no script to move them over, you will have to update maunally**
+    - **There is no script to move them over, you will have to update manually**
     - Should be more robust, report any bugs encountered
 
 **Fixed** :
