@@ -19,6 +19,7 @@ public class ItemModelMapper {
         }else{
             ModelLoader.setCustomModelResourceLocation(pattern, 0, defaultPatternModel);
             for (ConfigCategory mapping : ConfigMapping.mappings){
+                if(mapping.containsKey("uses")){continue;}
                 int meta = mapping.get("meta").getInt();
                 String patternS = mapping.get("name").getString();
                 if (itemModelExists(Tags.MOD_ID, "pattern/"+patternS)){
