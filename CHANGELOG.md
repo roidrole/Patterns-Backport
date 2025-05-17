@@ -1,7 +1,8 @@
-Unreleased : 
+1.1.1 : 
 
 **Fixed** : 
 - entryName of injected entry in Bastion
+- Mod not loading
 
 
 1.1.0 :
