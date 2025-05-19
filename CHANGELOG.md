@@ -8,7 +8,7 @@ Unreleased :
 
 **Fixed** : 
 - entryName of injected entry in Bastion
-- Mod not loading in non-dev
+- Mod not loading
 
 
 1.1.0 :
