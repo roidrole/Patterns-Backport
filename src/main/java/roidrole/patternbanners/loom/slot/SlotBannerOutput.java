@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketSetSlot;
 import net.minecraft.util.NonNullList;
 
-import java.io.Console;
-
 public class SlotBannerOutput extends SlotCrafting {
     InventoryCrafting craftMatrix;
     InventoryCraftResult craftResult;

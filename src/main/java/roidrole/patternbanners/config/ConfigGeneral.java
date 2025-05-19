@@ -1,6 +1,5 @@
 package roidrole.patternbanners.config;
 
-import net.minecraft.item.crafting.RecipesBanners;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 import roidrole.patternbanners.Tags;
