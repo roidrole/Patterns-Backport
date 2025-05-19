@@ -66,7 +66,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     }
 
     @Override
-    public boolean canFit(int width, int height) {return width >=2 && height >=2;}
+    public boolean canFit(int width, int height) {return width + height >=4;}
 
     @Override
     public @Nonnull ItemStack getRecipeOutput() {return ItemStack.EMPTY;}

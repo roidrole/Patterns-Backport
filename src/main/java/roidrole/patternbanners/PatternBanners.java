@@ -15,7 +15,10 @@ import roidrole.patternbanners.proxy.CommonProxy;
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
 public class PatternBanners {
     //Constants
-    public static Item pattern = new ItemPattern();
+    public static final Item pattern = new ItemPattern();
+
+    @Mod.Instance(Tags.MOD_ID)
+    public static PatternBanners INSTANCE;
 
     //Proxy
     @SidedProxy(clientSide = Tags.ROOT_PACKAGE+".proxy.ClientProxy", serverSide = Tags.ROOT_PACKAGE+".proxy.CommonProxy")

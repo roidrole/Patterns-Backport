@@ -19,6 +19,7 @@ import roidrole.patternbanners.recipe.wrapper.RecipeAddPatternWrapper;
 
 import java.util.Collections;
 
+import static roidrole.patternbanners.loom._Loom.loomBlock;
 import static roidrole.patternbanners.recipe._Recipe.categoryUid;
 
 @JEIPlugin
@@ -34,16 +35,20 @@ public class HEIPlugin implements IModPlugin {
 
         if(ConfigGeneral.shapes_pattern){
             registry.handleRecipes(PatternFromShape.class, PatternFromShapeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
-        }
-        else{
+        } else {
             for(BannerPattern pattern : BannerPattern.values()){
                 if(pattern.hasPatternItem() || !pattern.hasPattern()){continue;}
                 registry.addRecipes(Collections.singletonList(new RecipeAddPatternWrapper(pattern)), categoryUid);
             }
         }
 
-        registry.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE, 1, 0), categoryUid);
         registry.addRecipeCatalyst(new ItemStack(Items.BANNER, 1, OreDictionary.WILDCARD_VALUE), categoryUid);
+        if(ConfigGeneral.Recipes.craftingTable) {
+            registry.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE, 1, 0), categoryUid);
+        }
+        if(ConfigGeneral.Recipes.loom){
+            registry.addRecipeCatalyst(new ItemStack(loomBlock, 1, 0), categoryUid);
+        }
     }
 
     @Override

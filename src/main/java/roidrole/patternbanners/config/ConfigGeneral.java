@@ -1,5 +1,6 @@
 package roidrole.patternbanners.config;
 
+import net.minecraft.item.crafting.RecipesBanners;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 import roidrole.patternbanners.Tags;
@@ -26,4 +27,11 @@ public class ConfigGeneral {
 
     @Config.Comment("Should we generate pattern items for shapes?")
     public static boolean shapes_pattern = true;
+
+    @Config.Comment("Should we generate recipes for the following tables?")
+    public static Recipes recipes = new Recipes();
+    public static class Recipes{
+        public static boolean loom = true;
+        public static boolean craftingTable = false;
+    }
 }

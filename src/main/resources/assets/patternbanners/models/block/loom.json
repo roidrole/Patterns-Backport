@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "patternbanners:blocks/loom/front",
+    "down": "patternbanners:blocks/loom/bottom",
+    "up": "patternbanners:blocks/loom/top",
+    "north": "patternbanners:blocks/loom/front",
+    "east": "patternbanners:blocks/loom/side",
+    "south": "patternbanners:blocks/loom/side",
+    "west": "patternbanners:blocks/loom/side"
+  }
+}
