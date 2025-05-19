@@ -1,7 +1,14 @@
 Unreleased : 
 
+**Added**:
+- Loom (WIP)
+
+
+1.1.1 : 
+
 **Fixed** : 
 - entryName of injected entry in Bastion
+- Mod not loading in non-dev
 
 
 1.1.0 :
