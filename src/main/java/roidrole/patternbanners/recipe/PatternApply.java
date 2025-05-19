@@ -20,6 +20,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Utils;
 import roidrole.patternbanners.config.ConfigGeneral;
+import roidrole.patternbanners.config.ConfigMapping;
 
 import javax.annotation.Nonnull;
 
@@ -34,6 +35,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
         Item patternItem;
         if(mapping.containsKey("uses")){
             patternItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(mapping.get("uses").getString()));
+            ConfigMapping.extraPatternItems.add(new ItemStack(patternItem, 1, mapping.get("meta").getInt()));
         }else{patternItem = PatternBanners.pattern;}
 
         this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());

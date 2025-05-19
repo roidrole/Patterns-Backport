@@ -11,5 +11,7 @@ public class SlotBanner extends Slot {
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {return stack.getItem().equals(Items.BANNER);}
+    public boolean isItemValid(ItemStack stack) {
+        return stack.getItem().equals(Items.BANNER);
+    }
 }

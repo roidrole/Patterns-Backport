@@ -8,11 +8,12 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import roidrole.patternbanners.config.ConfigMapping;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
-import static roidrole.patternbanners.config.ConfigMapping.mappings;
 
 public class Utils {
     @SideOnly(Side.CLIENT)
@@ -36,20 +37,15 @@ public class Utils {
     public static ItemStack getItemStack(ConfigCategory mapping){
         if(!mapping.containsKey("item")){return ItemStack.EMPTY;}
         String[] params = mapping.get("item").getString().split(":");
-        if(params.length == 2){return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, 0);}
-        if(params.length == 3){return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, Integer.parseInt(params[2]));}
+        if(params.length == 2){return new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1]))), 1, 0);}
+        if(params.length == 3){return new ItemStack(Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1]))), 1, Integer.parseInt(params[2]));}
         return ItemStack.EMPTY;
     }
 
     public static boolean isPatternItem(ItemStack stack){
         if(stack.getItem().equals(pattern)){return true;}
-        //TODO:cache list of patternItems
-        for(ConfigCategory mapping : mappings){
-            if(!mapping.containsKey("uses")){continue;}
-            if(mapping.get("meta").getInt() != stack.getItemDamage()){continue;}
-            if(stack.getItem().getRegistryName().toString().equals(mapping.get("uses").getString()) && stack.getItemDamage() == mapping.get("meta").getInt()) {
-                return true;
-            }
+        for(ItemStack entry : ConfigMapping.extraPatternItems){
+            if(entry.getItem().equals(stack.getItem()) && entry.getItemDamage() == stack.getItemDamage()){return true;}
         }
         return false;
     }
