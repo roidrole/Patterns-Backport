@@ -9,6 +9,7 @@ Unreleased :
 
 **Changed** : 
 - Improvements to recipe registry
+- General code cleanup
 
 1.1.0 :
 

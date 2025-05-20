@@ -11,6 +11,7 @@ import java.io.File;
         name = Tags.MOD_ID+"/general"
 )
 public class ConfigGeneral {
+
     @Config.Ignore
     public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+"/general.cfg"));
 
@@ -25,12 +26,14 @@ public class ConfigGeneral {
     public static int max_banner_layer = 16;
 
     @Config.Comment("Should we generate pattern items for shapes?")
+    @Config.RequiresMcRestart
     public static boolean shapes_pattern = true;
 
-    @Config.Comment("Should we generate recipes for the following tables?")
-    public static Recipes recipes = new Recipes();
-    public static class Recipes{
+    @Config(modid=Tags.MOD_ID, name=Tags.MOD_ID+"/general",category = "general.recipes")
+    public static final class Recipes{
+        @Config.RequiresMcRestart
         public static boolean loom = true;
+        @Config.RequiresMcRestart
         public static boolean craftingTable = false;
     }
 }
