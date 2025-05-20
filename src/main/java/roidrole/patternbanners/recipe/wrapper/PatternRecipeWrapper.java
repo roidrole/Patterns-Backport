@@ -1,6 +1,5 @@
 package roidrole.patternbanners.recipe.wrapper;
 
-import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
