@@ -9,15 +9,12 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import roidrole.patternbanners.Tags;
 
-public class PatternRecipeWrapper implements IRecipeWrapper {
+public abstract class PatternRecipeWrapper implements IRecipeWrapper {
     String patternN;
 
     @Override
-    public void getIngredients(IIngredients iIngredients) {/*NO OP*/}
-
-    @Override
     public void drawInfo(Minecraft mc, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        mc.getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/jei/empty_banner.png"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/empty_banner.png"));
         drawTexturedModalRect(82, 0, 0, 2, 2, 39, 78, 0.008f, 0.008f);
         mc.getTextureManager().bindTexture(new ResourceLocation("minecraft", "textures/entity/banner/"+patternN+".png"));
         drawTexturedModalRect(82, 0, 0, 2, 2, 39, 78, 0.008f, 0.008f);
@@ -35,6 +32,4 @@ public class PatternRecipeWrapper implements IRecipeWrapper {
         tessellator.getBuffer().pos(x, y, z).tex(u * f, v * f1).endVertex();
         tessellator.draw();
     }
-
-
 }

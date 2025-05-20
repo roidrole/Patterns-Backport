@@ -1,8 +1,14 @@
 Unreleased : 
 
+**Added** : 
+- Loom
+- Config to remove crafting table and/or loom recipes
+
 **Fixed** : 
 - entryName of injected entry in Bastion
 
+**Changed** : 
+- Improvements to recipe registry
 
 1.1.0 :
 

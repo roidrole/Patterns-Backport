@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RecipeAddPatternWrapper extends PatternRecipeWrapper {
+public class PatternOnlyShapeWrapper extends PatternRecipeWrapper {
     String patternS;
 
-    public RecipeAddPatternWrapper(BannerPattern patternIn){
+    public PatternOnlyShapeWrapper(BannerPattern patternIn){
         patternN = patternIn.getFileName();
         patternS = String.join("", patternIn.getPatterns());
     }

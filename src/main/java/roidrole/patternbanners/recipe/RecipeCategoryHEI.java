@@ -16,9 +16,10 @@ import roidrole.patternbanners.recipe.wrapper.PatternRecipeWrapper;
 
 import javax.annotation.Nullable;
 
-import static roidrole.patternbanners.recipe._Recipe.categoryUid;
+import static roidrole.patternbanners.recipe.HEIPlugin.categoryUid;
 
 public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
+    //TODO : draw differently if no CraftingTableRecipe
     IGuiHelper guiHelper;
 
     public RecipeCategoryHEI(IGuiHelper guiHelper) {this.guiHelper = guiHelper;}

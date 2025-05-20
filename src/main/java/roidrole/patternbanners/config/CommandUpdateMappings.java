@@ -23,7 +23,6 @@ public class CommandUpdateMappings extends CommandBase {
 
     @Override
     public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) {
-        ConfigGeneral.config.load();
         config.load();
         for (BannerPattern pattern : BannerPattern.values()) {
             if(checkAdd(pattern)){

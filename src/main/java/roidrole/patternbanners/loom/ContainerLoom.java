@@ -17,7 +17,7 @@ import roidrole.patternbanners.loom.slot.SlotPattern;
 import roidrole.patternbanners.recipe.PatternApply;
 
 import static roidrole.patternbanners.loom._Loom.loomBlock;
-import static roidrole.patternbanners.recipe._Recipe.LOOM_RECIPES;
+import static roidrole.patternbanners.recipe._Recipe.PATTERN_APPLY_RECIPES;
 
 public class ContainerLoom extends Container {
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 1);
@@ -53,7 +53,7 @@ public class ContainerLoom extends Container {
         if(world.isRemote){return;}
         EntityPlayerMP player = (EntityPlayerMP) this.player;
         ItemStack output = ItemStack.EMPTY;
-        for(PatternApply recipe : LOOM_RECIPES){
+        for(PatternApply recipe : PATTERN_APPLY_RECIPES){
             if (recipe.patternI.isItemEqual(inventoryIn.getStackInSlot(1)) && recipe.matches(craftMatrix, world)) {
                 this.craftResult.setRecipeUsed(recipe);
                 output = recipe.getCraftingResult((InventoryCrafting) inventoryIn);

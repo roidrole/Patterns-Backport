@@ -22,7 +22,6 @@ public class CommonProxy {
     }
 
     public void init(){
-        ConfigGeneral.config.load();
         ConfigMapping.init();
         _Integration.init();
         _Recipe.init();
