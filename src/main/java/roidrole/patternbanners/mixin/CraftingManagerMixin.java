@@ -8,9 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Debug(export = true, print = true)
 @Mixin(CraftingManager.class)
-public class CraftingManagerMixin {
+public abstract class CraftingManagerMixin {
     @Redirect(
         method = "init()Z",
         at = @At(
