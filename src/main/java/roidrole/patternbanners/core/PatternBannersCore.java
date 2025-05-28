@@ -13,7 +13,7 @@ import java.util.Map;
 @IFMLLoadingPlugin.Name("PatternBannersCore")
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
 //Sorting index is, so far, a random number > 1000
-@IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE)
+@IFMLLoadingPlugin.SortingIndex(1521)
 @IFMLLoadingPlugin.TransformerExclusions("roidrole.patternbanners.core")
 public class PatternBannersCore implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
