@@ -1,8 +1,8 @@
 package roidrole.patternbanners.loom.slot;
 
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemBanner;
 import net.minecraft.item.ItemStack;
 
 public class SlotBanner extends Slot {
@@ -12,6 +12,6 @@ public class SlotBanner extends Slot {
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-        return stack.getItem().equals(Items.BANNER);
+        return stack.getItem() instanceof ItemBanner;
     }
 }
