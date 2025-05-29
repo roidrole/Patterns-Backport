@@ -95,7 +95,7 @@ public class GuiLoom extends GuiContainer {
 
         //Preview
         if(container.getSlot(3).getHasStack()){
-            drawBannerPreview(container.getSlot(3).getStack(), 0, 0, 20, 40);
+            drawBannerPreview(container.getSlot(3).getStack(), guiLeft+141, guiTop+8, 20, 40);
         }
     }
 
@@ -154,7 +154,7 @@ public class GuiLoom extends GuiContainer {
                             bannerTile.getColorList()
                     )
             );
-            drawModalRectWithCustomSizedTexture(x, y, 0, 0, w, h, w, h);
+            drawModalRectWithCustomSizedTexture(x, y, 1, 1, w, h, 64, 64);
             GlStateManager.color(1, 1, 1); // Reset color
         }
     }

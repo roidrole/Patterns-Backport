@@ -31,6 +31,7 @@ public class ContainerLoom extends Container {
     public World world;
     public final EntityPlayer player;
     public static final List<String> patternHashes = PATTERNS_ONLY_SHAPE.stream().map(BannerPattern::getHashname).collect(Collectors.toList());
+    public static int selectedRecipe = -1;
 
     public ContainerLoom(InventoryPlayer playerInventory, World world, BlockPos pos) {
         this.world = world;
@@ -57,18 +58,7 @@ public class ContainerLoom extends Container {
     public void onCraftMatrixChanged(IInventory inventoryIn) {
         //Can't use annotations here. I guess it must return *something* on client
         if(world.isRemote){return;}
-        ItemStack output = ItemStack.EMPTY;
-        for(PatternApply recipe : PATTERN_APPLY_RECIPES){
-            if (recipe.patternI.isItemEqual(inventoryIn.getStackInSlot(1)) && recipe.matches(craftMatrix, world)) {
-                this.craftResult.setRecipeUsed(recipe);
-                output = recipe.getCraftingResult((InventoryCrafting) inventoryIn);
-                break;
-            }
-        }
-        if(!output.equals(this.craftResult.getStackInSlot(0))){
-            this.craftResult.setInventorySlotContents(0, output);
-            ((EntityPlayerMP) player).connection.sendPacket(new SPacketSetSlot(this.windowId, 3, output));
-        }
+        calcOutput();
     }
 
     public void onContainerClosed(EntityPlayer playerIn) {
@@ -148,12 +138,33 @@ public class ContainerLoom extends Container {
     @Override
     public boolean enchantItem(EntityPlayer clicker, int index) {
         if(index < 0 || index >= patternHashes.size()){return false;}
-        if(craftMatrix.getStackInSlot(0).isEmpty()){return false;}
-        if(craftMatrix.getStackInSlot(2).isEmpty()){return false;}
-        ItemStack output = craftMatrix.getStackInSlot(0).copy();
-        PatternApply.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(index));
-        this.craftResult.setInventorySlotContents(0, output);
-        ((EntityPlayerMP) player).connection.sendPacket(new SPacketSetSlot(this.windowId, 3, output));
+        selectedRecipe = index;
+        calcOutput();
         return true;
+    }
+
+    //Helpers
+    public void calcOutput(){
+        ItemStack output = ItemStack.EMPTY;
+        if(craftMatrix.getStackInSlot(0).isEmpty() || craftMatrix.getStackInSlot(2).isEmpty()){
+            // NO-OP
+        }else if(craftMatrix.getStackInSlot(1).isEmpty()){ //PatternOnly
+            if(selectedRecipe < 0 || selectedRecipe >= patternHashes.size()){return;}
+            output = craftMatrix.getStackInSlot(0).copy();
+            output.setCount(1);
+            PatternApply.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(selectedRecipe));
+        }else{ //PatternApply
+            for(PatternApply recipe : PATTERN_APPLY_RECIPES){
+                if (recipe.patternI.isItemEqual(craftMatrix.getStackInSlot(1)) && recipe.matches(craftMatrix, world)) {
+                    this.craftResult.setRecipeUsed(recipe);
+                    output = recipe.getCraftingResult(craftMatrix);
+                    break;
+                }
+            }
+        }
+        if(!this.craftResult.getStackInSlot(0).equals(output)){
+            this.craftResult.setInventorySlotContents(0, output);
+            ((EntityPlayerMP) player).connection.sendPacket(new SPacketSetSlot(this.windowId, 3, output));
+        }
     }
 }
