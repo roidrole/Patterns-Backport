@@ -148,8 +148,7 @@ public class ContainerLoom extends Container {
         ItemStack output = ItemStack.EMPTY;
         if(craftMatrix.getStackInSlot(0).isEmpty() || craftMatrix.getStackInSlot(2).isEmpty()){
             // NO-OP
-        }else if(craftMatrix.getStackInSlot(1).isEmpty()){ //PatternOnly
-            if(selectedRecipe < 0 || selectedRecipe >= patternHashes.size()){return;}
+        }else if(craftMatrix.getStackInSlot(1).isEmpty() && selectedRecipe >= 0 && selectedRecipe < patternHashes.size()){ //PatternOnly
             output = craftMatrix.getStackInSlot(0).copy();
             output.setCount(1);
             PatternApply.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(selectedRecipe));

@@ -30,7 +30,6 @@ public class GuiLoom extends GuiContainer {
 
     private int firstRenderedLine = 0;
     private int slotSelected = -1;
-    private int recipeSelected = -1;
     private final ContainerLoom container;
     public GuiLoom(ContainerLoom container) {
         super(container);
@@ -111,7 +110,7 @@ public class GuiLoom extends GuiContainer {
         int columnClicked = Math.floorDiv(mouseX-(this.guiLeft+60), 14);
         if(columnClicked < 0 || columnClicked > 3){return;}
         slotSelected = 4*lineClicked + columnClicked;
-        recipeSelected = 4*(lineClicked + firstRenderedLine) + columnClicked;
+        int recipeSelected = 4 * (lineClicked + firstRenderedLine) + columnClicked;
         Minecraft.getMinecraft().player.connection.sendPacket(
                 new CPacketEnchantItem(container.windowId, recipeSelected)
         );
