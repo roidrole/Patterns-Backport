@@ -23,7 +23,7 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         IBlockState iblockstate = world.getBlockState(new BlockPos(x,y,z));
         if(ID == guiLoomID && (iblockstate.getBlock() == loomBlock))
-            return new GuiLoom(player.inventory, world, new BlockPos(x, y, z));
+            return new GuiLoom(new ContainerLoom(player.inventory, world, new BlockPos(x, y, z)));
         return null;
     }
 }

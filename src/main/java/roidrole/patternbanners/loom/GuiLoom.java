@@ -2,12 +2,13 @@ package roidrole.patternbanners.loom;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.BannerTextures;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.CPacketEnchantItem;
+import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
@@ -30,8 +31,10 @@ public class GuiLoom extends GuiContainer {
     private int firstRenderedLine = 0;
     private int slotSelected = -1;
     private int recipeSelected = -1;
-    public GuiLoom(InventoryPlayer inventory, World world, BlockPos pos) {
-        super(new ContainerLoom(inventory, world, pos));
+    private final ContainerLoom container;
+    public GuiLoom(ContainerLoom container) {
+        super(container);
+        this.container = container;
         if(hasScroll){
             maxRenderedLine = Math.floorDiv(patternLocs.size(), 4) - 4;
         }
@@ -91,7 +94,9 @@ public class GuiLoom extends GuiContainer {
         }
 
         //Preview
-        //Should be 20x40
+        if(container.getSlot(3).getHasStack()){
+            drawBannerPreview(container.getSlot(3).getStack(), 0, 0, 20, 40);
+        }
     }
 
     //Just send an int representing the PATTERN_ONLY_RECIPES index of the pattern and calc on the server
@@ -107,6 +112,9 @@ public class GuiLoom extends GuiContainer {
         if(columnClicked < 0 || columnClicked > 3){return;}
         slotSelected = 4*lineClicked + columnClicked;
         recipeSelected = 4*(lineClicked + firstRenderedLine) + columnClicked;
+        Minecraft.getMinecraft().player.connection.sendPacket(
+                new CPacketEnchantItem(container.windowId, recipeSelected)
+        );
     }
 
     @Override
@@ -133,5 +141,21 @@ public class GuiLoom extends GuiContainer {
     public static int getThumbOffset(int first){
         if(first == maxRenderedLine){return 41;}
         return first*Math.floorDiv(41, maxRenderedLine);
+    }
+
+    public void drawBannerPreview(ItemStack bannerStack, int x, int y, int w, int h) {
+        TileEntityBanner bannerTile = new TileEntityBanner();
+        bannerTile.setItemValues(bannerStack, false);
+        for (int i = 0; i < TileEntityBanner.getPatterns(bannerStack); i++) {
+            Minecraft.getMinecraft().getTextureManager().bindTexture(
+                    BannerTextures.BANNER_DESIGNS.getResourceLocation(
+                            bannerTile.getPatternResourceLocation(),
+                            bannerTile.getPatternList(),
+                            bannerTile.getColorList()
+                    )
+            );
+            drawModalRectWithCustomSizedTexture(x, y, 0, 0, w, h, w, h);
+            GlStateManager.color(1, 1, 1); // Reset color
+        }
     }
 }

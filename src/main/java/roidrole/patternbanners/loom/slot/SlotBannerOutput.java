@@ -1,5 +1,6 @@
 package roidrole.patternbanners.loom.slot;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -9,6 +10,7 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketSetSlot;
 import net.minecraft.util.NonNullList;
+import roidrole.patternbanners.recipe.PatternApply;
 
 public class SlotBannerOutput extends SlotCrafting {
     InventoryCrafting craftMatrix;
@@ -30,11 +32,16 @@ public class SlotBannerOutput extends SlotCrafting {
 
     @Override
     public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
-        if(this.craftResult.getRecipeUsed() == null){return ItemStack.EMPTY;}
+        if(thePlayer instanceof EntityPlayerSP){return ItemStack.EMPTY;}
         this.onCrafting(stack);
 
+        NonNullList<ItemStack> nonnulllist;
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(thePlayer);
-        NonNullList<ItemStack> nonnulllist = this.craftResult.getRecipeUsed().getRemainingItems(craftMatrix);
+        if(this.craftResult.getRecipeUsed() instanceof PatternApply){
+            nonnulllist = this.craftResult.getRecipeUsed().getRemainingItems(craftMatrix);
+        }else{
+            nonnulllist = NonNullList.withSize(3, ItemStack.EMPTY);
+        }
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(null);
 
         for (int i = 0; i < nonnulllist.size(); ++i) {

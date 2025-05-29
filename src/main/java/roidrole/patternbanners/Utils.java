@@ -1,6 +1,7 @@
 package roidrole.patternbanners;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.ConfigCategory;
@@ -32,6 +33,16 @@ public class Utils {
             if(OreDictionary.getOreName(oreID).startsWith("dye")){return true;}
         }
         return false;
+    }
+
+    public static int getDyeColor(ItemStack dye){
+        for(int oreID : OreDictionary.getOreIDs(dye)){
+            String oreName = OreDictionary.getOreName(oreID);
+            if(oreName.startsWith("dye") && !oreName.equals("dye")){
+                return EnumDyeColor.valueOf(oreName.substring(3).toUpperCase()).getDyeDamage();
+            }
+        }
+        return -1;
     }
 
     public static ItemStack getItemStack(ConfigCategory mapping){

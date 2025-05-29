@@ -7,6 +7,7 @@ import net.minecraft.inventory.*;
 import net.minecraft.item.ItemBanner;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketSetSlot;
+import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import roidrole.patternbanners.Utils;
@@ -16,7 +17,11 @@ import roidrole.patternbanners.loom.slot.SlotDye;
 import roidrole.patternbanners.loom.slot.SlotPattern;
 import roidrole.patternbanners.recipe.PatternApply;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static roidrole.patternbanners.loom._Loom.loomBlock;
+import static roidrole.patternbanners.recipe._Recipe.PATTERNS_ONLY_SHAPE;
 import static roidrole.patternbanners.recipe._Recipe.PATTERN_APPLY_RECIPES;
 
 public class ContainerLoom extends Container {
@@ -24,7 +29,8 @@ public class ContainerLoom extends Container {
     public InventoryCraftResult craftResult = new InventoryCraftResult();
     private final BlockPos pos;
     public World world;
-    private final EntityPlayer player;
+    public final EntityPlayer player;
+    public static final List<String> patternHashes = PATTERNS_ONLY_SHAPE.stream().map(BannerPattern::getHashname).collect(Collectors.toList());
 
     public ContainerLoom(InventoryPlayer playerInventory, World world, BlockPos pos) {
         this.world = world;
@@ -51,7 +57,6 @@ public class ContainerLoom extends Container {
     public void onCraftMatrixChanged(IInventory inventoryIn) {
         //Can't use annotations here. I guess it must return *something* on client
         if(world.isRemote){return;}
-        EntityPlayerMP player = (EntityPlayerMP) this.player;
         ItemStack output = ItemStack.EMPTY;
         for(PatternApply recipe : PATTERN_APPLY_RECIPES){
             if (recipe.patternI.isItemEqual(inventoryIn.getStackInSlot(1)) && recipe.matches(craftMatrix, world)) {
@@ -62,7 +67,7 @@ public class ContainerLoom extends Container {
         }
         if(!output.equals(this.craftResult.getStackInSlot(0))){
             this.craftResult.setInventorySlotContents(0, output);
-            player.connection.sendPacket(new SPacketSetSlot(this.windowId, 3, output));
+            ((EntityPlayerMP) player).connection.sendPacket(new SPacketSetSlot(this.windowId, 3, output));
         }
     }
 
@@ -72,7 +77,6 @@ public class ContainerLoom extends Container {
             this.clearContainer(playerIn, this.world, this.craftMatrix);
         }
     }
-
 
     public boolean canInteractWith(EntityPlayer playerIn) {
         if (this.world.getBlockState(this.pos).getBlock() != loomBlock) {
@@ -139,5 +143,17 @@ public class ContainerLoom extends Container {
      */
     public boolean canMergeSlot(ItemStack stack, Slot slotIn) {
         return slotIn.inventory != this.craftResult && super.canMergeSlot(stack, slotIn);
+    }
+
+    @Override
+    public boolean enchantItem(EntityPlayer clicker, int index) {
+        if(index < 0 || index >= patternHashes.size()){return false;}
+        if(craftMatrix.getStackInSlot(0).isEmpty()){return false;}
+        if(craftMatrix.getStackInSlot(2).isEmpty()){return false;}
+        ItemStack output = craftMatrix.getStackInSlot(0).copy();
+        PatternApply.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(index));
+        this.craftResult.setInventorySlotContents(0, output);
+        ((EntityPlayerMP) player).connection.sendPacket(new SPacketSetSlot(this.windowId, 3, output));
+        return true;
     }
 }

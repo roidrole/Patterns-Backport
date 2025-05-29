@@ -53,17 +53,9 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
     @Override
     public @Nonnull ItemStack getCraftingResult(InventoryCrafting inv) {
-        int color = -1;
-        for(int oreID : OreDictionary.getOreIDs(inv.getStackInSlot(2))){
-            String oreName = OreDictionary.getOreName(oreID);
-            if(oreName.startsWith("dye") && !oreName.equals("dye")){
-                color = EnumDyeColor.valueOf(oreName.substring(3).toUpperCase()).getDyeDamage();
-                break;
-            }
-        }
         ItemStack output = inv.getStackInSlot(0).copy();
             output.setCount(1);
-            addPattern(output, color);
+            addPattern(output, Utils.getDyeColor(inv.getStackInSlot(2)), patternS);
         return output;
     }
 
@@ -86,7 +78,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public boolean isDynamic() {return true;}
 
     //Helper
-    public void addPattern(ItemStack banner, int color){
+    public static void addPattern(ItemStack banner, int color, String patternHash){
         NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");
         NBTTagList patternList;
         if (nbt.hasKey("Patterns", 9)){
@@ -97,7 +89,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
             nbt.setTag("Patterns", patternList);
         }
         NBTTagCompound patternToAdd = new NBTTagCompound();
-        patternToAdd.setString("Pattern", patternS);
+        patternToAdd.setString("Pattern", patternHash);
         patternToAdd.setInteger("Color", color);
         patternList.appendTag(patternToAdd);
     }
