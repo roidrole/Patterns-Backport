@@ -97,8 +97,6 @@ public class GuiLoom extends GuiContainer {
             drawBannerPreview(container.getSlot(3).getStack(), guiLeft+141, guiTop+8, 20, 40);
         }
     }
-
-    //Just send an int representing the PATTERN_ONLY_RECIPES index of the pattern and calc on the server
     //TODO:Add click and drag thumb
 
     @Override

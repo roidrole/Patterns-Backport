@@ -8,9 +8,11 @@ import net.minecraft.item.ItemBanner;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketSetSlot;
 import net.minecraft.tileentity.BannerPattern;
+import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import roidrole.patternbanners.Utils;
+import roidrole.patternbanners.config.ConfigGeneral;
 import roidrole.patternbanners.loom.slot.SlotBanner;
 import roidrole.patternbanners.loom.slot.SlotBannerOutput;
 import roidrole.patternbanners.loom.slot.SlotDye;
@@ -146,9 +148,14 @@ public class ContainerLoom extends Container {
     //Helpers
     public void calcOutput(){
         ItemStack output = ItemStack.EMPTY;
-        if(craftMatrix.getStackInSlot(0).isEmpty() || craftMatrix.getStackInSlot(2).isEmpty()){
+        if( //Invalid recipe
+            craftMatrix.getStackInSlot(0).isEmpty() ||
+            craftMatrix.getStackInSlot(2).isEmpty() ||
+            TileEntityBanner.getPatterns(craftMatrix.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer
+        ){
             // NO-OP
         }else if(craftMatrix.getStackInSlot(1).isEmpty() && selectedRecipe >= 0 && selectedRecipe < patternHashes.size()){ //PatternOnly
+            this.craftResult.setRecipeUsed(null);
             output = craftMatrix.getStackInSlot(0).copy();
             output.setCount(1);
             PatternApply.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(selectedRecipe));
