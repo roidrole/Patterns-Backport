@@ -22,26 +22,26 @@ import static roidrole.patternbanners.recipe._Recipe.PATTERNS_ONLY_SHAPE;
 @SideOnly(Side.CLIENT)
 public class GuiLoom extends GuiContainer {
     public static final List<ResourceLocation> patternLocs = PATTERNS_ONLY_SHAPE.stream().map(
-    pattern -> new ResourceLocation("textures/entity/banner/"+pattern.getFileName()+".png")).collect(Collectors.toList());
+    pattern -> new ResourceLocation("minecraft:textures/entity/banner/"+pattern.getFileName()+".png")).collect(Collectors.toList());
     public static final boolean hasScroll = patternLocs.size() > 16;
 
     static int maxRenderedLine;
 
     private int firstRenderedLine = 0;
+    private int slotSelected = -1;
+    private int recipeSelected = -1;
     public GuiLoom(InventoryPlayer inventory, World world, BlockPos pos) {
         super(new ContainerLoom(inventory, world, pos));
         if(hasScroll){
             maxRenderedLine = Math.floorDiv(patternLocs.size(), 4) - 4;
         }
     }
-
+    //TODO : BTW, the first three lines are unconditionally rendered if hasScroll
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
-
-        //Render the items
     }
 
     @Override
@@ -52,21 +52,59 @@ public class GuiLoom extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        //Background
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom.png"));
-        int i = this.guiLeft;
-        int j = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
+        int x = this.guiLeft;
+        int y = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        //Thumb
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/creative_inventory/tabs.png"));
         this.drawTexturedModalRect(this.guiLeft+119, this.guiTop+13+getThumbOffset(firstRenderedLine), 232 +(hasScroll?0:12 ), 0, 12, 15);
+
+        //Other slots
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_full.png"));
+        int lastFullItemSlot = Math.min(15, patternLocs.size() -(firstRenderedLine *4));
+        for (int index = 0; index <= lastFullItemSlot; index++) {
+            x = this.guiLeft+60 + (index % 4) * 14;
+            y = this.guiTop+13 + Math.floorDiv(index, 4)*14;
+            if (index != slotSelected) {
+                drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
+            }
+        }
+
+        //Selected Slot
+        if(slotSelected >=0 && slotSelected < 16){
+            x = this.guiLeft+60 + (slotSelected % 4) * 14;
+            y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
+            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_selected.png"));
+            drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
+        }
+
+        //Banners
+        for (int index = 0; index <= lastFullItemSlot; index++) {
+            x = this.guiLeft+60+4 + (index % 4) * 14;
+            y = this.guiTop+13+2 + Math.floorDiv(index, 4)*14;
+            Minecraft.getMinecraft().getTextureManager().bindTexture(patternLocs.get(firstRenderedLine * 4 + index));
+            drawScaledCustomSizeModalRect(x, y, 1, 1, 20, 40, 5, 10, 64, 64);
+        }
     }
 
-    //TODO : Finish implementing banner preview. FutureMC adds a listener to craftingMatrix. Vanilla output preview? Custom slot galore?
     //Just send an int representing the PATTERN_ONLY_RECIPES index of the pattern and calc on the server
-    //Should check if there are enough PATTERN_ONLY_RECIPES to justify the bar. Vanilla is
-    //TODO:Add click and drag slot
+    //TODO:Add click and drag thumb
+
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        if(mouseButton != 0 && mouseButton != 1){return;}
+        int lineClicked = Math.floorDiv(mouseY-(this.guiTop+13), 14);
+        if(lineClicked < 0 || lineClicked > 4){return;}
+        int columnClicked = Math.floorDiv(mouseX-(this.guiLeft+60), 14);
+        if(columnClicked < 0 || columnClicked > 4){return;}
+        slotSelected = 4*lineClicked + columnClicked;
+        recipeSelected = 4*(lineClicked + firstRenderedLine) + columnClicked;
+    }
 
     @Override
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
@@ -80,13 +118,14 @@ public class GuiLoom extends GuiContainer {
         if(Mouse.getEventDWheel() > 0){
             if(this.firstRenderedLine <= 0){return;}
             firstRenderedLine--;
+            slotSelected += 4;
         } else {
             if(this.firstRenderedLine >= maxRenderedLine){return;}
             firstRenderedLine++;
+            slotSelected -= 4;
         }
     }
 
-    //TODO : implement slots. Draw all slots at the same time to minimize isItemInSlot
     //Helpers
     public static int getThumbOffset(int first){
         if(first == maxRenderedLine){return 41;}

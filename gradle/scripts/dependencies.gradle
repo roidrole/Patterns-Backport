@@ -66,5 +66,5 @@ dependencies {
     //     transitive = false
     // }
 
-    compileOnly rfg.deobf('curse.maven:had-enough-items-557549:4543375')
+    compileOnly('curse.maven:had-enough-items-557549:4543375')
 }
