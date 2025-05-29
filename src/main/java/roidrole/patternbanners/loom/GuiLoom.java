@@ -89,6 +89,9 @@ public class GuiLoom extends GuiContainer {
             Minecraft.getMinecraft().getTextureManager().bindTexture(patternLocs.get(firstRenderedLine * 4 + index));
             drawScaledCustomSizeModalRect(x, y, 1, 1, 20, 40, 5, 10, 64, 64);
         }
+
+        //Preview
+        //Should be 20x40
     }
 
     //Just send an int representing the PATTERN_ONLY_RECIPES index of the pattern and calc on the server
@@ -99,9 +102,9 @@ public class GuiLoom extends GuiContainer {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         if(mouseButton != 0 && mouseButton != 1){return;}
         int lineClicked = Math.floorDiv(mouseY-(this.guiTop+13), 14);
-        if(lineClicked < 0 || lineClicked > 4){return;}
+        if(lineClicked < 0 || lineClicked > 3){return;}
         int columnClicked = Math.floorDiv(mouseX-(this.guiLeft+60), 14);
-        if(columnClicked < 0 || columnClicked > 4){return;}
+        if(columnClicked < 0 || columnClicked > 3){return;}
         slotSelected = 4*lineClicked + columnClicked;
         recipeSelected = 4*(lineClicked + firstRenderedLine) + columnClicked;
     }
