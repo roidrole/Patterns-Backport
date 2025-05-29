@@ -33,7 +33,7 @@ public class ContainerLoom extends Container {
     public World world;
     public final EntityPlayer player;
     public static final List<String> patternHashes = PATTERNS_ONLY_SHAPE.stream().map(BannerPattern::getHashname).collect(Collectors.toList());
-    public static int selectedRecipe = -1;
+    public int selectedRecipe = -1;
 
     public ContainerLoom(InventoryPlayer playerInventory, World world, BlockPos pos) {
         this.world = world;
