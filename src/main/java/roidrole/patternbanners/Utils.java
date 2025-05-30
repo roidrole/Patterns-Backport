@@ -39,6 +39,8 @@ public class Utils {
         for(int oreID : OreDictionary.getOreIDs(dye)){
             String oreName = OreDictionary.getOreName(oreID);
             if(oreName.startsWith("dye") && !oreName.equals("dye")){
+                if(oreName.equals("dyeLightGray")){return 7;}
+                if(oreName.equals("dyeLightBlue")){return 12;}
                 return EnumDyeColor.valueOf(oreName.substring(3).toUpperCase()).getDyeDamage();
             }
         }
