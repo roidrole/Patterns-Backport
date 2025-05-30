@@ -10,7 +10,7 @@ import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.Utils.itemModelExists;
 
 public class ItemModelMapper {
-    public static ModelResourceLocation defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern", "inventory");
+    public static final ModelResourceLocation defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern", "inventory");
 
     public static void preInit(){
         if (ConfigMapping.config.getCategoryNames().isEmpty()){

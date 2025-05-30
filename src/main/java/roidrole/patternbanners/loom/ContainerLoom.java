@@ -30,7 +30,7 @@ public class ContainerLoom extends Container {
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 1);
     public InventoryCraftResult craftResult = new InventoryCraftResult();
     private final BlockPos pos;
-    public World world;
+    public final World world;
     public final EntityPlayer player;
     public static final List<String> patternHashes = PATTERNS_ONLY_SHAPE.stream().map(BannerPattern::getHashname).collect(Collectors.toList());
     public int selectedRecipe = -1;
@@ -116,7 +116,7 @@ public class ContainerLoom extends Container {
             } else if (!mergeItemStack(itemstack1, 4, 40, false)) { //Crafting Matrix
                 return ItemStack.EMPTY;
             }
-            if (itemstack1.isEmpty()) { //Empty slot after everythind
+            if (itemstack1.isEmpty()) { //Empty slot after everything
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();

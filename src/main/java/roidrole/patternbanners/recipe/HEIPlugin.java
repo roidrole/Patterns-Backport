@@ -22,7 +22,7 @@ import static roidrole.patternbanners.recipe._Recipe.PATTERN_APPLY_RECIPES;
 
 @JEIPlugin
 public class HEIPlugin implements IModPlugin {
-    public static String categoryUid = Tags.MOD_ID+"pattern";
+    public static final String categoryUid = Tags.MOD_ID+"pattern";
     @Override
     public void register(IModRegistry registry){
 
