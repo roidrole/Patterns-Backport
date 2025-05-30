@@ -5,6 +5,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.BannerTextures;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPacketEnchantItem;
 import net.minecraft.tileentity.TileEntityBanner;
@@ -61,9 +62,25 @@ public class GuiLoom extends GuiContainer {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
 
+        //Input slots
+        for (int i = 0; i < 3; i++) {
+            Slot current = this.container.getSlot(i);
+            if(current.getHasStack()){continue;}
+            Minecraft.getMinecraft().getTextureManager().bindTexture(current.getBackgroundLocation());
+            drawModalRectWithCustomSizedTexture(this.guiLeft+current.xPos, this.guiTop+current.yPos, 0, 0, 16, 16, 16, 16);
+        }
+
         //Thumb
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/creative_inventory/tabs.png"));
         this.drawTexturedModalRect(this.guiLeft+119, this.guiTop+13+getThumbOffset(firstRenderedLine), 232 +(hasScroll?0:12 ), 0, 12, 15);
+
+        //Selected Slot
+        if(slotSelected >=0 && slotSelected < 16){
+            x = this.guiLeft+60 + (slotSelected % 4) * 14;
+            y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
+            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_selected.png"));
+            drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
+        }
 
         //Other slots
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_full.png"));
@@ -74,14 +91,6 @@ public class GuiLoom extends GuiContainer {
             if (index != slotSelected) {
                 drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
             }
-        }
-
-        //Selected Slot
-        if(slotSelected >=0 && slotSelected < 16){
-            x = this.guiLeft+60 + (slotSelected % 4) * 14;
-            y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
-            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_selected.png"));
-            drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
         }
 
         //Banners

@@ -2,7 +2,6 @@ package roidrole.patternbanners.recipe;
 
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -15,7 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Utils;
