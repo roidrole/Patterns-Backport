@@ -66,5 +66,5 @@ dependencies {
     //     transitive = false
     // }
 
-    compileOnly('curse.maven:had-enough-items-557549:4543375')
+    compileOnly 'mezz:jei:4.25.5'
 }

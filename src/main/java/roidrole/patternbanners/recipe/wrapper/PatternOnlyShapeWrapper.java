@@ -2,10 +2,14 @@ package roidrole.patternbanners.recipe.wrapper;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
+import roidrole.patternbanners.Tags;
+import roidrole.patternbanners.config.ConfigGeneral;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,5 +38,14 @@ public class PatternOnlyShapeWrapper extends PatternRecipeWrapper {
             }
         }
         iIngredients.setInputLists(VanillaTypes.ITEM, ingredientsTemp);
+    }
+
+    @Override
+    public void drawInfo(Minecraft mc, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+        super.drawInfo(mc, recipeWidth, recipeHeight, mouseX, mouseY);
+        if(!ConfigGeneral.Recipes.craftingTable) {
+            mc.getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/slot/banner_pattern.png"));
+            drawTexturedModalRect(17, 31, 0, 0, 0, 16, 16, 0.0625f, 0.0625f);
+        }
     }
 }

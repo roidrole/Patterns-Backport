@@ -10,8 +10,13 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.oredict.OreDictionary;
 import roidrole.patternbanners.Tags;
+import roidrole.patternbanners.config.ConfigGeneral;
+import roidrole.patternbanners.recipe.wrapper.PatternApplyWrapper;
 import roidrole.patternbanners.recipe.wrapper.PatternRecipeWrapper;
 
 import javax.annotation.Nullable;
@@ -19,7 +24,6 @@ import javax.annotation.Nullable;
 import static roidrole.patternbanners.recipe.HEIPlugin.categoryUid;
 
 public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
-    //TODO : draw differently if no CraftingTableRecipe
     IGuiHelper guiHelper;
 
     public RecipeCategoryHEI(IGuiHelper guiHelper) {this.guiHelper = guiHelper;}
@@ -38,12 +42,15 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
 
     @Override
     public void drawExtras(Minecraft mc) {
-        for(int y = 0; y < 3; y++) {
-            for(int x = 0; x < 3; ++x) {
-                guiHelper.getSlotDrawable().draw(mc, 4 + x * 18, 4 + y * 18);
+        if(ConfigGeneral.Recipes.craftingTable){
+            for(int y = 0; y < 3; y++) {
+                for(int x = 0; x < 3; ++x) {
+                    guiHelper.getSlotDrawable().draw(mc, 4 + x * 18, 4 + y * 18);
+                }
             }
+        } else {
+            guiHelper.createDrawable(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom.png"), 6, 14, 50, 55).draw(mc);
         }
-
     }
 
     @Nullable
@@ -60,14 +67,24 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
         if(!(wrapper instanceof PatternRecipeWrapper)) return;
 
         IGuiItemStackGroup guiItemStacks = layout.getItemStacks();
-        for(int y = 0; y < 3; y++) {
-            for(int x = 0; x < 3; ++x) {
-                int index = x + (y * 3);
-                guiItemStacks.init(index, true, 4 + x * 18, 4 + y * 18);
+
+        if(ConfigGeneral.Recipes.craftingTable){
+            for(int y = 0; y < 3; y++) {
+                for(int x = 0; x < 3; ++x) {
+                    int index = x + (y * 3);
+                    guiItemStacks.init(index, true, 4 + x * 18, 4 + y * 18);
+                }
             }
-        }
-        for (int i = 0; i < ingr.getInputs(VanillaTypes.ITEM).size(); i++) {
-            guiItemStacks.set(i, ingr.getInputs(VanillaTypes.ITEM).get(i));
+            for (int i = 0; i < ingr.getInputs(VanillaTypes.ITEM).size(); i++) {
+                guiItemStacks.set(i, ingr.getInputs(VanillaTypes.ITEM).get(i));
+            }
+        } else {
+            guiItemStacks.init(0, true, 6, 11);
+            guiItemStacks.init(1, true, 16, 30);
+            guiItemStacks.init(2, true, 26, 11);
+            guiItemStacks.set(0, new ItemStack(Items.BANNER));
+            if(wrapper instanceof PatternApplyWrapper){guiItemStacks.set(1, ((PatternApplyWrapper) wrapper).patternI);}
+            guiItemStacks.set(2, OreDictionary.getOres("dyeWhite").get(0));
         }
     }
 }

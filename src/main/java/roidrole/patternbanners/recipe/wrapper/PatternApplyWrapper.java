@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class PatternApplyWrapper extends PatternRecipeWrapper {
-    ItemStack patternI;
+    public ItemStack patternI;
 
     public PatternApplyWrapper(PatternApply recipe){
         patternI = recipe.patternI;
