@@ -6,6 +6,7 @@ Unreleased :
 
 **Fixed** : 
 - entryName of injected entry in Bastion
+- Light gray and light blue dye not applicable
 
 **Changed** : 
 - Improvements to recipe registry
