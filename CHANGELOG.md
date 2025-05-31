@@ -14,6 +14,7 @@ Unreleased :
 **Changed** : 
 - Improvements to recipe registry
 - General code cleanup
+- Optimized JEI category
 
 1.1.0 :
 
