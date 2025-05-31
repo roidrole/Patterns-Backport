@@ -5,6 +5,7 @@ Unreleased :
 - Config to remove crafting table and/or loom recipes
 - Config to fall back to old pattern texture
 - Config to always use fallback texture
+- Config to remove default pattern crafts
 
 **Fixed** : 
 - entryName of injected entry in Bastion
