@@ -48,7 +48,7 @@ public class ConfigGeneral {
         @Config.RequiresMcRestart
         public static boolean loom = true;
 
-        @Config.Comment("Should the crafting be usable to apply patterns?")
+        @Config.Comment("Should the crafting table be usable to apply patterns?")
         @Config.RequiresMcRestart
         public static boolean craftingTable = false;
 
