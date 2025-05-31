@@ -32,6 +32,7 @@ public class GuiLoom extends GuiContainer {
     private int firstRenderedLine = 0;
     private int slotSelected = -1;
     private final ContainerLoom container;
+    private int lastFullItemSlot = -1;
     public GuiLoom(ContainerLoom container) {
         super(container);
         this.container = container;
@@ -75,7 +76,8 @@ public class GuiLoom extends GuiContainer {
         this.drawTexturedModalRect(this.guiLeft+119, this.guiTop+13+getThumbOffset(firstRenderedLine), 232 +(hasScroll?0:12 ), 0, 12, 15);
 
         //Selected Slot
-        if(slotSelected >=0 && slotSelected < 16){
+        lastFullItemSlot = Math.min(15, patternLocs.size() -(firstRenderedLine *4));
+        if(slotSelected >=0 && slotSelected < lastFullItemSlot){
             x = this.guiLeft+60 + (slotSelected % 4) * 14;
             y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
             Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_selected.png"));
@@ -84,8 +86,7 @@ public class GuiLoom extends GuiContainer {
 
         //Other slots
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_full.png"));
-        int lastFullItemSlot = Math.min(15, patternLocs.size() -(firstRenderedLine *4));
-        for (int index = 0; index <= lastFullItemSlot; index++) {
+        for (int index = 0; index < lastFullItemSlot; index++) {
             x = this.guiLeft+60 + (index % 4) * 14;
             y = this.guiTop+13 + Math.floorDiv(index, 4)*14;
             if (index != slotSelected) {
@@ -94,7 +95,7 @@ public class GuiLoom extends GuiContainer {
         }
 
         //Banners
-        for (int index = 0; index <= lastFullItemSlot; index++) {
+        for (int index = 0; index < lastFullItemSlot; index++) {
             x = this.guiLeft+60+4 + (index % 4) * 14;
             y = this.guiTop+13+2 + Math.floorDiv(index, 4)*14;
             Minecraft.getMinecraft().getTextureManager().bindTexture(patternLocs.get(firstRenderedLine * 4 + index));
@@ -106,7 +107,6 @@ public class GuiLoom extends GuiContainer {
             drawBannerPreview(container.getSlot(3).getStack(), guiLeft+141, guiTop+8, 20, 40);
         }
     }
-    //TODO:Add click and drag thumb
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
@@ -118,11 +118,13 @@ public class GuiLoom extends GuiContainer {
         if(columnClicked < 0 || columnClicked > 3){return;}
         slotSelected = 4*lineClicked + columnClicked;
         int recipeSelected = 4 * (lineClicked + firstRenderedLine) + columnClicked;
+        if(recipeSelected > patternLocs.size()){return;}
         Minecraft.getMinecraft().player.connection.sendPacket(
                 new CPacketEnchantItem(container.windowId, recipeSelected)
         );
     }
 
+    //TODO:Add click and drag thumb
     @Override
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
         super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
@@ -145,6 +147,7 @@ public class GuiLoom extends GuiContainer {
 
     //Helpers
     public static int getThumbOffset(int first){
+        if(!hasScroll){return 0;}
         if(first == maxRenderedLine){return 41;}
         return first*Math.floorDiv(41, maxRenderedLine);
     }

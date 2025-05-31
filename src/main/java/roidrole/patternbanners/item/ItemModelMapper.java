@@ -4,16 +4,22 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.ConfigCategory;
 import roidrole.patternbanners.Tags;
+import roidrole.patternbanners.config.ConfigGeneral;
 import roidrole.patternbanners.config.ConfigMapping;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.Utils.itemModelExists;
 
 public class ItemModelMapper {
-    public static final ModelResourceLocation defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern", "inventory");
 
     public static void preInit(){
-        if (ConfigMapping.config.getCategoryNames().isEmpty()){
+        ModelResourceLocation defaultPatternModel;
+        if(ConfigGeneral.Patterns.fallbackToOld){
+            defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern_old", "inventory");
+        } else {
+            defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern", "inventory");
+        }
+        if (ConfigGeneral.Patterns.forceFallback || ConfigMapping.config.getCategoryNames().isEmpty()){
             ModelLoader.setCustomMeshDefinition(pattern, (stack -> defaultPatternModel));
             ModelLoader.registerItemVariants(pattern, defaultPatternModel);
         }else{

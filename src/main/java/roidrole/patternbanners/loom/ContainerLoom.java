@@ -151,7 +151,7 @@ public class ContainerLoom extends Container {
         if( //Invalid recipe
             craftMatrix.getStackInSlot(0).isEmpty() ||
             craftMatrix.getStackInSlot(2).isEmpty() ||
-            TileEntityBanner.getPatterns(craftMatrix.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer
+            TileEntityBanner.getPatterns(craftMatrix.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer - 1
         ){
             // NO-OP
         }else if(craftMatrix.getStackInSlot(1).isEmpty() && selectedRecipe >= 0 && selectedRecipe < patternHashes.size()){ //PatternOnly

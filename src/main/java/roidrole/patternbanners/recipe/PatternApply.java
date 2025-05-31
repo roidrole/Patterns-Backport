@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
     public ItemStack patternI;
-    String patternS;
+    String patternH;
     public String patternN;
 
     public PatternApply(ConfigCategory mapping){
@@ -37,7 +37,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
         }else{patternItem = PatternBanners.pattern;}
 
         this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());
-        this.patternS = mapping.get("hash").getString();
+        this.patternH = mapping.get("hash").getString();
         this.patternN = mapping.get("name").getString();
     }
 
@@ -53,7 +53,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public @Nonnull ItemStack getCraftingResult(InventoryCrafting inv) {
         ItemStack output = inv.getStackInSlot(0).copy();
             output.setCount(1);
-            addPattern(output, Utils.getDyeColor(inv.getStackInSlot(2)), patternS);
+            addPattern(output, Utils.getDyeColor(inv.getStackInSlot(2)), patternH);
         return output;
     }
 
@@ -67,7 +67,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public @Nonnull NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
         return NonNullList.from(ItemStack.EMPTY,
             ItemStack.EMPTY,
-            patternI.copy(),
+            (ConfigGeneral.Recipes.consumePattern)?ItemStack.EMPTY:patternI.copy(),
             ForgeHooks.getContainerItem(inv.getStackInSlot(2))
         );
     }

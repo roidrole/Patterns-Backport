@@ -40,7 +40,7 @@ public class ConfigMapping {
                     genMappingFor(pattern);
                     continue;
                 }
-                if(!ConfigGeneral.shapes_pattern && !pattern.hasPatternItem() && pattern.hasPattern()){continue;}
+                if(!ConfigGeneral.Patterns.shapes_pattern && !pattern.hasPatternItem() && pattern.hasPattern()){continue;}
                 genMappingFor(pattern);
             }
             config.save();

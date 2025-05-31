@@ -29,7 +29,7 @@ public class HEIPlugin implements IModPlugin {
         registry.handleRecipes(PatternApply.class, PatternApplyWrapper::new, categoryUid);
         registry.addRecipes(PATTERN_APPLY_RECIPES, categoryUid);
 
-        if(ConfigGeneral.shapes_pattern){
+        if(ConfigGeneral.Patterns.shapes_pattern){
             registry.handleRecipes(PatternFromShape.class, PatternFromShapeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
         } else {
             registry.handleRecipes(BannerPattern.class, PatternOnlyShapeWrapper::new, categoryUid);
