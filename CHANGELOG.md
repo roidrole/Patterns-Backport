@@ -8,13 +8,20 @@ Unreleased :
 - Config to remove default pattern crafts
 
 **Fixed** : 
-- entryName of injected entry in Bastion
 - Light gray and light blue dye not applicable
 
 **Changed** : 
 - Improvements to recipe registry
 - General code cleanup
 - Optimized JEI category
+
+1.1.1 :
+
+**Fixed** :
+
+- entryName of injected entry in Bastion
+- Mod not loading
+
 
 1.1.0 :
 
