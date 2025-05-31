@@ -32,7 +32,7 @@ public class GuiLoom extends GuiContainer {
     private int firstRenderedLine = 0;
     private int slotSelected = -1;
     private final ContainerLoom container;
-    private int lastFullItemSlot = -1;
+
     public GuiLoom(ContainerLoom container) {
         super(container);
         this.container = container;
@@ -76,7 +76,7 @@ public class GuiLoom extends GuiContainer {
         this.drawTexturedModalRect(this.guiLeft+119, this.guiTop+13+getThumbOffset(firstRenderedLine), 232 +(hasScroll?0:12 ), 0, 12, 15);
 
         //Selected Slot
-        lastFullItemSlot = Math.min(15, patternLocs.size() -(firstRenderedLine *4));
+        int lastFullItemSlot = Math.min(15, patternLocs.size() - (firstRenderedLine * 4));
         if(slotSelected >=0 && slotSelected < lastFullItemSlot){
             x = this.guiLeft+60 + (slotSelected % 4) * 14;
             y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
