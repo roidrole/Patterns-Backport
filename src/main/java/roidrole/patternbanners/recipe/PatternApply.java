@@ -45,7 +45,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public boolean matches(InventoryCrafting inv, @Nonnull World worldIn) {
         if(inv.getStackInSlot(0).getItem() != Items.BANNER){return false;}
         if(!inv.getStackInSlot(1).isItemEqual(patternI)){return false;}
-        if(TileEntityBanner.getPatterns(inv.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer){return false;}
+        if(TileEntityBanner.getPatterns(inv.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer - 1){return false;}
         return Utils.isDye(inv.getStackInSlot(2));
     }
 
@@ -67,7 +67,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public @Nonnull NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
         return NonNullList.from(ItemStack.EMPTY,
             ItemStack.EMPTY,
-            (ConfigGeneral.Recipes.consumePattern)?ItemStack.EMPTY:patternI.copy(),
+            (ConfigGeneral.recipes.patternApply.consumePattern)?ItemStack.EMPTY:patternI.copy(),
             ForgeHooks.getContainerItem(inv.getStackInSlot(2))
         );
     }

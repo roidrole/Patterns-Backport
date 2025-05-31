@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.PatternBanners.INSTANCE;
-import static roidrole.patternbanners.loom.GuiHandler.guiLoomID;
+import static roidrole.patternbanners.GuiHandler.guiLoomID;
 
 public class BlockLoom extends Block {
     public BlockLoom() {

@@ -13,7 +13,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(){
         super.preInit();
         ItemModelMapper.preInit();
-        if(ConfigGeneral.Recipes.loom){
+        if(ConfigGeneral.loom){
             _Loom.preInitClient();
         }
     }

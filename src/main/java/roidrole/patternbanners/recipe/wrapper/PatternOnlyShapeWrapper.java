@@ -43,7 +43,7 @@ public class PatternOnlyShapeWrapper extends PatternRecipeWrapper {
     @Override
     public void drawInfo(Minecraft mc, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         super.drawInfo(mc, recipeWidth, recipeHeight, mouseX, mouseY);
-        if(!ConfigGeneral.Recipes.craftingTable) {
+        if(!ConfigGeneral.recipes.patternApply.craftingTable) {
             mc.getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/slot/banner_pattern.png"));
             drawTexturedModalRect(17, 31, 0, 0, 16, 16, 0.0625f, 0.0625f);
         }

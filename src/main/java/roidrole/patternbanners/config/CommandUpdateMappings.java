@@ -43,7 +43,7 @@ public class CommandUpdateMappings extends CommandBase {
     //Helpers
     public static boolean checkAdd(BannerPattern pattern){
         if(pattern.ordinal() == 0){return false;}
-        if(!ConfigGeneral.Patterns.shapes_pattern && !pattern.hasPatternItem() && pattern.hasPattern()){return false;}
+        if(!ConfigGeneral.patterns.shapes_pattern && !pattern.hasPatternItem() && pattern.hasPattern()){return false;}
         for (ConfigCategory mapping : mappings){
             if(!mapping.containsKey("hash")){continue;}
             if(pattern.getHashname().equals(mapping.get("hash").getString())){
@@ -63,7 +63,7 @@ public class CommandUpdateMappings extends CommandBase {
         if(Arrays.asList(ConfigGeneral.custom_pattern_hashes).contains(hash)){
             return false;
         }
-        if(!ConfigGeneral.Patterns.shapes_pattern && mapping.containsKey("shap")){
+        if(!ConfigGeneral.patterns.shapes_pattern && mapping.containsKey("shap")){
             return true;
         }
         for (BannerPattern pattern : BannerPattern.values()) {

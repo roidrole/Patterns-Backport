@@ -29,7 +29,7 @@ public class HEIPlugin implements IModPlugin {
         registry.handleRecipes(PatternApply.class, PatternApplyWrapper::new, categoryUid);
         registry.addRecipes(PATTERN_APPLY_RECIPES, categoryUid);
 
-        if(ConfigGeneral.Patterns.shapes_pattern){
+        if(ConfigGeneral.patterns.shapes_pattern){
             registry.handleRecipes(PatternFromShape.class, PatternFromShapeWrapper::new, VanillaRecipeCategoryUid.CRAFTING);
         } else {
             registry.handleRecipes(BannerPattern.class, PatternOnlyShapeWrapper::new, categoryUid);
@@ -38,10 +38,10 @@ public class HEIPlugin implements IModPlugin {
 
 
         registry.addRecipeCatalyst(new ItemStack(Items.BANNER, 1, OreDictionary.WILDCARD_VALUE), categoryUid);
-        if(ConfigGeneral.Recipes.craftingTable) {
+        if(ConfigGeneral.recipes.patternApply.craftingTable) {
             registry.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE, 1, 0), categoryUid);
         }
-        if(ConfigGeneral.Recipes.loom){
+        if(ConfigGeneral.recipes.patternApply.loom){
             registry.addRecipeCatalyst(new ItemStack(loomBlock, 1, 0), categoryUid);
         }
     }

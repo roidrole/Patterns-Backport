@@ -14,12 +14,12 @@ public class ItemModelMapper {
 
     public static void preInit(){
         ModelResourceLocation defaultPatternModel;
-        if(ConfigGeneral.Patterns.fallbackToOld){
+        if(ConfigGeneral.patterns.fallbackToOld){
             defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern_old", "inventory");
         } else {
             defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern", "inventory");
         }
-        if (ConfigGeneral.Patterns.forceFallback || ConfigMapping.config.getCategoryNames().isEmpty()){
+        if (ConfigGeneral.patterns.forceFallback || ConfigMapping.config.getCategoryNames().isEmpty()){
             ModelLoader.setCustomMeshDefinition(pattern, (stack -> defaultPatternModel));
             ModelLoader.registerItemVariants(pattern, defaultPatternModel);
         }else{

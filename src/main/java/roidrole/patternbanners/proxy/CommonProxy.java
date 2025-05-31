@@ -16,7 +16,7 @@ public class CommonProxy {
         ConfigMapping.config.load();
         ConfigMapping.preInit();
         ForgeRegistries.ITEMS.register(pattern);
-        if(ConfigGeneral.Recipes.loom) {
+        if(ConfigGeneral.loom) {
             _Loom.preInit();
         }
     }
@@ -25,9 +25,10 @@ public class CommonProxy {
         ConfigMapping.init();
         _Integration.init();
         _Recipe.init();
-        if(ConfigGeneral.Recipes.loom) {_Loom.init();}
+        if(ConfigGeneral.loom) {_Loom.init();}
         //Required after _Integration.init()
-        if(ConfigGeneral.config.hasChanged()){ConfigGeneral.config.save();}
+        if(ConfigGeneral.config.hasChanged()){
+            ConfigGeneral.config.save();}
     }
 
     public void postInit(){

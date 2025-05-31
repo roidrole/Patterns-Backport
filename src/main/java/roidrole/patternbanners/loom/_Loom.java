@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import roidrole.patternbanners.GuiHandler;
 import roidrole.patternbanners.Tags;
 
 import static roidrole.patternbanners.PatternBanners.INSTANCE;

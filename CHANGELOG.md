@@ -6,9 +6,11 @@ Unreleased :
 - Config to fall back to old pattern texture
 - Config to always use fallback texture
 - Config to remove default pattern crafts
+- Config for PatternApply to consume pattern
 
 **Fixed** : 
 - Light gray and light blue dye not applicable
+- Off-by-one error on max_banner_layer
 
 **Changed** : 
 - Improvements to recipe registry

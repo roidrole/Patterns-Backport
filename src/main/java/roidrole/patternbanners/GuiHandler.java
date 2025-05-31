@@ -1,10 +1,12 @@
-package roidrole.patternbanners.loom;
+package roidrole.patternbanners;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import roidrole.patternbanners.loom.ContainerLoom;
+import roidrole.patternbanners.loom.GuiLoom;
 
 import static roidrole.patternbanners.loom._Loom.loomBlock;
 
