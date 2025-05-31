@@ -15,6 +15,8 @@ Unreleased :
 - General code cleanup
 - Optimized JEI category
 
+.
+
 1.1.1 :
 
 **Fixed** :
@@ -22,6 +24,7 @@ Unreleased :
 - entryName of injected entry in Bastion
 - Mod not loading
 
+.
 
 1.1.0 :
 
@@ -41,6 +44,7 @@ Unreleased :
 - Make all banners have a black background (#2)
 - Fix max_banner_layers
 
+.
 
 1.0.0 : 
 First release
