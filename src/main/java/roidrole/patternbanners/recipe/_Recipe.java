@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
+import static roidrole.patternbanners.config.ConfigGeneral.recipes;
 
 public class _Recipe {
     public static List<PatternApply> PATTERN_APPLY_RECIPES;
@@ -25,13 +26,13 @@ public class _Recipe {
 
     public static void init(){
         //Populate registries
-        if(ConfigGeneral.recipes.patternOnlyShape.enabled){
+        if(recipes.patternOnlyShape.enabled){
             for(BannerPattern pattern : BannerPattern.values()){
                 if(pattern.hasPatternItem() || !pattern.hasPattern()){continue;}
                 PATTERNS_ONLY_SHAPE.add(pattern);
             }
         }
-        if(ConfigGeneral.recipes.patternApply.enabled){
+        if(recipes.patternApply.enabled){
             PATTERN_APPLY_RECIPES = ConfigMapping.mappings.stream().map(PatternApply::new).collect(Collectors.toList());
         }
 
@@ -51,8 +52,7 @@ public class _Recipe {
             }
         }
 
-        if(ConfigGeneral.recipes.patternApply.craftingTable) {
-            PATTERN_APPLY_RECIPES.forEach(recipe -> GameData.register_impl(recipe.setRegistryName(Tags.MOD_ID, "recipes/pattern_apply/" + recipe.patternH)));
-        }
+        if(recipes.patternApply.craftingTable) {PATTERN_APPLY_RECIPES.forEach(GameData::register_impl);}
+        if(recipes.patternOnlyShape.craftingTable){PATTERNS_ONLY_SHAPE.forEach(pattern -> GameData.register_impl(new PatternOnlyShape(pattern)));}
     }
 }

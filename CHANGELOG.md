@@ -2,11 +2,12 @@ Unreleased :
 
 **Added** : 
 - Loom
-- Config to remove crafting table and/or loom recipes
+- Recipe to apply a pattern from a shape only
+- Config to remove crafting table and/or loom recipes (pattern creation, application, bypassing)
 - Config to fall back to old pattern texture
 - Config to always use fallback texture
-- Config to remove default pattern crafts
 - Config for PatternApply to consume pattern
+- Config to show crafting table or loom in HEI
 
 **Fixed** : 
 - Light gray and light blue dye not applicable

@@ -3,6 +3,8 @@ package roidrole.patternbanners;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -61,5 +63,22 @@ public class Utils {
             if(entry.getItem().equals(stack.getItem()) && entry.getItemDamage() == stack.getItemDamage()){return true;}
         }
         return false;
+    }
+
+
+    public static void addPattern(ItemStack banner, int color, String patternHash){
+        NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");
+        NBTTagList patternList;
+        if (nbt.hasKey("Patterns", 9)){
+            patternList = nbt.getTagList("Patterns", 10);
+        }
+        else{
+            patternList = new NBTTagList();
+            nbt.setTag("Patterns", patternList);
+        }
+        NBTTagCompound patternToAdd = new NBTTagCompound();
+        patternToAdd.setString("Pattern", patternHash);
+        patternToAdd.setInteger("Color", color);
+        patternList.appendTag(patternToAdd);
     }
 }

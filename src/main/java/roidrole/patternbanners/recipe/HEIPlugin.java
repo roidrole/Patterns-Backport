@@ -38,10 +38,10 @@ public class HEIPlugin implements IModPlugin {
 
 
         registry.addRecipeCatalyst(new ItemStack(Items.BANNER, 1, OreDictionary.WILDCARD_VALUE), categoryUid);
-        if(ConfigGeneral.recipes.patternApply.craftingTable) {
+        if(ConfigGeneral.recipes.patternApply.craftingTable || ConfigGeneral.recipes.patternOnlyShape.craftingTable) {
             registry.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE, 1, 0), categoryUid);
         }
-        if(ConfigGeneral.recipes.patternApply.loom){
+        if(ConfigGeneral.recipes.patternApply.loom || ConfigGeneral.recipes.patternOnlyShape.loom){
             registry.addRecipeCatalyst(new ItemStack(loomBlock, 1, 0), categoryUid);
         }
     }

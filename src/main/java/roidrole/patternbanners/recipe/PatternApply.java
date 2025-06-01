@@ -5,8 +5,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -16,6 +14,7 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.PatternBanners;
+import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.Utils;
 import roidrole.patternbanners.config.ConfigGeneral;
 import roidrole.patternbanners.config.ConfigMapping;
@@ -39,6 +38,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
         this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());
         this.patternH = mapping.get("hash").getString();
         this.patternN = mapping.get("name").getString();
+        this.setRegistryName(Tags.MOD_ID, "recipes/pattern_apply/" + patternH);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public @Nonnull ItemStack getCraftingResult(InventoryCrafting inv) {
         ItemStack output = inv.getStackInSlot(0).copy();
             output.setCount(1);
-            addPattern(output, Utils.getDyeColor(inv.getStackInSlot(2)), patternH);
+            Utils.addPattern(output, Utils.getDyeColor(inv.getStackInSlot(2)), patternH);
         return output;
     }
 
@@ -75,20 +75,4 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     @Override
     public boolean isDynamic() {return true;}
 
-    //Helper
-    public static void addPattern(ItemStack banner, int color, String patternHash){
-        NBTTagCompound nbt = banner.getOrCreateSubCompound("BlockEntityTag");
-        NBTTagList patternList;
-        if (nbt.hasKey("Patterns", 9)){
-            patternList = nbt.getTagList("Patterns", 10);
-        }
-        else{
-            patternList = new NBTTagList();
-            nbt.setTag("Patterns", patternList);
-        }
-        NBTTagCompound patternToAdd = new NBTTagCompound();
-        patternToAdd.setString("Pattern", patternHash);
-        patternToAdd.setInteger("Color", color);
-        patternList.appendTag(patternToAdd);
-    }
 }

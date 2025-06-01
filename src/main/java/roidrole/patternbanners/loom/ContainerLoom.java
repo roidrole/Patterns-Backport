@@ -139,6 +139,7 @@ public class ContainerLoom extends Container {
 
     @Override
     public boolean enchantItem(EntityPlayer clicker, int index) {
+        if(!ConfigGeneral.recipes.patternOnlyShape.loom){return false;}
         if(index < 0 || index >= patternHashes.size()){return false;}
         selectedRecipe = index;
         calcOutput();
@@ -158,7 +159,7 @@ public class ContainerLoom extends Container {
             this.craftResult.setRecipeUsed(null);
             output = craftMatrix.getStackInSlot(0).copy();
             output.setCount(1);
-            PatternApply.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(selectedRecipe));
+            Utils.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(selectedRecipe));
         }else{ //PatternApply
             for(PatternApply recipe : PATTERN_APPLY_RECIPES){
                 if (recipe.patternI.isItemEqual(craftMatrix.getStackInSlot(1)) && recipe.matches(craftMatrix, world)) {

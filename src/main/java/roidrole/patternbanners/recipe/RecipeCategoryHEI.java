@@ -42,7 +42,7 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
 
     @Override
     public void drawExtras(Minecraft mc) {
-        if(ConfigGeneral.recipes.patternApply.craftingTable){
+        if(ConfigGeneral.recipes.JEICraftingTable){
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 3; ++x) {
                     guiHelper.getSlotDrawable().draw(mc, 4 + x * 18, 4 + y * 18);
@@ -68,7 +68,7 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
 
         IGuiItemStackGroup guiItemStacks = layout.getItemStacks();
 
-        if(ConfigGeneral.recipes.patternApply.craftingTable){
+        if(ConfigGeneral.recipes.JEICraftingTable){
             for(int y = 0; y < 3; y++) {
                 for(int x = 0; x < 3; ++x) {
                     int index = x + (y * 3);

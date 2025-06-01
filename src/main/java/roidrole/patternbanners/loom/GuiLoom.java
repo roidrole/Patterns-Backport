@@ -76,8 +76,8 @@ public class GuiLoom extends GuiContainer {
         this.drawTexturedModalRect(this.guiLeft+119, this.guiTop+13+getThumbOffset(firstRenderedLine), 232 +(hasScroll?0:12 ), 0, 12, 15);
 
         //Selected Slot
-        int lastFullItemSlot = Math.min(15, patternLocs.size() - (firstRenderedLine * 4));
-        if(slotSelected >=0 && slotSelected < lastFullItemSlot){
+        int lastFullItemSlot = Math.min(16, patternLocs.size() - (firstRenderedLine * 4)) - 1;
+        if(slotSelected >=0 && slotSelected <= lastFullItemSlot){
             x = this.guiLeft+60 + (slotSelected % 4) * 14;
             y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
             Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_selected.png"));
@@ -86,7 +86,7 @@ public class GuiLoom extends GuiContainer {
 
         //Other slots
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_full.png"));
-        for (int index = 0; index < lastFullItemSlot; index++) {
+        for (int index = 0; index <= lastFullItemSlot; index++) {
             x = this.guiLeft+60 + (index % 4) * 14;
             y = this.guiTop+13 + Math.floorDiv(index, 4)*14;
             if (index != slotSelected) {
@@ -95,7 +95,7 @@ public class GuiLoom extends GuiContainer {
         }
 
         //Banners
-        for (int index = 0; index < lastFullItemSlot; index++) {
+        for (int index = 0; index <= lastFullItemSlot; index++) {
             x = this.guiLeft+60+4 + (index % 4) * 14;
             y = this.guiTop+13+2 + Math.floorDiv(index, 4)*14;
             Minecraft.getMinecraft().getTextureManager().bindTexture(patternLocs.get(firstRenderedLine * 4 + index));
@@ -116,11 +116,15 @@ public class GuiLoom extends GuiContainer {
         if(lineClicked < 0 || lineClicked > 3){return;}
         int columnClicked = Math.floorDiv(mouseX-(this.guiLeft+60), 14);
         if(columnClicked < 0 || columnClicked > 3){return;}
-        slotSelected = 4*lineClicked + columnClicked;
+
+        int newSlot = 4*lineClicked + columnClicked;
+        if(slotSelected == newSlot){return;}
+        slotSelected = newSlot;
+
         int recipeSelected = 4 * (lineClicked + firstRenderedLine) + columnClicked;
-        if(recipeSelected > patternLocs.size()){return;}
+        if(recipeSelected >= patternLocs.size()){return;}
         Minecraft.getMinecraft().player.connection.sendPacket(
-                new CPacketEnchantItem(container.windowId, recipeSelected)
+            new CPacketEnchantItem(container.windowId, recipeSelected)
         );
     }
 
