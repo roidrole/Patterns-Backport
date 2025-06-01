@@ -27,8 +27,4 @@ public class _Loom {
     public static void preInitClient(){
         ModelLoader.setCustomModelResourceLocation(loomItem, 0, new ModelResourceLocation(Tags.MOD_ID+":loom"));
     }
-
-    public static void init(){
-        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
-    }
 }
