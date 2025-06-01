@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "minecraft:item_exists",
+      "item": "patternbanners:loom"
+    }
+  ],
+  "pattern": [
+    "xx",
+    "aa"
+  ],
+  "key": {
+    "x": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    },
+    "a": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    }
+  },
+  "result": {
+    "item": "patternbanners:loom"
+  }
+}
