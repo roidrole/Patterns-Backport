@@ -5,14 +5,10 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import roidrole.patternbanners.GuiHandler;
 import roidrole.patternbanners.Tags;
-
-import static roidrole.patternbanners.PatternBanners.INSTANCE;
 
 public class _Loom {
     public static final Block loomBlock = new BlockLoom();
