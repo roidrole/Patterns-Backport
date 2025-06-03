@@ -1,6 +1,5 @@
 package roidrole.patternbanners.mixin;
 
-
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import org.spongepowered.asm.mixin.Mixin;
