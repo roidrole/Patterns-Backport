@@ -18,4 +18,3 @@ public class ConfigCore {
 }
 
 //TODO:Map markers?
-//Will be for another update...

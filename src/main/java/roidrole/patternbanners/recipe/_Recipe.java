@@ -19,25 +19,33 @@ import java.util.stream.Collectors;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.config.ConfigGeneral.recipes;
+import static roidrole.patternbanners.config.ConfigMapping.mappings;
 
 public class _Recipe {
     public static List<PatternApply> PATTERN_APPLY_RECIPES;
     public static List<BannerPattern> PATTERNS_ONLY_SHAPE = new ArrayList<>();
+    public static List<String> PATTERNS_USING_SHAPE;
 
     public static void init(){
         //Populate registries
         if(recipes.patternOnlyShape.enabled){
+            PATTERNS_USING_SHAPE = mappings.stream()
+                    .filter(mapping -> mapping.containsKey("shap"))
+                    .map(mapping -> mapping.get("hash").getString())
+                    .collect(Collectors.toList())
+            ;
             for(BannerPattern pattern : BannerPattern.values()){
                 if(pattern.hasPatternItem() || !pattern.hasPattern()){continue;}
+                if(PATTERNS_USING_SHAPE.contains(pattern.getHashname())){continue;}
                 PATTERNS_ONLY_SHAPE.add(pattern);
             }
         }
         if(recipes.patternApply.enabled){
-            PATTERN_APPLY_RECIPES = ConfigMapping.mappings.stream().map(PatternApply::new).collect(Collectors.toList());
+            PATTERN_APPLY_RECIPES = mappings.stream().map(PatternApply::new).collect(Collectors.toList());
         }
 
         if(ConfigGeneral.patterns.craftable){
-            for (ConfigCategory mapping : ConfigMapping.mappings){
+            for (ConfigCategory mapping : mappings){
                 ResourceLocation name = new ResourceLocation(Tags.MOD_ID, "recipes/pattern_create/" + mapping.get("hash").getString());
                 if(mapping.containsKey("item") && !mapping.get("item").getString().isEmpty()){
                     ResourceLocation group = new ResourceLocation("");

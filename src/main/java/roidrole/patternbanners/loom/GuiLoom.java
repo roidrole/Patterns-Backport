@@ -26,11 +26,12 @@ public class GuiLoom extends GuiContainer {
     public static final List<ResourceLocation> patternLocs = PATTERNS_ONLY_SHAPE.stream().map(
     pattern -> new ResourceLocation("minecraft:textures/entity/banner/"+pattern.getFileName()+".png")).collect(Collectors.toList());
     public static final boolean hasScroll = patternLocs.size() > 16;
+    private final ResourceLocation background;
 
     static int maxRenderedLine;
 
     private int firstRenderedLine = 0;
-    private int slotSelected = -1;
+    private int slotSelected = -20;
     private final ContainerLoom container;
 
     public GuiLoom(ContainerLoom container) {
@@ -39,8 +40,12 @@ public class GuiLoom extends GuiContainer {
         if(hasScroll){
             maxRenderedLine = Math.floorDiv(patternLocs.size(), 4) - 4;
         }
+        if(hasScroll){
+            this.background = new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom_scroll.png");
+        }else{
+            this.background = new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom_scrolless.png");
+        }
     }
-    //TODO : BTW, the first three lines are unconditionally rendered if hasScroll
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
@@ -58,7 +63,7 @@ public class GuiLoom extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         //Background
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom.png"));
+        this.mc.getTextureManager().bindTexture(this.background);
         int x = this.guiLeft;
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
@@ -72,26 +77,28 @@ public class GuiLoom extends GuiContainer {
         }
 
         //Thumb
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/creative_inventory/tabs.png"));
-        this.drawTexturedModalRect(this.guiLeft+119, this.guiTop+13+getThumbOffset(firstRenderedLine), 232 +(hasScroll?0:12 ), 0, 12, 15);
-
-        //Selected Slot
-        int lastFullItemSlot = Math.min(16, patternLocs.size() - (firstRenderedLine * 4)) - 1;
-        if(slotSelected >=0 && slotSelected <= lastFullItemSlot){
-            x = this.guiLeft+60 + (slotSelected % 4) * 14;
-            y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
-            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_selected.png"));
-            drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
+        if(hasScroll) {
+            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/creative_inventory/tabs.png"));
+            this.drawTexturedModalRect(this.guiLeft+119, this.guiTop+13+getThumbOffset(firstRenderedLine), 232, 0, 12, 15);
         }
 
-        //Other slots
+        //Non-selected slots
+        int lastFullItemSlot = Math.min(16, patternLocs.size() - (firstRenderedLine * 4)) - 1;
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_full.png"));
-        for (int index = 0; index <= lastFullItemSlot; index++) {
+        for (int index = (hasScroll)?13:0; index <= lastFullItemSlot; index++) {
             x = this.guiLeft+60 + (index % 4) * 14;
             y = this.guiTop+13 + Math.floorDiv(index, 4)*14;
             if (index != slotSelected) {
                 drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
             }
+        }
+
+        //Selected Slot
+        if(slotSelected >=0 && slotSelected <= lastFullItemSlot){
+            x = this.guiLeft+60 + (slotSelected % 4) * 14;
+            y = this.guiTop+13 + Math.floorDiv(slotSelected, 4)*14;
+            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Tags.MOD_ID, "textures/gui/slot_selected.png"));
+            drawModalRectWithCustomSizedTexture(x, y, 0, 0, 14, 14, 14, 14);
         }
 
         //Banners
