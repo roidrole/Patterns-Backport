@@ -19,6 +19,7 @@
 - Improvements to recipe registry
 - General code cleanup
 - Optimized JEI category
+- Metadata of ```uses``` parameter is now set in itself instead of using the meta parameter
 
 .
 
