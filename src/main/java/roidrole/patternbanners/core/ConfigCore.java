@@ -10,10 +10,12 @@ import roidrole.patternbanners.Tags;
 public class ConfigCore {
     @Config.Comment("Should we remove the vanilla pattern-applying recipe?\nRecommended, but option to disable is here if incompatible")
     @Config.RequiresMcRestart
-    public static boolean disableVanillaPatternApply = true;
+    public static boolean no_vanilla_pattern_apply = true;
+
+    @Config.Comment("Should players be able to wear banners on your head?")
+    @Config.RequiresMcRestart
+    public static boolean wearBannerOnHead = true;
 }
 
-//TODO:Putting banners on the head, as via commands
 //TODO:Map markers?
-//TODO:Copying? (already can but modify the max_banner_layer)
 //Will be for another update...

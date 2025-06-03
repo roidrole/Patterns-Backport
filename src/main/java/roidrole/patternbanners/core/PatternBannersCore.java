@@ -5,7 +5,7 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,12 +43,10 @@ public class PatternBannersCore implements IFMLLoadingPlugin, IEarlyMixinLoader 
 
     @Override
     public List<String> getMixinConfigs() {
-        return Collections.singletonList("mixins.patternbanners.json");
-    }
-
-    @Override
-    public boolean shouldMixinConfigQueue(String mixinConfig){
-        return ConfigCore.disableVanillaPatternApply;
+        List<String> mixinconfs = new ArrayList<>(2);
+        mixinconfs.add("mixins.patternbanners.json");
+        if(ConfigCore.no_vanilla_pattern_apply){mixinconfs.add("mixins.patternbanners.no_vanilla_pattern_apply.json");}
+        return mixinconfs;
     }
 }
 

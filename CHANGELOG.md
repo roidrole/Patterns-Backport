@@ -8,6 +8,7 @@ Unreleased :
 - Config to always use fallback texture
 - Config for PatternApply to consume pattern
 - Config to show crafting table or loom in HEI
+- Config to wear banners in the helmet slot
 
 **Fixed** : 
 - Light gray and light blue dye not applicable
