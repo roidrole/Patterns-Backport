@@ -11,7 +11,6 @@ import net.minecraftforge.registries.GameData;
 import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.Utils;
 import roidrole.patternbanners.config.ConfigGeneral;
-import roidrole.patternbanners.config.ConfigMapping;
 
 import java.util.ArrayList;
 import java.util.List;

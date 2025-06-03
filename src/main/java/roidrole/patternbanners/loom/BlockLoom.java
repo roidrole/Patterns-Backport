@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import roidrole.patternbanners.Tags;
 
-import static roidrole.patternbanners.PatternBanners.INSTANCE;
 import static roidrole.patternbanners.GuiHandler.guiLoomID;
+import static roidrole.patternbanners.PatternBanners.INSTANCE;
 
 public class BlockLoom extends Block {
     public BlockLoom() {
