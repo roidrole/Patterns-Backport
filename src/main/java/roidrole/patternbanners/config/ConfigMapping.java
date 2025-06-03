@@ -32,16 +32,16 @@ public class ConfigMapping {
         }
     }
 
-    public static void postInit(){
+    public static void postInit(boolean client){
         if(config.getCategoryNames().isEmpty()){
             for(BannerPattern pattern : BannerPattern.values()){
                 if(pattern.ordinal() == 0){continue;}
                 if(ArrayUtils.contains(ConfigGeneral.custom_pattern_hashes, pattern.getHashname())){
-                    genMappingFor(pattern);
+                    genMappingFor(pattern, client);
                     continue;
                 }
                 if(!ConfigGeneral.patterns.shapes_pattern && !pattern.hasPatternItem() && pattern.hasPattern()){continue;}
-                genMappingFor(pattern);
+                genMappingFor(pattern, client);
             }
             config.save();
         }
@@ -49,7 +49,7 @@ public class ConfigMapping {
 
 
     //Helpers
-    public static void genMappingFor(BannerPattern pattern){
+    public static void genMappingFor(BannerPattern pattern, boolean client){
         ConfigCategory temp;
         int nextMeta = config.getCategoryNames().size();
         do{nextMeta++;}
@@ -58,7 +58,9 @@ public class ConfigMapping {
         if(meta.length() == 1){meta = "0"+meta;}
         temp = config.getCategory(meta);
         temp.put("hash", new Property("hash", pattern.getHashname(), Property.Type.STRING));
-        temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
+        if(client) {
+            temp.put("name", new Property("name", pattern.getFileName(), Property.Type.STRING));
+        }
         temp.put("meta", new Property("meta", meta, Property.Type.INTEGER));
         if(pattern.hasPatternItem()){
             ItemStack stack = pattern.getPatternItem();

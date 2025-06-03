@@ -12,6 +12,7 @@ Unreleased :
 **Fixed** : 
 - Light gray and light blue dye not applicable
 - Off-by-one error on max_banner_layer
+- Crash on startup on dedicated servers
 
 **Changed** : 
 - Improvements to recipe registry

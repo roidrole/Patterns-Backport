@@ -12,3 +12,8 @@ public class ConfigCore {
     @Config.RequiresMcRestart
     public static boolean disableVanillaPatternApply = true;
 }
+
+//TODO:Putting banners on the head, as via commands
+//TODO:Map markers?
+//TODO:Copying? (already can but modify the max_banner_layer)
+//Will be for another update...

@@ -3,8 +3,6 @@ package roidrole.patternbanners.config;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import roidrole.patternbanners.Tags;
 
 import java.io.File;
@@ -73,7 +71,6 @@ public class ConfigGeneral {
             public boolean enabled = !ConfigGeneral.patterns.shapes_pattern && (loom || craftingTable);
         }
 
-        @SideOnly(Side.CLIENT)
         @Config.Comment("Determines the layout of the HEI tab:\ntrue: Crafting Table\nfalse: Loom")
         public boolean JEICraftingTable = patternApply.craftingTable || patternOnlyShape.craftingTable;
     }

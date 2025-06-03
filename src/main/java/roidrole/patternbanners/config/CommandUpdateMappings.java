@@ -26,7 +26,7 @@ public class CommandUpdateMappings extends CommandBase {
         config.load();
         for (BannerPattern pattern : BannerPattern.values()) {
             if(checkAdd(pattern)){
-                genMappingFor(pattern);
+                genMappingFor(pattern, server.isSinglePlayer());
             }
         }
 

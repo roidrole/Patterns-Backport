@@ -37,7 +37,9 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
         this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());
         this.patternH = mapping.get("hash").getString();
-        this.patternN = mapping.get("name").getString();
+        if(mapping.containsKey("name")){
+            this.patternN = mapping.get("name").getString();
+        }
         this.setRegistryName(Tags.MOD_ID, "recipes/pattern_apply/" + patternH);
     }
 

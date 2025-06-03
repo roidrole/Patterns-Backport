@@ -37,6 +37,6 @@ public class CommonProxy {
     }
 
     public void postInit(){
-        ConfigMapping.postInit();
+        ConfigMapping.postInit(false);
     }
 }
