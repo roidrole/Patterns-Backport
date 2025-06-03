@@ -39,8 +39,6 @@ public class GuiLoom extends GuiContainer {
         this.container = container;
         if(hasScroll){
             maxRenderedLine = Math.floorDiv(patternLocs.size(), 4) - 4;
-        }
-        if(hasScroll){
             this.background = new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom_scroll.png");
         }else{
             this.background = new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom_scrolless.png");
