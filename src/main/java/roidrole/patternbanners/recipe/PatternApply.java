@@ -2,16 +2,13 @@ package roidrole.patternbanners.recipe;
 
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.config.ConfigCategory;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Tags;
@@ -29,13 +26,15 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     public String patternN;
 
     public PatternApply(ConfigCategory mapping){
-        Item patternItem;
+        ItemStack patternStack;
         if(mapping.containsKey("uses")){
-            patternItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(mapping.get("uses").getString()));
-            ConfigMapping.extraPatternItems.add(new ItemStack(patternItem, 1, mapping.get("meta").getInt()));
-        }else{patternItem = PatternBanners.pattern;}
+            patternStack = Utils.getItemStack(mapping, "uses");
+            ConfigMapping.extraPatternItems.add(patternStack);
+        }else{
+            patternStack = new ItemStack(PatternBanners.pattern, 1, mapping.get("meta").getInt());
+        }
 
-        this.patternI = new ItemStack(patternItem, 1, mapping.get("meta").getInt());
+        this.patternI = patternStack;
         this.patternH = mapping.get("hash").getString();
         if(mapping.containsKey("name")){
             this.patternN = mapping.get("name").getString();

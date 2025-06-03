@@ -48,9 +48,8 @@ public class Utils {
         return -1;
     }
 
-    public static ItemStack getItemStack(ConfigCategory mapping){
-        if(!mapping.containsKey("item")){return ItemStack.EMPTY;}
-        String[] params = mapping.get("item").getString().split(":");
+    public static ItemStack getItemStack(ConfigCategory mapping, String key){
+        String[] params = mapping.get(key).getString().split(":");
         if(params.length == 2){return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, 0);}
         if(params.length == 3){return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(params[0], params[1])), 1, Integer.parseInt(params[2]));}
         return ItemStack.EMPTY;

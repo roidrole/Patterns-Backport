@@ -51,7 +51,7 @@ public class _Recipe {
                     ItemStack patternStack = new ItemStack(pattern, 1, mapping.get("meta").getInt());
                     GameRegistry.addShapelessRecipe(name, group, patternStack,
                             Ingredient.fromItem(Items.PAPER),
-                            Ingredient.fromStacks(Utils.getItemStack(mapping))
+                            Ingredient.fromStacks(Utils.getItemStack(mapping, "item"))
                     );
                 } else if (mapping.containsKey("shap") && mapping.get("shap").getString().length() == 11) {
                     GameData.register_impl(new PatternFromShape(mapping).setRegistryName(name));
