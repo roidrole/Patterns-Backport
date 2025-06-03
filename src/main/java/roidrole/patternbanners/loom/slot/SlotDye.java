@@ -10,7 +10,7 @@ import roidrole.patternbanners.Utils;
 public class SlotDye extends Slot {
     public SlotDye(IInventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);
-        this.setBackgroundLocation(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/slot/dye.png"));
+        this.backgroundLocation = new ResourceLocation(Tags.MOD_ID, "textures/gui/container/slot/dye.png");
     }
     @Override
     public boolean isItemValid(ItemStack stack) {return Utils.isDye(stack);}

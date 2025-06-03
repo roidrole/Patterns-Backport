@@ -1,4 +1,4 @@
-Unreleased : 
+1.2.0 : 
 
 **Added** : 
 - Loom
@@ -13,7 +13,7 @@ Unreleased :
 **Fixed** : 
 - Light gray and light blue dye not applicable
 - Off-by-one error on max_banner_layer
-- Crash on startup on dedicated servers
+- [#3](https://github.com/roidrole/Patterns-Backport/issues/3) - Crash on startup on dedicated servers
 
 **Changed** : 
 - Improvements to recipe registry

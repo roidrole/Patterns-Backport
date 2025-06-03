@@ -10,7 +10,7 @@ import roidrole.patternbanners.Tags;
 public class SlotBanner extends Slot {
     public SlotBanner(IInventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);
-        this.setBackgroundLocation(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/slot/banner.png"));
+        this.backgroundLocation = new ResourceLocation(Tags.MOD_ID, "textures/gui/container/slot/banner.png");
     }
 
     @Override
