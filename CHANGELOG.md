@@ -1,4 +1,11 @@
+Unreleased : 
+-
+
+**Fixed** : 
+- Config to not remove vanilla pattern-apply being ignored
+
 1.2.0 : 
+-
 
 **Added** : 
 - Loom
@@ -21,18 +28,18 @@
 - Optimized JEI category
 - Metadata of ```uses``` parameter is now set in itself instead of using the meta parameter
 
-.
 
 1.1.1 :
+-
 
 **Fixed** :
 
 - entryName of injected entry in Bastion
 - Mod not loading
 
-.
 
 1.1.0 :
+-
 
 **Added** :
 - Allows setting a custom pattern item via the uses parameter
@@ -50,7 +57,7 @@
 - Make all banners have a black background (#2)
 - Fix max_banner_layers
 
-.
 
 1.0.0 : 
+-
 First release

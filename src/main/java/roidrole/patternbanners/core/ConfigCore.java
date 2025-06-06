@@ -1,5 +1,6 @@
 package roidrole.patternbanners.core;
 
+import com.cleanroommc.configanytime.ConfigAnytime;
 import net.minecraftforge.common.config.Config;
 import roidrole.patternbanners.Tags;
 
@@ -12,9 +13,13 @@ public class ConfigCore {
     @Config.RequiresMcRestart
     public static boolean no_vanilla_pattern_apply = true;
 
-    @Config.Comment("Should players be able to wear banners on your head?")
+    @Config.Comment("Should players be able to wear banners on their head?")
     @Config.RequiresMcRestart
     public static boolean wearBannerOnHead = true;
+
+    static {
+        ConfigAnytime.register(ConfigCore.class);
+    }
 }
 
 //TODO:Map markers?
