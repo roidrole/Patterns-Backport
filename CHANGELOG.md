@@ -1,13 +1,9 @@
-Unreleased : 
--
-
+## 1.2.1 :
 **Fixed** : 
 - Meta values < 10 not being localized properly
 - Config to not remove vanilla pattern-apply being ignored
 
-1.2.0 : 
--
-
+## 1.2.0 :
 **Added** : 
 - Loom
 - Recipe to apply a pattern from a shape only
@@ -30,18 +26,14 @@ Unreleased :
 - Metadata of ```uses``` parameter is now set in itself instead of using the meta parameter
 
 
-1.1.1 :
--
-
+## 1.1.1 :
 **Fixed** :
 
 - entryName of injected entry in Bastion
 - Mod not loading
 
 
-1.1.0 :
--
-
+## 1.1.0 :
 **Added** :
 - Allows setting a custom pattern item via the uses parameter
 - Add config to remove vanilla pattern applying recipe via mixin
@@ -59,6 +51,5 @@ Unreleased :
 - Fix max_banner_layers
 
 
-1.0.0 : 
--
+## 1.0.0 :
 First release
