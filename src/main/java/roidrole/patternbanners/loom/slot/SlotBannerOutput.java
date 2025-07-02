@@ -26,11 +26,6 @@ public class SlotBannerOutput extends SlotCrafting {
     }
 
     @Override
-    protected void onCrafting(ItemStack stack) {
-        super.onCrafting(stack);
-    }
-
-    @Override
     public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
         if(thePlayer instanceof EntityPlayerSP){return ItemStack.EMPTY;}
         this.onCrafting(stack);

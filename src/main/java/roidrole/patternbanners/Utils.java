@@ -22,7 +22,8 @@ public class Utils {
     public static boolean itemModelExists(String modid, String modelName) {
         ResourceLocation resLoc = new ResourceLocation(modid, "models/item/" + modelName + ".json");
         try {
-            return Minecraft.getMinecraft().getResourceManager().getResource(resLoc) != null;
+            Minecraft.getMinecraft().getResourceManager().getResource(resLoc);
+            return true;
         } catch (IOException e) {
             return false;
         }

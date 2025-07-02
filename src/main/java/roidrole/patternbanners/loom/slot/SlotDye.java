@@ -12,6 +12,7 @@ public class SlotDye extends Slot {
         super(inventoryIn, index, xPosition, yPosition);
         this.backgroundLocation = new ResourceLocation(Tags.MOD_ID, "textures/gui/container/slot/dye.png");
     }
+
     @Override
     public boolean isItemValid(ItemStack stack) {return Utils.isDye(stack);}
 }

@@ -61,6 +61,7 @@ public class ItemPattern extends Item {
     @SideOnly(Side.CLIENT)
     public String getPatternLang(ItemStack stack){
         String meta = String.valueOf(stack.getItemDamage());
+        if(meta.length() == 1){meta = "0"+meta;}
         if(!ConfigMapping.config.getCategoryNames().contains(meta)){return meta;}
         String name = ConfigMapping.config.get(meta, "name", meta).getString();
         String key = Tags.MOD_ID + ".pattern."+name+".name";

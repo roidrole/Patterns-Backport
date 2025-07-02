@@ -2,6 +2,7 @@ Unreleased :
 -
 
 **Fixed** : 
+- Meta values < 10 not being localized properly
 - Config to not remove vanilla pattern-apply being ignored
 
 1.2.0 : 
