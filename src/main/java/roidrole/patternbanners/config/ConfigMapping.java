@@ -11,19 +11,17 @@ import roidrole.patternbanners.integration._Integration;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ConfigMapping {
     public static Configuration config = new Configuration(new File("config/"+ Tags.MOD_ID+"/mappings.cfg"));
-    public static Set<ConfigCategory> mappings = new HashSet<>(8);
+    public static List<ConfigCategory> mappings = new ArrayList<>(8);
     public static List<ItemStack> extraPatternItems = new ArrayList<>(0);
 
     public static void preInit(){
-        for (String name : config.getCategoryNames()){
-            mappings.add(config.getCategory(name));
-        }
+        config.getCategoryNames().forEach(name ->
+            mappings.add(config.getCategory(name))
+        );
     }
 
     public static void init(){

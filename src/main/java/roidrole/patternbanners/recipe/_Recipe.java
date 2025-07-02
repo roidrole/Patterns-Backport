@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.GameData;
 import roidrole.patternbanners.Tags;
@@ -44,7 +43,7 @@ public class _Recipe {
         }
 
         if(ConfigGeneral.patterns.craftable){
-            for (ConfigCategory mapping : mappings){
+            mappings.forEach(mapping -> {
                 ResourceLocation name = new ResourceLocation(Tags.MOD_ID, "recipes/pattern_create/" + mapping.get("hash").getString());
                 if(mapping.containsKey("item") && !mapping.get("item").getString().isEmpty()){
                     ResourceLocation group = new ResourceLocation("");
@@ -56,7 +55,7 @@ public class _Recipe {
                 } else if (mapping.containsKey("shap") && mapping.get("shap").getString().length() == 11) {
                     GameData.register_impl(new PatternFromShape(mapping).setRegistryName(name));
                 }
-            }
+            });
         }
 
         if(recipes.patternApply.craftingTable) {PATTERN_APPLY_RECIPES.forEach(GameData::register_impl);}

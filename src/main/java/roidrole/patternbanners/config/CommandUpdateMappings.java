@@ -30,10 +30,11 @@ public class CommandUpdateMappings extends CommandBase {
             }
         }
 
-        for (ConfigCategory mapping : mappings){
+        mappings.forEach(mapping ->{
             if(checkRemove(mapping)){
-                config.removeCategory(mapping);}
-        }
+                config.removeCategory(mapping);
+            }
+        });
         config.save();
     }
 

@@ -2,6 +2,7 @@
 **Fixed** : 
 - Meta values < 10 not being localized properly
 - Config to not remove vanilla pattern-apply being ignored
+- Order of pattern banners in the creative tab
 
 ## 1.2.0 :
 **Added** : 
