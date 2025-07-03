@@ -1,6 +1,7 @@
 ## Unreleased : 
 **Fixed** : 
 - JEI Category when crafting table recipes are disabled showing a missing texture
+- Loom being registered when it's unused
 
 ## 1.2.1 :
 **Fixed** : 
