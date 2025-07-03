@@ -49,7 +49,7 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
                 }
             }
         } else {
-            guiHelper.createDrawable(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom.png"), 6, 14, 50, 55).draw(mc);
+            guiHelper.createDrawable(new ResourceLocation(Tags.MOD_ID, "textures/gui/container/loom_scroll.png"), 6, 14, 50, 55).draw(mc);
         }
     }
 

@@ -1,3 +1,7 @@
+## Unreleased : 
+**Fixed** : 
+- JEI Category when crafting table recipes are disabled showing a missing texture
+
 ## 1.2.1 :
 **Fixed** : 
 - Meta values < 10 not being localized properly
