@@ -6,7 +6,6 @@ import net.minecraftforge.common.config.Configuration;
 import roidrole.patternbanners.Tags;
 
 import java.io.File;
-import java.util.function.BooleanSupplier;
 
 @Config(
     modid = Tags.MOD_ID,
@@ -78,6 +77,5 @@ public class ConfigGeneral {
     @Config.Ignore
     public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+"/general.cfg"));
 
-    @Config.Ignore
-    public static BooleanSupplier loom = () -> ConfigGeneral.recipes.patternApply.loom || ConfigGeneral.recipes.patternOnlyShape.loom;
+    public static boolean loom = true;
 }

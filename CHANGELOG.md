@@ -1,8 +1,11 @@
-## Unreleased : 
+## Unreleased :
+**Added** :
+- Config to not register the loom
+
 **Fixed** : 
 - JEI Category when crafting table recipes are disabled showing a missing texture
-- Loom being registered when it's unused
 - Properly manage dependencies. Instead of crashing, you the forge popup
+
 
 ## 1.2.1 :
 **Fixed** : 
