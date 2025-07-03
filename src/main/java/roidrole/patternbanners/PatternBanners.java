@@ -12,9 +12,11 @@ import roidrole.patternbanners.item.ItemPattern;
 import roidrole.patternbanners.proxy.CommonProxy;
 
 
-@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies = PatternBanners.dependencies)
 public class PatternBanners {
     //Constants
+    public static final String dependencies = "required-after:configanytime;" +
+        "required-after:mixinbooter;";
     public static final Item pattern = new ItemPattern();
 
     @Mod.Instance(Tags.MOD_ID)
