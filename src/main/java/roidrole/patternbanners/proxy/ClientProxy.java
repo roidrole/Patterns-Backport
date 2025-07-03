@@ -14,7 +14,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(){
         super.preInit();
         ItemModelMapper.preInit();
-        if(ConfigGeneral.loom){
+        if(ConfigGeneral.loom.getAsBoolean()){
             _Loom.preInitClient();
         }
     }

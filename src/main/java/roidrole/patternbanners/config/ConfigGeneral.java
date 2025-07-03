@@ -6,6 +6,7 @@ import net.minecraftforge.common.config.Configuration;
 import roidrole.patternbanners.Tags;
 
 import java.io.File;
+import java.util.function.BooleanSupplier;
 
 @Config(
     modid = Tags.MOD_ID,
@@ -55,7 +56,7 @@ public class ConfigGeneral {
             @Config.RequiresMcRestart
             public boolean consumePattern = false;
 
-            public boolean enabled = loom || craftingTable;
+            public boolean enabled = true;
         }
 
         @Config.Name("Pattern Only Shape")
@@ -68,7 +69,7 @@ public class ConfigGeneral {
             @Config.RequiresMcRestart
             public boolean craftingTable = false;
 
-            public boolean enabled = !ConfigGeneral.patterns.shapes_pattern && (loom || craftingTable);
+            public boolean enabled = true;
         }
 
         @Config.Comment("Determines the layout of the HEI tab:\ntrue: Crafting Table\nfalse: Loom")
@@ -78,5 +79,5 @@ public class ConfigGeneral {
     public static Configuration config = new Configuration(new File("config/"+Tags.MOD_ID+"/general.cfg"));
 
     @Config.Ignore
-    public static boolean loom = ConfigGeneral.recipes.patternApply.loom || ConfigGeneral.recipes.patternOnlyShape.loom;
+    public static BooleanSupplier loom = () -> ConfigGeneral.recipes.patternApply.loom || ConfigGeneral.recipes.patternOnlyShape.loom;
 }

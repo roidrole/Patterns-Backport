@@ -19,7 +19,7 @@ public class CommonProxy {
         ConfigMapping.config.load();
         ConfigMapping.preInit();
         ForgeRegistries.ITEMS.register(pattern);
-        if(ConfigGeneral.loom) {
+        if(ConfigGeneral.loom.getAsBoolean()) {
             _Loom.preInit();
         }
     }
@@ -28,7 +28,7 @@ public class CommonProxy {
         ConfigMapping.init();
         _Integration.init();
         _Recipe.init();
-        if(ConfigGeneral.loom) {
+        if(ConfigGeneral.loom.getAsBoolean()) {
             NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
         }
         //Required after _Integration.init()
