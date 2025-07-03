@@ -1,4 +1,4 @@
-## Unreleased :
+## 1.2.2 :
 **Added** :
 - Config to not register the loom
 
