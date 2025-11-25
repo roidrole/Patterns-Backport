@@ -1,6 +1,7 @@
 package roidrole.patternbanners.integration;
 
 import net.minecraft.world.storage.loot.LootEntryItem;
+import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
@@ -24,7 +25,11 @@ public class NetherBackport implements _Integration.Integration {
     @SubscribeEvent
     public void listen(LootTableLoadEvent event) {
             if (event.getName().toString().startsWith("nb:bastion_hold")) {
-                event.getTable().getPool("nb:bastion_hold").addEntry(new LootEntryItem(
+				LootPool pool = event.getTable().getPool("nb:bastion_hold");
+				if(pool == null){
+					return;
+				}
+                pool.addEntry(new LootEntryItem(
                         pattern,
                         9,
                         0,

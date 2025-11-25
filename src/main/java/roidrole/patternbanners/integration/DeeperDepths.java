@@ -1,6 +1,7 @@
 package roidrole.patternbanners.integration;
 
 import net.minecraft.world.storage.loot.LootEntryItem;
+import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
@@ -26,7 +27,11 @@ public class DeeperDepths implements _Integration.Integration {
     @SubscribeEvent
     public void listen(LootTableLoadEvent event) {
         if (event.getName().toString().equals("deeperdepths:vault")) {
-            event.getTable().getPool("deeperdepths:vault_unique").addEntry(new LootEntryItem(
+			LootPool pool = event.getTable().getPool("deeperdepths:vault_unique");
+			if(pool == null){
+				return;
+			}
+            pool.addEntry(new LootEntryItem(
                     pattern,
                     2,
                     0,
@@ -35,7 +40,11 @@ public class DeeperDepths implements _Integration.Integration {
                     Tags.MOD_ID+":dd_flo"
             ));
         } else if (event.getName().toString().equals("deeperdepths:ominous_vault")) {
-            event.getTable().getPool("deeperdepths:ominous_vault_unique").addEntry(new LootEntryItem(
+			LootPool pool = event.getTable().getPool("deeperdepths:ominous_vault_unique");
+			if(pool == null){
+				return;
+			}
+            pool.addEntry(new LootEntryItem(
                     pattern,
                     2,
                     0,
