@@ -1,3 +1,7 @@
+## 1.2.3
+**Fixed**:
+#3 and #4 - crash when trying to modify a non-existent loot pool
+
 ## 1.2.2 :
 **Added** :
 - Config to not register the loom
