@@ -16,7 +16,6 @@ import static roidrole.patternbanners.PatternBanners.pattern;
 public class CommonProxy {
 
     public void preInit(){
-        ConfigMapping.config.load();
         ConfigMapping.preInit();
         ForgeRegistries.ITEMS.register(pattern);
         if(ConfigGeneral.loom) {

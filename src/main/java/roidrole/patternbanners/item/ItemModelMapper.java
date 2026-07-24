@@ -19,7 +19,7 @@ public class ItemModelMapper {
         } else {
             defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern", "inventory");
         }
-        if (ConfigGeneral.patterns.forceFallback || ConfigMapping.config.getCategoryNames().isEmpty()){
+        if (ConfigGeneral.patterns.forceFallback || ConfigMapping.mappings.isEmpty()){
             ModelLoader.setCustomMeshDefinition(pattern, (stack -> defaultPatternModel));
             ModelLoader.registerItemVariants(pattern, defaultPatternModel);
         }else{

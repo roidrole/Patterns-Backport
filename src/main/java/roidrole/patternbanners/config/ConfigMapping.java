@@ -19,6 +19,7 @@ public class ConfigMapping {
     public static List<ItemStack> extraPatternItems = new ArrayList<>(0);
 
     public static void preInit(){
+        config.load();
         config.getCategoryNames().forEach(name ->
             mappings.add(config.getCategory(name))
         );
