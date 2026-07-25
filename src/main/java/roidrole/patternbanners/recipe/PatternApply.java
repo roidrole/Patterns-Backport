@@ -8,45 +8,40 @@ import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.Utils;
 import roidrole.patternbanners.config.ConfigGeneral;
-import roidrole.patternbanners.config.ConfigMapping;
+import roidrole.patternbanners.config.PatternData;
 
 import javax.annotation.Nonnull;
 
 
 public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-    public ItemStack patternI;
-    String patternH;
+    final public ItemStack patternI;
+    final String patternH;
     public String patternN;
 
-    public PatternApply(ConfigCategory mapping){
-        ItemStack patternStack;
-        if(mapping.containsKey("uses")){
-            patternStack = Utils.getItemStack(mapping, "uses");
-            ConfigMapping.extraPatternItems.add(patternStack);
-        }else{
-            patternStack = new ItemStack(PatternBanners.pattern, 1, mapping.get("meta").getInt());
-        }
 
-        this.patternI = patternStack;
-        this.patternH = mapping.get("hash").getString();
-        if(mapping.containsKey("name")){
-            this.patternN = mapping.get("name").getString();
-        }
+    public PatternApply(PatternData pattern){
+		this.patternI = pattern.getPatternStack();
+        this.patternH = pattern.hash;
+        this.patternN = pattern.name;
         this.setRegistryName(Tags.MOD_ID, "recipes/pattern_apply/" + patternH);
     }
 
     @Override
     public boolean matches(InventoryCrafting inv, @Nonnull World worldIn) {
-        if(inv.getStackInSlot(0).getItem() != Items.BANNER){return false;}
-        if(!inv.getStackInSlot(1).isItemEqual(patternI)){return false;}
-        if(TileEntityBanner.getPatterns(inv.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer - 1){return false;}
+        if(inv.getStackInSlot(0).getItem() != Items.BANNER){
+            return false;
+        }
+        if(!inv.getStackInSlot(1).isItemEqual(patternI)){
+            return false;
+        }
+        if(TileEntityBanner.getPatterns(inv.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer - 1){
+            return false;
+        }
         return Utils.isDye(inv.getStackInSlot(2));
     }
 
@@ -74,6 +69,8 @@ public class PatternApply extends IForgeRegistryEntry.Impl<IRecipe> implements I
     }
 
     @Override
-    public boolean isDynamic() {return true;}
+    public boolean isDynamic() {
+        return true;
+    }
 
 }

@@ -5,24 +5,23 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import roidrole.patternbanners.Utils;
 
-import static roidrole.patternbanners.PatternBanners.pattern;
+import javax.annotation.Nonnull;
 
 public class PatternFromShape extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
     public String shape;
     public ItemStack output;
 
-    public PatternFromShape(ConfigCategory mapping){
-        this.shape = mapping.get("shap").getString().substring(1, 10);
-        this.output = new ItemStack(pattern, 1, mapping.get("meta").getInt());
+    public PatternFromShape(String shape, ItemStack output){
+        this.shape = shape;
+        this.output = output;
     }
 
     @Override
-    public boolean matches(InventoryCrafting inv, World worldIn) {
+    public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World worldIn) {
         boolean paper = false;
         for (int i = 0; i < 9; i++) {
             ItemStack stack = inv.getStackInSlot(i);
@@ -40,7 +39,7 @@ public class PatternFromShape extends IForgeRegistryEntry.Impl<IRecipe> implemen
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
+    public @Nonnull ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
         return output;
     }
 
@@ -50,7 +49,7 @@ public class PatternFromShape extends IForgeRegistryEntry.Impl<IRecipe> implemen
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public @Nonnull ItemStack getRecipeOutput() {
         return output;
     }
 }

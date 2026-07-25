@@ -67,6 +67,5 @@ dependencies {
     // }
 
     compileOnly 'mezz:jei:4.25.5'
-    compileOnly 'com.cleanroommc:configanytime:3.0'
-    compileOnly 'curse.maven:had-enough-items-557549:6463525'
+    implementation 'com.cleanroommc:configanytime:3.0'
 }

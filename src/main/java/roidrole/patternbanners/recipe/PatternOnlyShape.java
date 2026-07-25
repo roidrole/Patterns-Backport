@@ -18,14 +18,13 @@ public class PatternOnlyShape extends IForgeRegistryEntry.Impl<IRecipe> implemen
     public String hash;
 
     public PatternOnlyShape(BannerPattern pattern){
-
         this.shape = String.join("", pattern.getPatterns());
         this.hash = pattern.getHashname();
         this.setRegistryName(Tags.MOD_ID, "recipes/pattern_apply/" + hash);
     }
 
     @Override
-    public boolean matches(InventoryCrafting inv, World worldIn) {
+    public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World worldIn) {
         boolean banner = false;
         for (int i = 0; i < 9; i++) {
             ItemStack stack = inv.getStackInSlot(i);
@@ -43,7 +42,7 @@ public class PatternOnlyShape extends IForgeRegistryEntry.Impl<IRecipe> implemen
     }
 
     @Override
-    public @Nonnull ItemStack getCraftingResult(InventoryCrafting inv) {
+    public @Nonnull ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
         ItemStack output = ItemStack.EMPTY;
         for (int i = 0; i < 9; i++) {
             output = inv.getStackInSlot(i);
@@ -61,5 +60,7 @@ public class PatternOnlyShape extends IForgeRegistryEntry.Impl<IRecipe> implemen
     }
 
     @Override
-    public ItemStack getRecipeOutput() {return ItemStack.EMPTY;}
+    public @Nonnull ItemStack getRecipeOutput() {
+        return ItemStack.EMPTY;
+    }
 }

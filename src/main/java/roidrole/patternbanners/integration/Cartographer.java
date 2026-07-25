@@ -8,8 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import roidrole.patternbanners.config.ConfigMapping;
+import roidrole.patternbanners.config.PatternRegistry;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
@@ -27,10 +28,10 @@ public class Cartographer implements _Integration.Integration {
 
     public static class CartographerTrade implements EntityVillager.ITradeList {
         @Override
-        public void addMerchantRecipe(IMerchant merchant, MerchantRecipeList recipeList, Random random) {
+        public void addMerchantRecipe(@Nonnull IMerchant merchant, MerchantRecipeList recipeList, @Nonnull Random random) {
             recipeList.add(new MerchantRecipe(
                     new ItemStack(Items.EMERALD, 8),
-                    new ItemStack(pattern, 1, ConfigMapping.getDamageFromHash("glo"))
+                    new ItemStack(pattern, 1, PatternRegistry.getDamageFromHash("glo"))
             ));
         }
     }

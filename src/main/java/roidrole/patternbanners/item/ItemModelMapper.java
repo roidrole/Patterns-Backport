@@ -2,10 +2,11 @@ package roidrole.patternbanners.item;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.config.ConfigCategory;
+import roidrole.patternbanners.PatternBanners;
 import roidrole.patternbanners.Tags;
 import roidrole.patternbanners.config.ConfigGeneral;
-import roidrole.patternbanners.config.ConfigMapping;
+import roidrole.patternbanners.config.PatternRegistry;
+import roidrole.patternbanners.config.PatternData;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 import static roidrole.patternbanners.Utils.itemModelExists;
@@ -19,19 +20,23 @@ public class ItemModelMapper {
         } else {
             defaultPatternModel = new ModelResourceLocation(Tags.MOD_ID+":pattern", "inventory");
         }
-        if (ConfigGeneral.patterns.forceFallback || ConfigMapping.mappings.isEmpty()){
+        if (ConfigGeneral.patterns.forceFallback || PatternRegistry.mappingsMap.isEmpty()){
             ModelLoader.setCustomMeshDefinition(pattern, (stack -> defaultPatternModel));
             ModelLoader.registerItemVariants(pattern, defaultPatternModel);
-        }else{
+        } else {
             ModelLoader.setCustomModelResourceLocation(pattern, 0, defaultPatternModel);
-            for (ConfigCategory mapping : ConfigMapping.mappings){
-                if(mapping.containsKey("uses")){continue;}
-                int meta = mapping.get("meta").getInt();
-                String patternS = mapping.get("name").getString();
-                if (itemModelExists(Tags.MOD_ID, "pattern/"+patternS)){
-                    ModelLoader.setCustomModelResourceLocation(pattern, meta, new ModelResourceLocation(Tags.MOD_ID+":pattern/"+patternS, "inventory"));
-                }else{
-                    ModelLoader.setCustomModelResourceLocation(pattern, meta, defaultPatternModel);
+            for(PatternData pattern : PatternRegistry.mappingsMap.values()){
+                if(pattern instanceof PatternData.PatternUses){
+                    continue;
+                }
+                if (itemModelExists(Tags.MOD_ID, "pattern/"+pattern)){
+                    ModelLoader.setCustomModelResourceLocation(
+                        PatternBanners.pattern,
+                        pattern.meta,
+                        new ModelResourceLocation(Tags.MOD_ID+":pattern/"+pattern.name, "inventory")
+                    );
+                } else {
+                    ModelLoader.setCustomModelResourceLocation(PatternBanners.pattern, pattern.meta, defaultPatternModel);
                 }
             }
         }
