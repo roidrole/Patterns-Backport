@@ -28,11 +28,8 @@ public class PatternRegistry {
     public static List<ItemStack> extraPatternItems = new ArrayList<>(0);
     public static Int2ObjectMap<PatternData> mappingsMap = new Int2ObjectRBTreeMap<>();
 
-    public static void preInit(){
-        readPatternFile();
-	}
-
     public static void init(){
+        readPatternFile();
         for(String hash : ConfigGeneral.custom_pattern_hashes){
             _Integration.addPattern(hash, hash);
         }
