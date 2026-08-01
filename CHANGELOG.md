@@ -1,3 +1,9 @@
+## Unreleased
+**Changed**: 
+- Migrated to a JSON config for the mappings
+- Miscellaneous code format improvements
+- Some micro-optimizations
+
 ## 1.2.3
 **Fixed**:
 #3 and #4 - crash when trying to modify a non-existent loot pool
