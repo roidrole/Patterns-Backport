@@ -24,10 +24,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class PatternRegistry {
-    public static File jsonFile = new File("config/"+ Tags.MOD_ID+"/mappings.json");
-    public static Configuration config = new Configuration(new File("config/"+ Tags.MOD_ID+"/mappings.cfg"));
-    public static List<ItemStack> extraPatternItems = new ArrayList<>(0);
-    public static Int2ObjectMap<PatternData> mappingsMap = new Int2ObjectRBTreeMap<>();
+    public static final File jsonFile = new File("config/"+ Tags.MOD_ID+"/mappings.json");
+    public static final List<ItemStack> extraPatternItems = new ArrayList<>(0);
+    public static final Int2ObjectMap<PatternData> mappingsMap = new Int2ObjectRBTreeMap<>();
 
     public static void init(){
         readPatternFile();

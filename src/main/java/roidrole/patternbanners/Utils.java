@@ -29,9 +29,13 @@ public class Utils {
     }
 
     public static boolean isDye(ItemStack stack){
-        if (stack.isEmpty()){return false;}
+        if (stack.isEmpty()){
+            return false;
+        }
         for(int oreID : OreDictionary.getOreIDs(stack)){
-            if(OreDictionary.getOreName(oreID).startsWith("dye")){return true;}
+            if(OreDictionary.getOreName(oreID).startsWith("dye")){
+                return true;
+            }
         }
         return false;
     }
@@ -53,7 +57,9 @@ public class Utils {
             return true;
         }
         for(ItemStack entry : PatternRegistry.extraPatternItems){
-            if(entry.getItem().equals(stack.getItem()) && entry.getItemDamage() == stack.getItemDamage()){return true;}
+            if(stack.isItemEqual(entry)){
+                return true;
+            }
         }
         return false;
     }

@@ -18,6 +18,9 @@ import static roidrole.patternbanners.GuiHandler.guiLoomID;
 import static roidrole.patternbanners.PatternBanners.INSTANCE;
 
 public class BlockLoom extends Block {
+
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+
     public BlockLoom() {
         super(Material.WOOD);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
@@ -35,22 +38,21 @@ public class BlockLoom extends Block {
         return true;
     }
 
-    public static final PropertyDirection PROPERTYFACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, PROPERTYFACING);
+        return new BlockStateContainer(this, FACING);
     }
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(PROPERTYFACING, EnumFacing.byHorizontalIndex(meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(PROPERTYFACING).getHorizontalIndex();
+        return state.getValue(FACING).getHorizontalIndex();
     }
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing blockFaceClickedOn, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         EnumFacing enumfacing = (placer == null) ? EnumFacing.NORTH : EnumFacing.fromAngle(placer.rotationYaw);
-        return this.getDefaultState().withProperty(PROPERTYFACING, EnumFacing.byHorizontalIndex(enumfacing.getHorizontalIndex() + 2 % 4));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(enumfacing.getHorizontalIndex() + 2 % 4));
     }
 }

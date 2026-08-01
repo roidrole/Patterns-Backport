@@ -13,8 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class PatternFromShapeWrapper implements IRecipeWrapper {
-    ItemStack output;
-    String shape;
+    final ItemStack output;
+    final String shape;
 
     public PatternFromShapeWrapper(PatternFromShape recipe){
         this.output = recipe.output;
@@ -26,15 +26,17 @@ public class PatternFromShapeWrapper implements IRecipeWrapper {
         iIngredients.setOutput(VanillaTypes.ITEM, output);
         List<List<ItemStack>> inputs = new ArrayList<>(9);
         boolean addPaper = true;
-        for(char chr : shape.toCharArray()){
+        for (int i = 0; i < shape.length(); i++) {
+            char chr = shape.charAt(i);
             if(chr == '#'){
                 inputs.add(OreDictionary.getOres("dye"));
-            }else if (addPaper) {
+            } else if (addPaper) {
                 inputs.add(Collections.singletonList(Items.PAPER.getDefaultInstance()));
                 addPaper = false;
-            }else{
+            } else{
                 inputs.add(Collections.singletonList(ItemStack.EMPTY));
             }
+
         }
         iIngredients.setInputLists(VanillaTypes.ITEM, inputs);
     }

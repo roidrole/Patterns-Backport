@@ -14,5 +14,7 @@ public class SlotDye extends Slot {
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {return Utils.isDye(stack);}
+    public boolean isItemValid(ItemStack stack) {
+        return Utils.isDye(stack);
+    }
 }

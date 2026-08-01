@@ -26,14 +26,17 @@ public class PatternFromShape extends IForgeRegistryEntry.Impl<IRecipe> implemen
         for (int i = 0; i < 9; i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if(shape.charAt(i) == ' ') {
-                if(stack != ItemStack.EMPTY){return false;}
-            }
-            else{
+                if(!stack.isEmpty()){
+                    return false;
+                }
+            } else {
                 if (!Utils.isDye(stack)) {
                     return false;
                 }
             }
-            if(!paper && stack.getItem() == Items.PAPER){paper = true;}
+            if(!paper && stack.getItem() == Items.PAPER){
+                paper = true;
+            }
         }
         return paper;
     }

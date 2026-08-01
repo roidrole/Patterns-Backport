@@ -16,10 +16,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class PatternOnlyShapeWrapper extends PatternRecipeWrapper {
-    String patternS;
+    final String patternS;
 
     public PatternOnlyShapeWrapper(BannerPattern patternIn){
-        patternN = patternIn.getFileName();
+		super(patternIn.getFileName());
         patternS = String.join("", patternIn.getPatterns());
     }
 
@@ -30,10 +30,10 @@ public class PatternOnlyShapeWrapper extends PatternRecipeWrapper {
         for (char c : patternS.toCharArray()){
             if(c == '#'){
                 ingredientsTemp.add(OreDictionary.getOres("dyeWhite"));
-            }else if(flagBanner){
+            } else if(flagBanner){
                 ingredientsTemp.add(Collections.singletonList(new ItemStack(Items.BANNER, 1, 0)));
                 flagBanner = false;
-            }else{
+            } else {
                 ingredientsTemp.add(Collections.singletonList(ItemStack.EMPTY));
             }
         }

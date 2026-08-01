@@ -44,8 +44,12 @@ public class PatternBannersCore implements IFMLLoadingPlugin, IEarlyMixinLoader 
     @Override
     public List<String> getMixinConfigs() {
         List<String> mixinconfs = new ArrayList<>(2);
-        if(ConfigCore.wearBannerOnHead){mixinconfs.add("mixins.patternbanners.wear_banners.json");}
-        if(ConfigCore.no_vanilla_pattern_apply){mixinconfs.add("mixins.patternbanners.no_vanilla_pattern_apply.json");}
+        if(ConfigCore.wearBannerOnHead){
+            mixinconfs.add("mixins.patternbanners.wear_banners.json");
+        }
+        if(ConfigCore.no_vanilla_pattern_apply){
+            mixinconfs.add("mixins.patternbanners.no_vanilla_pattern_apply.json");
+        }
         return mixinconfs;
     }
 }

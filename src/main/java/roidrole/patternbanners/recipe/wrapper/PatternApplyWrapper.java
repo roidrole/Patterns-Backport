@@ -11,11 +11,11 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class PatternApplyWrapper extends PatternRecipeWrapper {
-    public ItemStack patternI;
+    public final ItemStack patternI;
 
     public PatternApplyWrapper(PatternApply recipe){
+        super(recipe.patternN);
         patternI = recipe.patternI;
-        patternN = recipe.patternN;
     }
 
     @Override

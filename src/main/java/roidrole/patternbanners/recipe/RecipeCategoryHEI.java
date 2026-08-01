@@ -26,19 +26,29 @@ import static roidrole.patternbanners.recipe.HEIPlugin.categoryUid;
 public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
     IGuiHelper guiHelper;
 
-    public RecipeCategoryHEI(IGuiHelper guiHelper) {this.guiHelper = guiHelper;}
+    public RecipeCategoryHEI(IGuiHelper guiHelper) {
+        this.guiHelper = guiHelper;
+    }
 
     @Override
-    public String getUid() {return categoryUid;}
+    public String getUid() {
+        return categoryUid;
+    }
 
     @Override
-    public String getTitle() {return I18n.format("patternbanners.category.patternapply");}
+    public String getTitle() {
+        return I18n.format("patternbanners.category.patternapply");
+    }
 
     @Override
-    public String getModName() {return Tags.MOD_NAME;}
+    public String getModName() {
+        return Tags.MOD_NAME;
+    }
 
     @Override
-    public IDrawable getBackground() {return guiHelper.createBlankDrawable(140, 100);}
+    public IDrawable getBackground() {
+        return guiHelper.createBlankDrawable(140, 100);
+    }
 
     @Override
     public void drawExtras(Minecraft mc) {
@@ -64,7 +74,9 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
 
     @Override
     public void setRecipe(IRecipeLayout layout, IRecipeWrapper wrapper, IIngredients ingr) {
-        if(!(wrapper instanceof PatternRecipeWrapper)) return;
+        if(!(wrapper instanceof PatternRecipeWrapper)) {
+            return;
+        }
 
         IGuiItemStackGroup guiItemStacks = layout.getItemStacks();
 
@@ -83,7 +95,9 @@ public class RecipeCategoryHEI implements IRecipeCategory<IRecipeWrapper> {
             guiItemStacks.init(1, true, 16, 30);
             guiItemStacks.init(2, true, 26, 11);
             guiItemStacks.set(0, new ItemStack(Items.BANNER));
-            if(wrapper instanceof PatternApplyWrapper){guiItemStacks.set(1, ((PatternApplyWrapper) wrapper).patternI);}
+            if(wrapper instanceof PatternApplyWrapper){
+                guiItemStacks.set(1, ((PatternApplyWrapper) wrapper).patternI);
+            }
             guiItemStacks.set(2, OreDictionary.getOres("dyeWhite").get(0));
         }
     }

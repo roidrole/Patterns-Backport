@@ -27,8 +27,8 @@ import static roidrole.patternbanners.recipe._Recipe.PATTERNS_ONLY_SHAPE;
 import static roidrole.patternbanners.recipe._Recipe.PATTERN_APPLY_RECIPES;
 
 public class ContainerLoom extends Container {
-    public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 1);
-    public InventoryCraftResult craftResult = new InventoryCraftResult();
+    public final InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 1);
+    public final InventoryCraftResult craftResult = new InventoryCraftResult();
     private final BlockPos pos;
     public final World world;
     public final EntityPlayer player;
@@ -46,8 +46,7 @@ public class ContainerLoom extends Container {
 
         //Player Inventory
         for (int k = 0; k < 3; ++k) {
-            for (int i = 0; i < 9; ++i)
-            {
+            for (int i = 0; i < 9; ++i) {
                 this.addSlotToContainer(new Slot(playerInventory, i + k * 9 + 9, 8 + i * 18, 84 + k * 18));
             }
         }
@@ -59,7 +58,9 @@ public class ContainerLoom extends Container {
 
     public void onCraftMatrixChanged(IInventory inventoryIn) {
         //Can't use annotations here. I guess it must return *something* on client
-        if(world.isRemote){return;}
+        if(world.isRemote){
+            return;
+        }
         calcOutput();
     }
 
@@ -139,8 +140,12 @@ public class ContainerLoom extends Container {
 
     @Override
     public boolean enchantItem(EntityPlayer clicker, int index) {
-        if(!ConfigGeneral.recipes.patternOnlyShape.loom){return false;}
-        if(index < 0 || index >= patternHashes.size()){return false;}
+        if(!ConfigGeneral.recipes.patternOnlyShape.loom){
+            return false;
+        }
+        if(index < 0 || index >= patternHashes.size()){
+            return false;
+        }
         selectedRecipe = index;
         calcOutput();
         return true;
@@ -155,12 +160,12 @@ public class ContainerLoom extends Container {
             TileEntityBanner.getPatterns(craftMatrix.getStackInSlot(0)) >= ConfigGeneral.max_banner_layer - 1
         ){
             // NO-OP
-        }else if(craftMatrix.getStackInSlot(1).isEmpty() && selectedRecipe >= 0 && selectedRecipe < patternHashes.size()){ //PatternOnly
+        } else if(craftMatrix.getStackInSlot(1).isEmpty() && selectedRecipe >= 0 && selectedRecipe < patternHashes.size()){ //PatternOnly
             this.craftResult.setRecipeUsed(null);
             output = craftMatrix.getStackInSlot(0).copy();
             output.setCount(1);
             Utils.addPattern(output, Utils.getDyeColor(craftMatrix.getStackInSlot(2)), patternHashes.get(selectedRecipe));
-        }else{ //PatternApply
+        } else { //PatternApply
             for(PatternApply recipe : PATTERN_APPLY_RECIPES){
                 if (recipe.patternI.isItemEqual(craftMatrix.getStackInSlot(1)) && recipe.matches(craftMatrix, world)) {
                     this.craftResult.setRecipeUsed(recipe);

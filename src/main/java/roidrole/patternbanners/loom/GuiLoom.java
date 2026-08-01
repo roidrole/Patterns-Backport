@@ -24,7 +24,8 @@ import static roidrole.patternbanners.recipe._Recipe.PATTERNS_ONLY_SHAPE;
 @SideOnly(Side.CLIENT)
 public class GuiLoom extends GuiContainer {
     public static final List<ResourceLocation> patternLocs = PATTERNS_ONLY_SHAPE.stream().map(
-    pattern -> new ResourceLocation("minecraft:textures/entity/banner/"+pattern.getFileName()+".png")).collect(Collectors.toList());
+    pattern -> new ResourceLocation("minecraft:textures/entity/banner/"+pattern.getFileName()+".png")).collect(Collectors.toList()
+    );
     public static final boolean hasScroll = patternLocs.size() > 16;
     private final ResourceLocation background;
 
@@ -69,7 +70,9 @@ public class GuiLoom extends GuiContainer {
         //Input slots
         for (int i = 0; i < 3; i++) {
             Slot current = this.container.getSlot(i);
-            if(current.getHasStack()){continue;}
+            if(current.getHasStack()){
+                continue;
+            }
             Minecraft.getMinecraft().getTextureManager().bindTexture(current.getBackgroundLocation());
             drawModalRectWithCustomSizedTexture(this.guiLeft+current.xPos, this.guiTop+current.yPos, 0, 0, 16, 16, 16, 16);
         }
@@ -116,18 +119,28 @@ public class GuiLoom extends GuiContainer {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if(mouseButton != 0 && mouseButton != 1){return;}
+        if(mouseButton != 0 && mouseButton != 1){
+            return;
+        }
         int lineClicked = Math.floorDiv(mouseY-(this.guiTop+13), 14);
-        if(lineClicked < 0 || lineClicked > 3){return;}
+        if(lineClicked < 0 || lineClicked > 3){
+            return;
+        }
         int columnClicked = Math.floorDiv(mouseX-(this.guiLeft+60), 14);
-        if(columnClicked < 0 || columnClicked > 3){return;}
+        if(columnClicked < 0 || columnClicked > 3){
+            return;
+        }
 
         int newSlot = 4*lineClicked + columnClicked;
-        if(slotSelected == newSlot){return;}
+        if(slotSelected == newSlot){
+            return;
+        }
         slotSelected = newSlot;
 
         int recipeSelected = 4 * (lineClicked + firstRenderedLine) + columnClicked;
-        if(recipeSelected >= patternLocs.size()){return;}
+        if(recipeSelected >= patternLocs.size()){
+            return;
+        }
         Minecraft.getMinecraft().player.connection.sendPacket(
             new CPacketEnchantItem(container.windowId, recipeSelected)
         );
@@ -142,13 +155,19 @@ public class GuiLoom extends GuiContainer {
     @Override
     public void handleMouseInput() throws IOException {
         super.handleMouseInput();
-        if (Mouse.getEventDWheel() == 0) {return;}
+        if (Mouse.getEventDWheel() == 0) {
+            return;
+        }
         if(Mouse.getEventDWheel() > 0){
-            if(this.firstRenderedLine <= 0){return;}
+            if(this.firstRenderedLine <= 0){
+                return;
+            }
             firstRenderedLine--;
             slotSelected += 4;
         } else {
-            if(this.firstRenderedLine >= maxRenderedLine){return;}
+            if(this.firstRenderedLine >= maxRenderedLine){
+                return;
+            }
             firstRenderedLine++;
             slotSelected -= 4;
         }
@@ -156,8 +175,12 @@ public class GuiLoom extends GuiContainer {
 
     //Helpers
     public static int getThumbOffset(int first){
-        if(!hasScroll){return 0;}
-        if(first == maxRenderedLine){return 41;}
+        if(!hasScroll){
+            return 0;
+        }
+        if(first == maxRenderedLine){
+            return 41;
+        }
         return first*Math.floorDiv(41, maxRenderedLine);
     }
 
@@ -173,7 +196,6 @@ public class GuiLoom extends GuiContainer {
                     )
             );
             drawModalRectWithCustomSizedTexture(x, y, 1, 1, w, h, 64, 64);
-            GlStateManager.color(1, 1, 1); // Reset color
         }
     }
 }

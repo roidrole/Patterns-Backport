@@ -10,9 +10,13 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public abstract class PatternRecipeWrapper implements IRecipeWrapper {
-    String patternN;
+    final String patternN;
 
-    @Override
+	protected PatternRecipeWrapper(String patternN) {
+		this.patternN = patternN;
+	}
+
+	@Override
     public void drawInfo(Minecraft mc, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         drawRect(82, 0, 121, 78, 0, 0, 0, 255);
         mc.getTextureManager().bindTexture(new ResourceLocation("minecraft", "textures/entity/banner/"+patternN+".png"));
