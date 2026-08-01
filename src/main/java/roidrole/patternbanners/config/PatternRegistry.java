@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectRBTreeMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.BannerPattern;
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,6 +31,9 @@ public class PatternRegistry {
 
     public static void init(){
         readPatternFile();
+        if(mappingsMap.isEmpty()){
+            readOldConfig();
+        }
         for(String hash : ConfigGeneral.custom_pattern_hashes){
             _Integration.addPattern(hash, hash);
         }
@@ -80,7 +84,8 @@ public class PatternRegistry {
         }
     }
 
-    public static void writePatternFile() {
+    ///@return If the operation was a success
+    public static boolean writePatternFile() {
         try(JsonWriter writer = new JsonWriter(new FileWriter(jsonFile))){
             writer.setIndent("\t");
             writer.beginArray();
@@ -88,11 +93,49 @@ public class PatternRegistry {
                 pattern.writeMapping(writer);
             }
             writer.endArray();
+            return true;
         } catch (IOException e) {
             PatternBanners.LOGGER.error("Error writing mapping file", e);
+            return false;
         }
     }
 
+    /**
+     * Attempts to migrate from the old forge config to the new config.
+     * Will automatically remove the old file and write the new one on success.
+     */
+    public static void readOldConfig(){
+        File configFile = new File("config/patternbanners/mappings.cfg");
+        if(!configFile.exists()){
+            return;
+        }
+        PatternBanners.LOGGER.info("Attmepting to migrate from forge configs to json configs.");
+        PatternBanners.LOGGER.info("Reading the forge config mappings.");
+        Configuration config = new Configuration(configFile);
+        boolean remove = true;
+        for(String name : config.getCategoryNames()){
+            ConfigCategory mapping = config.getCategory(name);
+            PatternData pattern;
+            try{
+                pattern = PatternData.readMapping(mapping);
+            } catch (IOException e) {
+                PatternBanners.LOGGER.error("Invalid mapping!", e);
+                remove = false;
+                continue;
+			}
+            mappingsMap.put(pattern.meta, pattern);
+        }
+        PatternBanners.LOGGER.info("Forge config mapping file has been read.");
+        if(!writePatternFile()){
+            PatternBanners.LOGGER.error("Cannot write the new configuration file. See error above. Retrying next launch.");
+        } else if(!remove){
+            PatternBanners.LOGGER.warn("Not removing the forge config mapping file because there was an error reading it.");
+        } else if(!configFile.delete()){
+            PatternBanners.LOGGER.error("Error deleting the old forge config. You may delete it manually. We won't retry.");
+        } else {
+            PatternBanners.LOGGER.info("Successfully migrated mappings from forge config to json.");
+        }
+    }
 
     public static int getDamageFromHash(String hash){
         for(PatternData data : mappingsMap.values()){

@@ -10,6 +10,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.config.ConfigCategory;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,6 +22,7 @@ import roidrole.patternbanners.recipe.PatternFromShape;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Optional;
 
 import static roidrole.patternbanners.PatternBanners.pattern;
 
@@ -143,6 +146,21 @@ public abstract class PatternData {
 		return pattern;
 	}
 
+	///Idem, but with a ConfigCategory for migration
+	public static PatternData readMapping(ConfigCategory category) throws IOException {
+		String hash = category.get("hash").getString();
+		int meta = category.get("meta").getInt();
+		String name = Optional.ofNullable(category.get("name")).map(Property::getString).orElse(null);
+		if(category.containsKey("item")){
+			return new PatternItem(hash, meta, name, Utils.parseItemStack(category.get("item").getString()));
+		} else if(category.containsKey("shap")){
+			return new PatternShape(hash, meta, name, category.get("shap").getString().substring(1, 10));
+		} else if(category.containsKey("uses")){
+			return new PatternUses(hash, Utils.parseItemStack(category.get("uses").getString()), name);
+		} else {
+			return new PatternRecipeLess(hash, meta, name);
+		}
+	}
 	//Writes this mapping as Json to the provided JsonWriter
 	public final void writeMapping(JsonWriter writer) throws IOException {
 		writer.beginObject();
