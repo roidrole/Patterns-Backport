@@ -68,10 +68,6 @@ public class PatternRegistry {
                     pattern = PatternData.readMapping(reader);
                 } catch (Exception e){
                     PatternBanners.LOGGER.error("Invalid mapping!", e);
-                    while(reader.peek() != JsonToken.END_OBJECT){
-                        reader.skipValue();
-                    }
-                    reader.endObject();
                     continue;
                 }
                 mappingsMap.put(pattern.meta, pattern);

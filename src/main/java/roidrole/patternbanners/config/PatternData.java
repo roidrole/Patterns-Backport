@@ -73,77 +73,80 @@ public abstract class PatternData {
 
 	/**
 	 * Creates a PatternData from reading a Json Object
-	 * <p>
-	 * <bold>Warning: </bold> If this method errors, the JSON will be left in a bad state.
-	 * To avoid this, include the following code in your <code>catch</code> block <p> <code>
-	 *     do{reader.skipValue();}while(reader.peek() != JsonToken.END_OBJECT);
-	 * </code>
 	 * @param reader the reader the data is read from
 	 * @return the read PatternData
 	 * @throws IOException on malformed JSON or invalid PatternData
 	 */
 	public static PatternData readMapping(JsonReader reader) throws IOException {
-		reader.beginObject();
-		String hash = null;
-		String name = null;
-		int meta = -1;
-		String shape = null;
-		ItemStack stack = null;
-		ItemStack uses = null;
+		//Everything is in a try block just so we make sure to consume the whole object
+		//Any and all throwable thrown will be rethrown to the caller
+		try {
+			reader.beginObject();
+			String hash = null;
+			String name = null;
+			int meta = -1;
+			String shape = null;
+			ItemStack stack = null;
+			ItemStack uses = null;
 
-		//Reads attribute as standard
-		while(reader.peek() != JsonToken.END_OBJECT){
-			switch (reader.nextName()){
-				case "hash":{
-					hash = reader.nextString();
-					break;
-				}
-				case "meta":{
-					meta = reader.nextInt();
-					break;
-				}
-				case "name":{
-					name = reader.nextString();
-					break;
-				}
-				case PatternShape.JSON_KEY:{
-					shape = reader.nextString();
-					break;
-				}
-				case PatternItem.JSON_KEY:{
-					stack = Utils.parseItemStack(reader.nextString());
-					break;
-				}
-				case PatternUses.JSON_KEY:{
-					uses = Utils.parseItemStack(reader.nextString());
-					break;
+			//Reads attribute as standard
+			while (reader.peek() != JsonToken.END_OBJECT) {
+				switch (reader.nextName()) {
+					case "hash": {
+						hash = reader.nextString();
+						break;
+					}
+					case "meta": {
+						meta = reader.nextInt();
+						break;
+					}
+					case "name": {
+						name = reader.nextString();
+						break;
+					}
+					case PatternShape.JSON_KEY: {
+						shape = reader.nextString();
+						break;
+					}
+					case PatternItem.JSON_KEY: {
+						stack = Utils.parseItemStack(reader.nextString());
+						break;
+					}
+					case PatternUses.JSON_KEY: {
+						uses = Utils.parseItemStack(reader.nextString());
+						break;
+					}
 				}
 			}
-		}
 
-		//Validation that the mapping is valid
-		if(hash == null){
-			throw new IOException("The hash has to be set for every mapping. ");
-		} else if (name == null && FMLCommonHandler.instance().getSide() == Side.CLIENT){
-			throw new IOException("Every mapping must have a name on the client-side (name is ignored on the server side)");
-		}
+			//Validation that the mapping is valid
+			if (hash == null) {
+				throw new IOException("The hash has to be set for every mapping. ");
+			} else if (name == null && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+				throw new IOException("Every mapping must have a name on the client-side (name is ignored on the server side)");
+			}
 
-		//Build the pattern
-		PatternData pattern;
-		if(uses != null){
-			pattern = new PatternUses(hash, uses, name);
-		} else if (meta == -1){
-			throw new IOException("The meta of every mapping (except uses mappings) must be specified. The mapping for " + hash + " doesn't have one");
-		} else if (shape != null){
-			pattern = new PatternShape(hash, meta, name, shape);
-		} else if (stack != null){
-			pattern = new PatternItem(hash, meta, name, stack);
-		} else {
-			pattern = new PatternRecipeLess(hash, meta, name);
+			//Build the pattern
+			if (uses != null) {
+				return new PatternUses(hash, uses, name);
+			} else if (meta == -1) {
+				throw new IOException("The meta of every mapping (except uses mappings) must be specified. The mapping for " + hash + " doesn't have one");
+			} else if (shape != null) {
+				return new PatternShape(hash, meta, name, shape);
+			} else if (stack != null) {
+				return new PatternItem(hash, meta, name, stack);
+			} else {
+				return new PatternRecipeLess(hash, meta, name);
+			}
+		} catch (Throwable e) {
+			//Make sure the entire object is consumed, so the other patterns aren't affected
+			while(reader.peek() != JsonToken.END_OBJECT){
+				reader.skipValue();
+			}
+			throw e;
+		} finally {
+			reader.endObject();
 		}
-
-		reader.endObject();
-		return pattern;
 	}
 
 	///Idem, but with a ConfigCategory for migration
